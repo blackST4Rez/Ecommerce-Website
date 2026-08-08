@@ -1,10 +1,12 @@
 import Topbar from '../Layout/Topbar'
+import Navbar from '../Common/Navbar'
 
 const Header = () => {
     return (
-        <div>
+        <header className='border-b border-gray-400'>
             <Topbar />
-        </div>
+            <Navbar />
+        </header>
     )
 }
 
