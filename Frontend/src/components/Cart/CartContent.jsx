@@ -11,7 +11,7 @@ const CartContent = () => {
         color: 'Sky',
         quantity: 2,
         price: 65,
-        image: 'https://i.pinimg.com/736x/45/0b/11/450b1101a7155d131444cffc8c112365.jpg'
+        image: 'https://i.pinimg.com/736x/45/0b/11/450b1101a7155d131444cffc8c112365.jpg?random=1'
     },
     {
         id: 2,
@@ -20,7 +20,7 @@ const CartContent = () => {
         color: 'Green',
         quantity: 6,
         price: 55,
-        image: 'https://i.pinimg.com/1200x/82/f3/08/82f308401d35b471b11f0a8bc296d7b5.jpg'
+        image: 'https://i.pinimg.com/1200x/82/f3/08/82f308401d35b471b11f0a8bc296d7b5.jpg?random=2'
     },
     {
         id: 3,
@@ -29,7 +29,7 @@ const CartContent = () => {
         color: 'Brown',
         quantity: 2,
         price: 35,
-        image: 'https://i.pinimg.com/736x/53/bf/3b/53bf3b24f3ab72a2136f742e7ea7a822.jpg'
+        image: 'https://i.pinimg.com/736x/53/bf/3b/53bf3b24f3ab72a2136f742e7ea7a822.jpg?random=3'
     },
 ]
 

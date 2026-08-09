@@ -103,8 +103,8 @@ const Footer = () => {
                         </a>
                     </div>
                             <p className='text-white'>Call Us</p>
-                            <p>
-                                <BiPhone className='inline-block mr-2' />
+                            <p className='text-[#CB2957]'>
+                                <BiPhone className='inline-block mr-2 text-[#CB2957]' />
                                 +977 98 0329 4610
                             </p>
                 </div>
