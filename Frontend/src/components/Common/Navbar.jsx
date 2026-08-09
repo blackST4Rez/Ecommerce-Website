@@ -22,7 +22,7 @@ const Navbar = () => {
         <nav className="container mx-auto flex items-center justify-between py-4 px-6">
             <div>
                 <Link to='/' className="navbarText text-5xl font-medium text-white">
-                    Groove
+                    <span className="navbarText text-[#CB2957]">G</span>roove
                 </Link>
             </div>
 
