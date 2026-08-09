@@ -1,12 +1,14 @@
 import { BrowserRouter, Routes, Route } from 'react-router'
 import UserLayout from './components/Layout/UserLayout'
+import Home from './components/Pages/Home'
 
 const App = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path='/' element={<UserLayout />}></Route>
-        <Route></Route>
+        <Route path='/' element={<UserLayout />}>
+          <Route index element={<Home />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   )

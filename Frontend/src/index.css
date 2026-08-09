@@ -9,3 +9,11 @@
 body{
     background-color: #191b1c;
 }
+
+.navbarText{
+    font-family: "Dr Sugiyama", cursive;
+}
+
+.HeroText{
+    font-family: "Henny Penny", system-ui;
+}
