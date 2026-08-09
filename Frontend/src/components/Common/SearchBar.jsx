@@ -17,7 +17,7 @@ const SearchBar = () => {
     }
 
     return (
-        <div className={`flex item-center justify-center w-full transition-all ease-in-out duration-300 ${isOpen ? "absolute top-0 left-0 w-full bg-white h-24 z-50" : "w-auto"}`}>
+        <div className={`flex item-center justify-center w-full transition-all ease-in-out duration-300 ${isOpen ? "absolute top-0 left-0 w-full bg-[#191b1c] h-24 z-50" : "w-auto"}`}>
             {isOpen ? (
                 <form
                     onSubmit={handleSearch}
@@ -28,15 +28,15 @@ const SearchBar = () => {
                             placeholder="Search"
                             value={searchTerm}
                             onChange={(e) => setSearchTerm(e.target.value)}
-                            className="bg-gray-200 px-4 py-2 pl-2 pr-12 rounded-lg focus:outline-none w-full
-                            placeholder:text-gray-700 "
+                            className="bg-[#212324] px-4 py-2 pl-2 pr-12 rounded-lg focus:outline-none w-full
+                            placeholder:text-gray-300 "
                         />
 
-                        <button type="submit" className="absolute right-2 -top-1/7 transform translate-y-1/2 text-black hover:text-[#CB2957] transition-all ease-in-out duration-300" >
+                        <button type="submit" className="absolute right-2 -top-1/7 transform translate-y-1/2 text-white hover:text-[#CB2957] transition-all ease-in-out duration-300" >
                             <BiSearch className="h-6 w-6" />
                         </button>
 
-                        <button type="button" className="absolute -right-20 top-1/2 transform -translate-y-1/2 text-black  hover:text-[#CB2957] transition-all ease-in-out duration-300 hover:rotate-90" >
+                        <button type="button" className="absolute -right-20 top-1/2 transform -translate-y-1/2 text-white  hover:text-[#CB2957] transition-all ease-in-out duration-300 hover:rotate-90" >
                             <BiPlus className="h-8 w-8 rotate-135" />
                         </button>
 
