@@ -3,7 +3,7 @@ import {Link} from 'react-router'
 
 const Footer = () => {
     return (
-        <footer className="border-t border-white py-12">
+        <footer className="border-t border-gray-700 py-12">
             <div className="container mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 px-4 lg:px-0">
                 <div>
                     <h3 className="text-xl text-white mb-4">Newsletter</h3>
@@ -14,7 +14,7 @@ const Footer = () => {
                     <p className="text-[#CB2957] font-medium mb-6">Sign Up and Get 10% off your first order.</p>
 
                     <form className="flex">
-                        <input type="email" placeholder="Your e-mail" className="p-3 w-65 text-sm border-t border-l border-b border-white focus:outline-none transition-all ease-in-out duration-300 placeholder-white " required />
+                        <input type="email" placeholder="Your e-mail" className="p-3 w-65 text-sm border-t border-l border-b border-gray-700 focus:outline-none transition-all ease-in-out duration-300 placeholder-white " required />
                         <button
                             type="submit"
                             className="bg-black text-white px-6 py-3 text-sm hover:text-[#CB2957] transition-all ease-in-out duration-300"
@@ -110,7 +110,7 @@ const Footer = () => {
                 </div>
             </div>
 
-            <div className="container mx-auto mt-12 px-4 lg-px-0 border-t border-white pt-6 ">
+            <div className="container mx-auto mt-12 px-4 lg-px-0 border-t border-gray-700 pt-6 ">
                 <p className='text-[#CB2957] text-sm tracking-tight text-center' >
                     &copy 2026, blackST4Rez. All Rights Reserved.
                 </p>

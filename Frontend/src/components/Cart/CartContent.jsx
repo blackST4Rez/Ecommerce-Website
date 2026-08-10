@@ -38,10 +38,10 @@ const CartContent = () => {
             {
                 cartProducts.map((product, idx) => (
                     <div key={idx}
-                        className="flex items-start justify-between py-4 border-b"
+                        className="flex items-start justify-between py-4 border-b border-gray-700"
                         >
-                        <div className="flex items-start">
-                            <img src={product.img} alt={product.name} className="w-24 h-24 object-cover" />
+                        <div className="flex gap-3 items-start">
+                            <img src={product.image} alt={product.name} className="w-24 h-24 object-cover" />
                             <div >
                                 <h3 className="text-white" >{product.name}</h3>
                                 <p className="text-sm text-gray-400" >Type: {product.type} | Color: {product.color}</p>
@@ -53,9 +53,9 @@ const CartContent = () => {
                             </div>
                         </div>
                         <div>
-                            <p className="text-[#CB2957]">Rs. {product.price.toLocaleString('ne-NP')} </p>
+                            <p className="text-white">Rs. {product.price.toLocaleString('ne-NP')} </p>
                             <button>
-                                <BiTrash />
+                                <BiTrash className="text-red-600" />
                             </button>
                         </div>
                     </div>

@@ -12,11 +12,11 @@ const selectedProduct =
     material: "Alder Woods",
     colors: ["#ffffff", "#0cd7ed"],
     images: [{
-        url: "https://i.pinimg.com/1200x/19/f0/48/19f048fa3392cb5f48aea1e67a94dbed.jpg?random=1",
+        url: "https://i.pinimg.com/736x/82/10/14/8210145493dc2859708c546ced7c1018.jpg?random=1",
         altText: "Fender Stratocastor",
     },
     {
-        url: "https://i.pinimg.com/1200x/18/9f/34/189f34d96017c44498a2e2fcaf087fe2.jpg?random=2",
+        url: "https://i.pinimg.com/736x/ab/b1/f0/abb1f099750980304827bae59c7755e0.jpg?random=2",
         altText: "Fender Stratocastor",
     },
     ],
@@ -81,7 +81,7 @@ const ProductDetails = () => {
                         <img
                             src={mainImage}
                             alt="Main-Product"
-                            className="w-full h-auto object-cover"
+                            className="w-full h-100px object-cover"
                         />
                     </div>
                 </div>
@@ -124,7 +124,7 @@ const ProductDetails = () => {
                                 <button
                                     onClick={() => setSelectedColor(color)}
                                     key={color}
-                                    className={`w-8 h-8 rounded-full ${selectedColor === color && "border-black border"} `}
+                                    className={`w-8 h-8 rounded-full ${selectedColor === color && "border-black border-3"} `}
                                     style={{
                                         backgroundColor: color.toLowerCase(),
                                         filter: "brightness(0.5)",
@@ -151,9 +151,14 @@ const ProductDetails = () => {
                     <button
                         disabled={isButtonDisabled}
                         onClick={handleAddToCart}
-                        className={`bg-black text-[#CB2957] font-semibold py-3 px-6 w-full mb-48 transition-all ease-in-out duration-300 ${isButtonDisabled && "cursor-not-allowed" }`}>
+                        className={`bg-[#CB2957] text-black border-2 border-black font-semibold py-3 px-2 w-[75%] mb-48 hover:bg-black hover:text-[#CB2957] transition-all ease-in-out duration-300 ${isButtonDisabled && "cursor-not-allowed bg-black border-2 border-[#CB2957] transition-all ease-in-out duration-300" }`}>
                         {isButtonDisabled
-                            ? <SyncLoader color="#CB2957"size={10}/>
+                            ? (
+                            <div className="flex items-center justify-center gap-4" >
+                                <span className="text-[#CB2957]" >Adding</span>
+                                <SyncLoader color="#CB2957" size={10} />
+                            </div>
+                            )
                             : "Add to Cart"
                         }
                     </button>

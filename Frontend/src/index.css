@@ -30,3 +30,10 @@ body{
 .priceTag{
     font-family: "New Rocker", system-ui;
 }
+
+.BottomImage{
+    background-image: url('/Frontend/src/assets/BottomImage.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
