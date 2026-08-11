@@ -15,7 +15,7 @@ const CartDrawer = ({
             </div>
 
             <div className="grow p-4 overflow-y-auto">
-                <h2 className="text-[#e02c5f] text-3xl font-semibold mb-4 p-3">Your Cart</h2>
+                <h2 className="text-[#CB2957] text-3xl font-semibold mb-4 p-3">Your Cart</h2>
                 <CartContent />
             </div>
 
