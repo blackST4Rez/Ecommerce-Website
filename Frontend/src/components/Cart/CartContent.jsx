@@ -46,9 +46,9 @@ const CartContent = () => {
                                 <h3 className="text-white" >{product.name}</h3>
                                 <p className="text-sm text-gray-400" >Type: {product.type} | Color: {product.color}</p>
                                 <div className="flex items-center mt-2">
-                                    <button className="px-2 py-1 bg-white text-black border-r hover:bg-gray-200">-</button>
-                                    <span className="px-2 py-1 bg-white text-black">{product.quantity}</span>
-                                    <button className="px-2 py-1 bg-white text-black border-l hover:bg-gray-200">+</button>
+                                    <button className="px-2 py-1 bg-black text-[#CB2957] border-l border-t border-b border-[#CB2957] hover:text-white">-</button>
+                                    <span className="px-2 py-1 bg-black text-white">{product.quantity}</span>
+                                    <button className="px-2 py-1 bg-black text-[#CB2957] border-r border-t border-b border-[#CB2957] hover:text-white">+</button>
                                 </div>
                             </div>
                         </div>

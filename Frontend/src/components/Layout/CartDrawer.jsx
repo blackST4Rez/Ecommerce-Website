@@ -20,7 +20,7 @@ const CartDrawer = ({
             </div>
 
             <div className="p-4 texat-white font-semibold sticky bottom-0">
-                <button className="w-full bg-[#CB2957] text-black border border-black py-3 font-semibold hover:bg-black hover:border-white hover:text-white transition-all ease-in-out duration-300 " >
+                <button className="w-full bg-[#CB2957] text-black border border-black py-3 font-semibold hover:bg-black hover:border-[#CB2957] hover:text-white transition-all ease-in-out duration-300 " >
                     Checkout
                 </button>
                 <p className="text-sm tracking-tight text-white mt-2 text-center">

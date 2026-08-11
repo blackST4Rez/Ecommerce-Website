@@ -12,11 +12,11 @@ const selectedProduct =
     material: "Alder Woods",
     colors: ["#ffffff", "#0cd7ed"],
     images: [{
-        url: "https://i.pinimg.com/736x/82/10/14/8210145493dc2859708c546ced7c1018.jpg?random=1",
+        url: "https://i.pinimg.com/1200x/28/50/ac/2850aca174f068641c1ddf4b5a70c895.jpg?random=1",
         altText: "Fender Stratocastor",
     },
     {
-        url: "https://i.pinimg.com/736x/ab/b1/f0/abb1f099750980304827bae59c7755e0.jpg?random=2",
+        url: "https://i.pinimg.com/736x/ec/79/ab/ec79ab17bfc808c6d6a033a71c4cb371.jpg?random=2",
         altText: "Fender Stratocastor",
     },
     ],
