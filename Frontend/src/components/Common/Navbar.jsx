@@ -27,7 +27,7 @@ const Navbar = () => {
             </div>
 
             <div className="hidden md:flex space-x-6 mr-10">
-                <Link to='#' className="text-white hover:text-[#CB2957] text-lg font-medium transition-all ease-in-out duration-300">
+                <Link to='/collections/all' className="text-white hover:text-[#CB2957] text-lg font-medium transition-all ease-in-out duration-300">
                     Stratocaster
                 </Link>
                 <Link to='#' className="text-white hover:text-[#CB2957] text-lg font-medium transition-all ease-in-out duration-300">
