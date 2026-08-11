@@ -1,5 +1,6 @@
 import Hero from "../Layout/Hero"
 import FeaturedCollection from "../Products/FeaturedCollection"
+import FeaturedSection from "../Products/FeaturedSection"
 import GuitarCollection from "../Products/GuitarCollection"
 import NewArrivals from "../Products/NewArrivals"
 import ProductDetails from "../Products/ProductDetails"
@@ -67,12 +68,13 @@ const Home = () => {
             <h2 className="navbarText text-6xl text-[#CB2957] text-center font-bold mb-4">Best Seller</h2>
             <ProductDetails />
             
-            <div className="container mx-auto mb-25">
+            <div className="container mx-auto mb-5">
                 <h2 className="navbarText text-5xl text-center font-bold mb-7 mt-5 text-[#CB2957]">
                     Above and Beyond
                 </h2>
                 <ProductGrid products={placeholderProducts} />
             </div>
+            <FeaturedSection />
             <FeaturedCollection />
         </div>
     )
