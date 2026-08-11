@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import { BiShoppingBag } from "react-icons/bi"
 
 const MyOrders = () => {
     const [orders, setOrders] = useState([])
@@ -101,12 +102,10 @@ const MyOrders = () => {
                             ))
                         ) : (
                             <tr>
-                                <td colSpan={7} className="py-8 px-4 text-center text-gray-700">
+                                <td colSpan={7} className="py-8 px-4 text-center text-white">
                                     <div className="flex flex-col items-center">
-                                        <svg className="w-12 h-12 text-gray-400 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
-                                        </svg>
-                                        <span>You have no orders</span>
+                                        <BiShoppingBag size={50} className="mb-3" />
+                                        <span className="text-xl" >You have no orders</span>
                                     </div>
                                 </td>
                             </tr>    
