@@ -5,7 +5,7 @@ import FilterSiderbar from "../Products/FilterSiderbar"
 import SortOptions from "../Products/SortOptions"
 import ProductGrid from "../Products/ProductGrid"
 
-const CollectionPage = () => {
+const AMPCollectionPage = () => {
     const [products, setProducts] = useState([])
     const [filteredProducts, setFilteredProducts] = useState([])
     const [searchParams] = useSearchParams()
@@ -29,88 +29,105 @@ const CollectionPage = () => {
         }
     }, [])
 
+    // Fetch AMP products
     useEffect(() => {
         setTimeout(() => {
             const fetchedProducts = [
                 {
-                    _id: 1,
-                    name: "SG Gibsun",
-                    price: 120,
-                    category: "Les Paul",
-                    color: "Red",
-                    material: "Mahogany",
-                    brand: "Gibson",
-                    images: [{ url: 'https://i.pinimg.com/736x/ee/6a/95/ee6a95f4073291af10ef7debf71c0aa9.jpg?random=3' }],
+                    _id: 101,
+                    name: "Marshall JCM800",
+                    price: 899,
+                    category: "Tube Amp",
+                    color: "Black",
+                    material: "Wood",
+                    brand: "Marshall",
+                    images: [{ 
+                        url: 'https://i.pinimg.com/736x/7b/df/46/7bdf463789ef29da1cd092684045989c.jpg?random=101',
+                    }],
                 },
                 {
-                    _id: 2,
-                    name: "Les Paul",
-                    price: 130,
-                    category: "Les Paul",
-                    color: "Blue",
-                    material: "Maple",
-                    brand: "Les Paul",
-                    images: [{ url: 'https://i.pinimg.com/1200x/e4/99/9d/e4999ddf471b0c890af9310487b35a40.jpg?random=4' }],
-                },
-                {
-                    _id: 3,
-                    name: "Fender 1997",
-                    price: 140,
-                    category: "Stratocastor",
-                    color: "Yellow",
-                    material: "Alder Woods",
+                    _id: 102,
+                    name: "Fender Blues Junior",
+                    price: 699,
+                    category: "Tube Amp",
+                    color: "Tweed",
+                    material: "Wood",
                     brand: "Fender",
-                    images: [{ url: 'https://i.pinimg.com/736x/1b/47/73/1b4773168313f814a97848a6c27c29ab.jpg?random=5' }],
+                    images: [{ 
+                        url: 'https://i.pinimg.com/736x/2d/4f/ef/2d4fef21ecd1cc0843cd4422d48b23d9.jpg?random=102',
+                    }],
                 },
                 {
-                    _id: 4,
-                    name: "Stratocastor 1890",
-                    price: 150,
-                    category: "Stratocastor",
-                    color: "White",
-                    material: "Alder Woods",
-                    brand: "Squier",
-                    images: [{ url: 'https://i.pinimg.com/1200x/a6/49/0c/a6490c389bcd0c8c92aadc4b16b1b823.jpg?random=6' }],
+                    _id: 103,
+                    name: "Vox AC30",
+                    price: 1099,
+                    category: "Tube Amp",
+                    color: "Black",
+                    material: "Wood",
+                    brand: "Vox",
+                    images: [{ 
+                        url: 'https://i.pinimg.com/1200x/39/9d/b0/399db03ceaf3abadddd4111f9f674dc9.jpg?random=103',
+                    }],
                 },
                 {
-                    _id: 5,
-                    name: "Ibanez 1890",
-                    price: 160,
-                    category: "Telecastor",
-                    color: "Green",
-                    material: "Maple",
-                    brand: "Fender",
-                    images: [{ url: 'https://i.pinimg.com/736x/7d/87/9b/7d879b6f720d06ab2f96f3ff732ca976.jpg?random=7' }],
+                    _id: 104,
+                    name: "Boss Katana 50",
+                    price: 349,
+                    category: "Solid State",
+                    color: "Black",
+                    material: "Plastic",
+                    brand: "Boss",
+                    images: [{ 
+                        url: 'https://i.pinimg.com/1200x/8e/15/55/8e15552cf7a78ca3f8ad644bea46963e.jpg?random=104',
+                    }],
                 },
                 {
-                    _id: 6,
-                    name: "Gibsun 2002",
-                    price: 170,
-                    category: "Les Paul",
-                    color: "Red",
-                    material: "Mahogany",
-                    brand: "Gibson",
-                    images: [{ url: 'https://i.pinimg.com/1200x/21/e5/a1/21e5a1a265d93996d3ef6b3dce14e5de.jpg?random=8' }],
+                    _id: 105,
+                    name: "Orange Crush 35RT",
+                    price: 399,
+                    category: "Solid State",
+                    color: "Orange",
+                    material: "Plastic",
+                    brand: "Orange",
+                    images: [{ 
+                        url: 'https://i.pinimg.com/1200x/c7/f4/3f/c7f43fd1ad9f42df15c219ba58bdd386.jpg?random=105',
+                    }],
                 },
                 {
-                    _id: 7,
-                    name: "Gibsun 2005",
-                    price: 180,
-                    category: "Telecastor",
-                    color: "Blue",
-                    material: "Alder Woods",
-                    brand: "Squier",
-                    images: [{ url: 'https://i.pinimg.com/1200x/c4/1f/06/c41f06e03a7a607e8aaed4051b68ec9f.jpg?random=9' }],
+                    _id: 106,
+                    name: "Peavey 6505",
+                    price: 1299,
+                    category: "Tube Amp",
+                    color: "Black",
+                    material: "Wood",
+                    brand: "Peavey",
+                    images: [{ 
+                        url: 'https://i.pinimg.com/736x/36/dd/4a/36dd4ac40a4a2552f994204ec853aec1.jpg?random=106',
+                    }],
                 },
                 {
-                    _id: 8,
-                    name: "Telecastor Sparky",
-                    price: 190,
-                    category: "Telecastor",
-                    color: "Yellow",
-                    material: "Maple",
-                    brand: "Fender",
-                    images: [{ url: 'https://i.pinimg.com/736x/d7/7f/63/d77f632d5375a1b6d02193f5c8f7744c.jpg?random=10' }],
+                    _id: 107,
+                    name: "Line 6 Spider V",
+                    price: 299,
+                    category: "Digital",
+                    color: "Black",
+                    material: "Plastic",
+                    brand: "Line 6",
+                    images: [{ 
+                        url: 'https://i.pinimg.com/1200x/de/d2/f7/ded2f7420cc2436672a9af511bdf37d8.jpg?random=107',
+                    }],
+                },
+                {
+                    _id: 108,
+                    name: "Marshall DSL40CR",
+                    price: 799,
+                    category: "Tube Amp",
+                    color: "Black",
+                    material: "Wood",
+                    brand: "Marshall",
+                    images: [{ 
+                        url: 'https://cdn11.bigcommerce.com/s-4hc0jwsnnq/products/13217/images/48030/261206-DSL20_C_Front__66137.1715105815.1280.1280.jpg?c=1?random=108',
+                    }],
                 },
             ]
             setProducts(fetchedProducts)
@@ -157,9 +174,9 @@ const CollectionPage = () => {
     }, [products, searchParams])
 
     return (
-        <div className="flex flex-col lg:flex-row min-h-screen">
+        <div className="flex flex-col lg:flex-row min-h-screen bg-[#191b1c]">
             {/* Mobile Filter Button - Only visible on tablet and below */}
-            <div className="lg:hidden top-0 z-40 px-4 py-2">
+            <div className="lg:hidden top-0 z-40 px-4 py-2 bg-[#191b1c]">
                 <button
                     onClick={toggleSidebar}
                     className="w-30 flex items-center justify-center gap-2 bg-[#090a0a] border border-[#CB2957] py-2 rounded-lg hover:bg-[#060707] transition-all ease-in-out duration-300"
@@ -190,7 +207,7 @@ const CollectionPage = () => {
                     h-full
                 `}
             >
-            {/* Close button for mobile/tablet */}
+                {/* Close button for mobile/tablet */}
                 <div className="lg:hidden flex justify-between items-center p-4 border-b border-gray-800">
                     <button 
                         onClick={toggleSidebar}
@@ -207,16 +224,16 @@ const CollectionPage = () => {
             {/* Overlay for mobile/tablet */}
             {isSidebarOpen && (
                 <div 
-                    className="lg:hidden fixed inset-0 z-40"
+                    className="lg:hidden fixed inset-0 z-40 bg-black/70"
                     onClick={toggleSidebar}
                 />
             )}
 
             {/* Main Content */}
-            <div className="flex-1 p-4 md:p-6 lg:p-8">
+            <div className="flex-1 p-4 md:p-6 lg:p-8 bg-[#191b1c]">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-4 gap-3">
                     <h2 className="text-xl sm:text-2xl lg:text-3xl uppercase text-[#CB2957] font-bold tracking-wider">
-                        All Collection
+                        AMP Collection
                     </h2>
                     <div className="flex items-center gap-2 text-sm text-gray-400">
                         <span>{filteredProducts.length}</span>
@@ -229,13 +246,16 @@ const CollectionPage = () => {
                     <SortOptions />
                 </div>
                 
-                {/* Product Grid */}
+                {/* Product Grid with 3 columns for AMP */}
                 <div className="mt-4">
-                    <ProductGrid products={filteredProducts.length > 0 ? filteredProducts : products} />
+                    <ProductGrid 
+                        products={filteredProducts.length > 0 ? filteredProducts : products}
+                        isAmpCollection={true}
+                    />
                 </div>
             </div>
         </div>
     )
 }
 
-export default CollectionPage
+export default AMPCollectionPage

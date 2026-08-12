@@ -27,16 +27,10 @@ const Navbar = () => {
             </div>
 
             <div className="hidden md:flex space-x-6 mr-10">
-                <Link to='/collections/all' className="text-white hover:text-[#CB2957] text-lg font-medium transition-all ease-in-out duration-300">
-                    Stratocaster
+                <Link to='/collections/guitars' className="text-white hover:text-[#CB2957] text-lg font-medium transition-all ease-in-out duration-300">
+                    Guitars
                 </Link>
-                <Link to='#' className="text-white hover:text-[#CB2957] text-lg font-medium transition-all ease-in-out duration-300">
-                    Telecaster
-                </Link>
-                <Link to='#' className="text-white hover:text-[#CB2957] text-lg font-medium transition-all ease-in-out duration-300">
-                    Les Paul
-                </Link>
-                <Link to='#' className="text-white hover:text-[#CB2957] text-lg font-medium transition-all ease-in-out duration-300">
+                <Link to='/collections/amp' className="text-white hover:text-[#CB2957] text-lg font-medium transition-all ease-in-out duration-300">
                     AMP
                 </Link>
             </div>
@@ -76,9 +70,9 @@ const Navbar = () => {
                 <div className="p-4">
                     <h2 className="text-[#CB2957] text-3xl font-semibold mb-4 p-3">Menu</h2>
                     <nav className='space-y-4 px-3'>
-                        <Link to='#' onClick={toggleNavDrawer} className='block text-white text-2xl hover:text-[#CB2957] transition-all ease-in-out duration-300' >Stratocastor</Link>
-                        <Link to='#' onClick={toggleNavDrawer} className='block text-white text-2xl hover:text-[#CB2957] transition-all ease-in-out duration-300' >Telecastor</Link>
-                        <Link to='#' onClick={toggleNavDrawer} className='block text-white text-2xl hover:text-[#CB2957] transition-all ease-in-out duration-300' >Les Paul</Link>
+                        <Link to='/collections/guitars' onClick={toggleNavDrawer} className='block text-white text-2xl hover:text-[#CB2957] transition-all ease-in-out duration-300'>Guitars</Link>
+                        <Link to='/collections/amp' onClick={toggleNavDrawer} className='block text-white text-2xl hover:text-[#CB2957] transition-all ease-in-out duration-300'>AMP</Link>
+                        <Link to='#' onClick={toggleNavDrawer} className='block text-white text-2xl hover:text-[#CB2957] transition-all ease-in-out duration-300'>Accessories</Link>
                     </nav>
                 </div>
             </div>

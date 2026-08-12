@@ -6,6 +6,7 @@ import Home from './components/Pages/Home'
 import Register from './components/Pages/Register'
 import Profile from './components/Pages/Profile'
 import CollectionPage from './components/Pages/CollectionPage'
+import AMPCollectionPage from './components/Pages/AMPCollectionPage'
 
 const App = () => {
   return (
@@ -17,6 +18,8 @@ const App = () => {
           <Route path='login' element={<Login />} />
           <Route path='register' element={<Register />} />
           <Route path='profile' element={<Profile />} />
+          <Route path='collections/guitars' element={<CollectionPage />} />
+          <Route path='collections/amp' element={<AMPCollectionPage />} />
           <Route path='collections/:collection' element={<CollectionPage />} />
         </Route>
       </Routes>
