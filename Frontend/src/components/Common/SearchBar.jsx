@@ -1,13 +1,19 @@
-import { useState } from "react"
+import { useRef, useState } from "react"
 import { BiPlus, BiSearch } from "react-icons/bi";
 
 const SearchBar = () => {
 
     const [searchTerm, setSearchTerm] = useState("");
     const [isOpen, setIsOpen] = useState(false);
+    const inputRef = useRef()
 
     const handleSearchToggle = () => {
         setIsOpen(!isOpen);
+        if (!isOpen) {
+            setTimeout(() => {
+                inputRef.current?.focus();
+            }, 100);
+        }
     };
 
     const handleSearch = (e) => {
@@ -24,6 +30,7 @@ const SearchBar = () => {
                     className="relative flex items-center justify-center w-full" >
                     <div className="relative w-1/2">
                         <input
+                            ref={inputRef}
                             type="text"
                             placeholder="Search"
                             value={searchTerm}
@@ -42,7 +49,7 @@ const SearchBar = () => {
 
                     </div>
                 </form>) : (
-                <button onClick={handleSearchToggle}>
+                <button onClick={handleSearchToggle} className="hover:bg-black h-6 w-6 rounded-full hover:text-[#CB2957] transition-all ease-in-out duration-300" >
                     <BiSearch className="h-6 w-6" />
                 </button>
             )}
