@@ -1,16 +1,7 @@
-import { useState } from "react"
 import { Link } from 'react-router'
 import LoginImage from '../../assets/LoginImage.jpg'
 
 const Login = () => {
-    const [email, setEmail] = useState("")
-    const [password, setPassword] = useState("")
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        console.log('User Registered.',{email, password});
-        
-    }
     
     return (
         <div 
@@ -25,7 +16,7 @@ const Login = () => {
             
             {/* Right side - Form */}
             <div className="relative w-full md:w-1/2 flex flex-col justify-center items-center p-8 md:p-12 ">
-                <form onSubmit={handleSubmit} className="w-full max-w-md p-8">
+                <form className="w-full max-w-md p-8">
                     <div className="flex justify-center mb-6">
                         <h2 className="navbarText text-7xl text-white">
                             <span className=" navbarText text-[#CB2957]">G</span>
@@ -44,9 +35,7 @@ const Login = () => {
                         </label>
                         <input
                             type="text"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                            className="w-full p-2 border border-white focus:outline-none focus:ring-2 focus:ring-[#CB2957] placeholder-white text-xl bg-transparent text-white"
+                            className="w-full p-2 border border-white focus:outline-none focus:ring-2 focus:ring-[#CB2957] text-white text-xl bg-transparent"
                             placeholder="userexample@gmail.com"
                         />
                     </div>
@@ -56,10 +45,8 @@ const Login = () => {
                         </label>
                         <input
                             type="password"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
                             className="w-full p-2 border border-white focus:outline-none focus:ring-2 focus:ring-[#CB2957] text-white text-xl bg-transparent"
-                            placeholder="............"
+                            placeholder="Password"
                         />
                     </div>
                     <button
@@ -70,7 +57,7 @@ const Login = () => {
                     </button>
                     <p className="mt-6 text-center text-xl text-white">
                         Don't have an account?
-                        <Link to="/register" className="text-[#CB2957] ml-1 hover:text-black transition-all ease-in-out duration-300">
+                        <Link to="/register" className="text-[#CB2957] ml-1 transition-all ease-in-out duration-300">
                             Register
                         </Link>
                     </p>

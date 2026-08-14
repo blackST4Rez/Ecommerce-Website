@@ -1,21 +1,11 @@
-import { useState } from "react"
 import { Link } from 'react-router'
 import RegisterImage from '../../assets/RegisterImage.jpg'
 
 const Register = () => {
-    const [name, setName] = useState("")
-    const [email, setEmail] = useState("")
-    const [password, setPassword] = useState("")
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        console.log('User Registered.',{name, email, password});
-        
-    }
     
     return (
         <div 
-            className="relative min-h-screen flex items-center justify-start"
+            className="relative min-h-screen flex items-center justify-end"
             style={{
                 backgroundImage: `url(${RegisterImage})`,
                 backgroundSize: 'cover',
@@ -26,53 +16,47 @@ const Register = () => {
             
             {/* Right side - Form */}
             <div className="relative w-full md:w-1/2 flex flex-col justify-center items-center p-8 md:p-12 ">
-                <form onSubmit={handleSubmit} className="w-full max-w-md p-8">
+                <form className="w-full max-w-md p-8">
                     <div className="flex justify-center mb-6">
-                        <h2 className="navbarText text-7xl text-black">
+                        <h2 className="navbarText text-7xl text-white">
                             <span className=" navbarText text-[#CB2957]">G</span>
                             roove
                         </h2>
                     </div>
-                    <h2 className="text-2xl font-bold text-center mb-6 text-black">
+                    <h2 className="text-2xl font-bold text-center mb-6 text-white">
                         Hey There!
                     </h2>
-                    <p className="text-center mb-6 text-black">
+                    <p className="text-center mb-6 text-white">
                         Enter your Username and Password to Login
                     </p>
                     <div className="mb-4">
-                        <label className="block text-xl font-semibold mb-2 text-black">
+                        <label className="block text-xl font-semibold mb-2 text-white">
                             Name
                         </label>
                         <input
                             type="text"
-                            value={name}
-                            onChange={(e) => setName(e.target.value)}
-                            className="w-full p-2 border border-black focus:outline-none focus:ring-2 focus:ring-[#CB2957] placeholder-black text-xl bg-transparent text-black"
+                            className="w-full p-2 border border-white focus:outline-none focus:ring-2 focus:ring-[#CB2957] placeholder-white text-xl bg-transparent text-white"
                             placeholder="user123"
                         />
                     </div>
                     <div className="mb-4">
-                        <label className="block text-xl font-semibold mb-2 text-black">
+                        <label className="block text-xl font-semibold mb-2 text-white">
                             Email
                         </label>
                         <input
                             type="text"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                            className="w-full p-2 border border-black focus:outline-none focus:ring-2 focus:ring-[#CB2957] placeholder-black text-xl bg-transparent text-black"
+                            className="w-full p-2 border border-white focus:outline-none focus:ring-2 focus:ring-[#CB2957] placeholder-white text-xl bg-transparent text-white"
                             placeholder="userexample@gmail.com"
                         />
                     </div>
                     <div className="mb-4">
-                        <label className="block text-xl font-semibold mb-2 text-black">
+                        <label className="block text-xl font-semibold mb-2 text-white">
                             Password
                         </label>
                         <input
                             type="password"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                            className="w-full p-2 border border-black focus:outline-none focus:ring-2 focus:ring-[#CB2957] text-black text-xl bg-transparent"
-                            placeholder="............"
+                            className="w-full p-2 border border-white focus:outline-none focus:ring-2 focus:ring-[#CB2957] text-white text-xl bg-transparent placeholder-white"
+                            placeholder="Password"
                         />
                     </div>
                     <button
@@ -81,9 +65,9 @@ const Register = () => {
                     >
                         Sign Up
                     </button>
-                    <p className="mt-6 text-center text-xl text-black">
+                    <p className="mt-6 text-center text-xl text-white">
                         Don't have an account?
-                        <Link to="/login" className="text-[#CB2957] ml-1 hover:text-black transition-all ease-in-out duration-300">
+                        <Link to="/login" className="text-[#CB2957] ml-1 transition-all ease-in-out duration-300">
                             Login
                         </Link>
                     </p>
