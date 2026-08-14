@@ -12,7 +12,7 @@ const Profile = () => {
                             Raka Maharjan
                         </h1>
                         <p className="text-lg text-[#CB2957] mb-4">raka2026@gmail.com</p>
-                        <button className="w-full bg-black border-2 border-black text-white py-2 px-4 hover:bg-[#CB2957] hover:text-black transition-all ease-in-out duration-300">
+                        <button className="w-full hover:bg-black border-2 hover:border-[#CB2957] hover:text-white py-2 px-4 bg-[#CB2957] text-black transition-all ease-in-out duration-300">
                             Logout
                         </button>
                     </div>

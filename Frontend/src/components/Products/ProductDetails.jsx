@@ -53,7 +53,7 @@ const ProductDetails = () => {
     const handleCart = () => {
         if (cartValue === 0 || selectedColor === null) {
             toast.error('Please select the quantity & color', {
-                duration : 2000
+                duration : 3000
             })
             return
         }
@@ -64,9 +64,9 @@ const ProductDetails = () => {
             setCartHandle(false)
             setCartValue(0)
             toast.success('Items added to cart', {
-                duration: 2000
+                duration: 3000
             })
-        }, 1000)
+        }, 2000)
     }
 
 

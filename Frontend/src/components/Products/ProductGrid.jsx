@@ -20,10 +20,10 @@ const ProductGrid = ({ products, isAmpCollection = false }) => {
             }
         `}>
             {products.map((product) => (
-                <div key={product._id} className="bg-[#252424] rounded-lg overflow-hidden">
+                <div key={product._id} className="bg-[#252424] rounded-lg overflow-hidden relative">
                     <Link to={`/product/${product._id}`} className="block">
                         <div className={`
-                            relative overflow-hidden bg-[#141313]
+                            overflow-hidden bg-[#141313]
                             ${isAmpCollection 
                                 ? 'aspect-4/3' 
                                 : 'aspect-square'
@@ -37,13 +37,13 @@ const ProductGrid = ({ products, isAmpCollection = false }) => {
                             />
                             {/* Cart Icon on Image - Top Right */}
                             <button 
-                                className="absolute top-2 right-2 bg-[#CB2957] text-black p-1.5 rounded-full"
+                                className="absolute bottom-7 right-3 bg-white hover:bg-[#CB2957] p-1.5 rounded-full transition-all duration-300 cursor-pointer"
                                 onClick={(e) => {
                                     e.preventDefault()
                                     console.log('Added to cart:', product.name)
                                 }}
                             >
-                                <BiCart size={16} />
+                                <BiCart size={25} />
                             </button>
                         </div>
                     </Link>

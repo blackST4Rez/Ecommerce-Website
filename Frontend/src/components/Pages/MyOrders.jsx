@@ -1,6 +1,5 @@
-import { useEffect, useState } from "react"
 import { BiShoppingBag } from "react-icons/bi"
-
+import { useState, useEffect } from "react"
 const MyOrders = () => {
     const [orders, setOrders] = useState([])
 
@@ -35,83 +34,152 @@ const MyOrders = () => {
                 },
             ]
             setOrders(mockOrders)
-        }, 1000)  
+        }, 8000)  
     }, []) 
 
     return (
-        <div className="max-w-7xl mx-auto p-4 sm:p-6">
-            <h2 className="text-3xl sm:text-2xl font-bold mb-6 text-white">
+        <div className="max-w-7xl mx-auto p-3 sm:p-4 md:p-6">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 sm:mb-6 text-white">
                 My Orders
             </h2>
-            <div className="relative overflow-x-auto">
-                <table className="min-w-full text-left text-white">
-                    <thead className="text-l uppercase text-[#CB2957]">
-                        <tr>
-                            <th className="py-2 px-4 sm:py-3">Image</th>
-                            <th className="py-2 px-4 sm:py-3">Order ID</th>
-                            <th className="py-2 px-4 sm:py-3">Created</th>
-                            <th className="py-2 px-4 sm:py-3">Shipping Address</th>
-                            <th className="py-2 px-4 sm:py-3">Items</th>
-                            <th className="py-2 px-4 sm:py-3">Price</th>
-                            <th className="py-2 px-4 sm:py-3">Status</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {orders.length > 0 ? (
-                            orders.map((order) => (
-                                <tr
-                                    key={order._id}
-                                    className="cursor-pointer border-b border-gray-400"
-                                >
-                                    <td className="py-2 px-2 sm:py-4 sm:px-4">
+            <div className="relative">
+                {orders.length > 0 ? (
+                    <div className="space-y-3 sm:space-y-4">
+                        {orders.map((order) => (
+                            <div
+                                key={order._id}
+                                className="bg-[#0c0d0e] rounded-lg p-3 sm:p-4 md:p-6 cursor-pointer transition-colors"
+                            >
+                                {/* Mobile Layout (default) */}
+                                <div className="block lg:hidden">
+                                    <div className="flex items-start gap-3">
                                         <img
                                             src={order.orderItems[0].image}
                                             alt={order.orderItems[0].name}
-                                            className="w-10 h-10 sm:w-12 sm:h-12 object-cover"
+                                            className="w-16 h-16 sm:w-20 sm:h-20 object-cover rounded-lg shrink"
                                         />
-                                    </td>
-                                    <td className="py-2 px-2 sm:py-4 sm:px-4 font-medium text-sm">
-                                        {order._id}
-                                    </td>
-                                    <td className="py-2 px-2 sm:py-4 sm:px-4 text-sm">
-                                        {new Date(order.createdAt).toLocaleDateString()} <br />
-                                        {new Date(order.createdAt).toLocaleTimeString()}
-                                    </td>
-                                    <td className="py-2 px-2 sm:py-4 sm:px-4 text-sm">
-                                        {order.shippingAddress
-                                            ? `${order.shippingAddress.city}, ${order.shippingAddress.country}`
-                                            : "N/A"
-                                        }
-                                    </td>
-                                    <td className="py-2 px-2 sm:py-4 sm:px-4 text-center">
-                                        {order.orderItems.length}
-                                    </td>
-                                    <td className="py-2 px-2 sm:py-4 sm:px-4 font-semibold">
-                                        ${order.totalPrice}
-                                    </td>
-                                    <td className="py-2 px-2 sm:py-4 sm:px-4">
-                                        <span className={`px-3 py-1 rounded-full text-l font-semibold ${
+                                        <div className="flex-1 min-w-0">
+                                            <div className="flex justify-between items-start">
+                                                <div>
+                                                    <div className="text-xs uppercase text-[#CB2957] font-bold">Order ID</div>
+                                                    <div className="text-white text-xs sm:text-sm font-medium truncate">{order._id}</div>
+                                                </div>
+                                                <span className={`px-2 py-0.5 sm:px-3 sm:py-1 rounded-full text-xs sm:text-sm font-semibold ${
+                                                    order.isPaid 
+                                                        ? 'bg-emerald-500/10 text-emerald-500 border border-emerald-500/20' 
+                                                        : 'bg-yellow-500/10 text-yellow-300 border border-yellow-500/20'
+                                                }`}>
+                                                    {order.isPaid ? 'Paid' : 'Pending'}
+                                                </span>
+                                            </div>
+                                            <div className="grid grid-cols-1 gap-1 mt-2">
+                                                <div>
+                                                    <div className="text-[10px] sm:text-xs uppercase text-[#CB2957] font-bold">Date</div>
+                                                    <div className="text-white text-xs sm:text-sm">
+                                                        {new Date(order.createdAt).toLocaleDateString()}
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    <div className="text-[10px] sm:text-xs uppercase text-[#CB2957] font-bold">Items</div>
+                                                    <div className="text-white text-xs sm:text-sm">{order.orderItems.length}</div>
+                                                </div>
+                                                <div className="col-span-2">
+                                                    <div className="text-[10px] sm:text-xs uppercase text-[#CB2957] font-bold">Address</div>
+                                                    <div className="text-white text-xs sm:text-sm truncate">
+                                                        {order.shippingAddress
+                                                            ? `${order.shippingAddress.city}, ${order.shippingAddress.country}`
+                                                            : "N/A"
+                                                        }
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div className="mt-2 pt-2 border-t border-gray-700">
+                                                <div className="flex justify-between items-center">
+                                                    <span className="text-[10px] sm:text-xs uppercase text-[#CB2957] font-bold">Total</span>
+                                                    <span className="text-lg sm:text-xl font-bold text-white">
+                                                        Rs. {order.totalPrice}
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {/* Tablet and Desktop Layout */}
+                                <div className="hidden lg:flex lg:items-center lg:gap-4">
+                                    {/* Left section - Image */}
+                                    <div className="shrink">
+                                        <img
+                                            src={order.orderItems[0].image}
+                                            alt={order.orderItems[0].name}
+                                            className="w-20 h-20 object-cover rounded-lg"
+                                        />
+                                    </div>
+
+                                    {/* Middle section - Details */}
+                                    <div className="flex-1 grid grid-cols-4 gap-4">
+                                        <div>
+                                            <div className="text-xs uppercase text-[#CB2957] font-bold">Order ID</div>
+                                            <div className="text-white text-sm font-medium">{order._id}</div>
+                                        </div>
+                                        
+                                        <div>
+                                            <div className="text-xs uppercase text-[#CB2957] font-bold">Date</div>
+                                            <div className="text-white text-sm">
+                                                {new Date(order.createdAt).toLocaleDateString()}
+                                            </div>
+                                            <div className="text-gray-400 text-xs">
+                                                {new Date(order.createdAt).toLocaleTimeString()}
+                                            </div>
+                                        </div>
+
+                                        <div>
+                                            <div className="text-xs uppercase text-[#CB2957] font-bold">Address</div>
+                                            <div className="text-white text-sm">
+                                                {order.shippingAddress
+                                                    ? `${order.shippingAddress.city}`
+                                                    : "N/A"
+                                                }
+                                            </div>
+                                            <div className="text-gray-400 text-xs">
+                                                {order.shippingAddress?.country}
+                                            </div>
+                                        </div>
+
+                                        <div>
+                                            <div className="text-xs uppercase text-[#CB2957] font-bold">Items</div>
+                                            <div className="text-white text-sm">{order.orderItems.length} item(s)</div>
+                                        </div>
+                                    </div>
+
+                                    {/* Right section - Price and Status */}
+                                    <div className="flex flex-col items-end gap-2 shrink">
+                                        <div className="text-2xl font-bold text-white">
+                                            Rs. {order.totalPrice}
+                                        </div>
+                                        <span className={`px-3 py-1 rounded-full text-sm font-semibold ${
                                             order.isPaid 
-                                                ? 'bg-[#0c0d0e] text-emerald-500' 
-                                                : 'bg-[#0c0d0e] text-yellow-300'
+                                                ? 'bg-emerald-500/10 text-emerald-500 border border-emerald-500/20' 
+                                                : 'bg-yellow-500/10 text-yellow-300 border border-yellow-500/20'
                                         }`}>
                                             {order.isPaid ? 'Paid' : 'Pending'}
                                         </span>
-                                    </td>
-                                </tr>
-                            ))
-                        ) : (
-                            <tr>
-                                <td colSpan={7} className="py-8 px-4 text-center text-white">
-                                    <div className="flex flex-col items-center">
-                                        <BiShoppingBag size={50} className="mb-3" />
-                                        <span className="text-xl" >You have no orders</span>
                                     </div>
-                                </td>
-                            </tr>    
-                        )}
-                    </tbody>
-                </table>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                ) : (
+                    <div className="py-12 sm:py-16 md:py-20 px-4 text-center text-white">
+                        <div className="flex flex-col items-center">
+                            <BiShoppingBag size={48} className="sm:hidden mb-3 text-white" />
+                            <BiShoppingBag size={60} className="hidden sm:block md:hidden mb-4 text-white" />
+                            <BiShoppingBag size={72} className="hidden md:block mb-6 text-white" />
+                            <span className="text-lg sm:text-xl md:text-2xl font-medium">No orders yet</span>
+                            <span className="text-gray-400 text-sm sm:text-base mt-1">Start shopping to see your orders here</span>
+                        </div>
+                    </div>    
+                )}
             </div>
         </div>
     )
