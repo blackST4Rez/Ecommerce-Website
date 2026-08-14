@@ -1,7 +1,10 @@
 import { BiShoppingBag } from "react-icons/bi"
 import { useState, useEffect } from "react"
+import {FadeLoader} from 'react-spinners'
+
 const MyOrders = () => {
     const [orders, setOrders] = useState([])
+    const [isFetching, setIsFetching] = useState(true)
 
     useEffect(() => {
         setTimeout(() => { 
@@ -34,8 +37,23 @@ const MyOrders = () => {
                 },
             ]
             setOrders(mockOrders)
-        }, 8000)  
+            setIsFetching(false)
+        }, 4000)  
     }, []) 
+
+    if (isFetching) {
+        return (
+            <div className="max-w-7xl mx-auto p-3 sm:p-4 md:p-6">
+                <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 sm:mb-6 text-white">
+                    My Orders
+                </h2>
+                <div className="flex justify-center items-center min-h-75">
+                    <FadeLoader color="#CB2957" />
+                </div>
+            </div>
+        )
+    }
+
 
     return (
         <div className="max-w-7xl mx-auto p-3 sm:p-4 md:p-6">
@@ -43,6 +61,7 @@ const MyOrders = () => {
                 My Orders
             </h2>
             <div className="relative">
+                
                 {orders.length > 0 ? (
                     <div className="space-y-3 sm:space-y-4">
                         {orders.map((order) => (
