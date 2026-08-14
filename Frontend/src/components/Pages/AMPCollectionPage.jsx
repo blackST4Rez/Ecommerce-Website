@@ -4,6 +4,7 @@ import { useSearchParams } from "react-router"
 import FilterSiderbar from "../Products/FilterSiderbar"
 import SortOptions from "../Products/SortOptions"
 import ProductGrid from "../Products/ProductGrid"
+import { FadeLoader } from "react-spinners"
 
 const AMPCollectionPage = () => {
     const [products, setProducts] = useState([])
@@ -11,6 +12,7 @@ const AMPCollectionPage = () => {
     const [searchParams] = useSearchParams()
     const sidebarRef = useRef(null)
     const [isSidebarOpen, setIsSidebarOpen] = useState(false)
+    const [isFetching, setIsFetching] = useState(true)
 
     const toggleSidebar = () => {
         setIsSidebarOpen(!isSidebarOpen)
@@ -41,7 +43,7 @@ const AMPCollectionPage = () => {
                     color: "Black",
                     material: "Wood",
                     brand: "Marshall",
-                    images: [{ 
+                    images: [{
                         url: 'https://i.pinimg.com/736x/7b/df/46/7bdf463789ef29da1cd092684045989c.jpg?random=101',
                     }],
                 },
@@ -53,7 +55,7 @@ const AMPCollectionPage = () => {
                     color: "Tweed",
                     material: "Wood",
                     brand: "Fender",
-                    images: [{ 
+                    images: [{
                         url: 'https://i.pinimg.com/736x/2d/4f/ef/2d4fef21ecd1cc0843cd4422d48b23d9.jpg?random=102',
                     }],
                 },
@@ -65,7 +67,7 @@ const AMPCollectionPage = () => {
                     color: "Black",
                     material: "Wood",
                     brand: "Vox",
-                    images: [{ 
+                    images: [{
                         url: 'https://i.pinimg.com/1200x/39/9d/b0/399db03ceaf3abadddd4111f9f674dc9.jpg?random=103',
                     }],
                 },
@@ -77,7 +79,7 @@ const AMPCollectionPage = () => {
                     color: "Black",
                     material: "Plastic",
                     brand: "Boss",
-                    images: [{ 
+                    images: [{
                         url: 'https://i.pinimg.com/1200x/8e/15/55/8e15552cf7a78ca3f8ad644bea46963e.jpg?random=104',
                     }],
                 },
@@ -89,7 +91,7 @@ const AMPCollectionPage = () => {
                     color: "Orange",
                     material: "Plastic",
                     brand: "Orange",
-                    images: [{ 
+                    images: [{
                         url: 'https://i.pinimg.com/1200x/c7/f4/3f/c7f43fd1ad9f42df15c219ba58bdd386.jpg?random=105',
                     }],
                 },
@@ -101,7 +103,7 @@ const AMPCollectionPage = () => {
                     color: "Black",
                     material: "Wood",
                     brand: "Peavey",
-                    images: [{ 
+                    images: [{
                         url: 'https://i.pinimg.com/736x/36/dd/4a/36dd4ac40a4a2552f994204ec853aec1.jpg?random=106',
                     }],
                 },
@@ -113,7 +115,7 @@ const AMPCollectionPage = () => {
                     color: "Black",
                     material: "Plastic",
                     brand: "Line 6",
-                    images: [{ 
+                    images: [{
                         url: 'https://i.pinimg.com/1200x/de/d2/f7/ded2f7420cc2436672a9af511bdf37d8.jpg?random=107',
                     }],
                 },
@@ -125,14 +127,15 @@ const AMPCollectionPage = () => {
                     color: "Black",
                     material: "Wood",
                     brand: "Marshall",
-                    images: [{ 
+                    images: [{
                         url: 'https://cdn11.bigcommerce.com/s-4hc0jwsnnq/products/13217/images/48030/261206-DSL20_C_Front__66137.1715105815.1280.1280.jpg?c=1?random=108',
                     }],
                 },
             ]
             setProducts(fetchedProducts)
             setFilteredProducts(fetchedProducts)
-        }, 1000)
+            setIsFetching(false)
+        }, 2000)
     }, [])
 
     // Apply filters whenever products or searchParams change
@@ -147,31 +150,40 @@ const AMPCollectionPage = () => {
         let filtered = [...products]
 
         if (category) {
-            filtered = filtered.filter(product => 
+            filtered = filtered.filter(product =>
                 product.category === category
             )
         }
 
         if (color) {
-            filtered = filtered.filter(product => 
+            filtered = filtered.filter(product =>
                 product.color === color
             )
         }
 
         if (material.length > 0) {
-            filtered = filtered.filter(product => 
+            filtered = filtered.filter(product =>
                 material.includes(product.material)
             )
         }
 
         if (brand.length > 0) {
-            filtered = filtered.filter(product => 
+            filtered = filtered.filter(product =>
                 brand.includes(product.brand)
             )
         }
 
         setFilteredProducts(filtered)
     }, [products, searchParams])
+
+    if (isFetching) {
+        return (
+            <div className="flex justify-center items-center min-h-screen">
+                <FadeLoader color="#CB2957" />
+            </div>
+        )
+    }
+
 
     return (
         <div className="flex flex-col lg:flex-row min-h-screen bg-[#191b1c]">
@@ -209,7 +221,7 @@ const AMPCollectionPage = () => {
             >
                 {/* Close button for mobile/tablet */}
                 <div className="lg:hidden flex justify-between items-center p-4 border-b border-gray-800">
-                    <button 
+                    <button
                         onClick={toggleSidebar}
                         className="text-white hover:text-[#CB2957] transition-colors"
                     >
@@ -223,7 +235,7 @@ const AMPCollectionPage = () => {
 
             {/* Overlay for mobile/tablet */}
             {isSidebarOpen && (
-                <div 
+                <div
                     className="lg:hidden fixed inset-0 z-40 bg-black/70"
                     onClick={toggleSidebar}
                 />
@@ -248,7 +260,7 @@ const AMPCollectionPage = () => {
                 
                 {/* Product Grid with 3 columns for AMP */}
                 <div className="mt-4">
-                    <ProductGrid 
+                    <ProductGrid
                         products={filteredProducts.length > 0 ? filteredProducts : products}
                         isAmpCollection={true}
                     />

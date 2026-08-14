@@ -4,6 +4,7 @@ import { useSearchParams } from "react-router"
 import FilterSiderbar from "../Products/FilterSiderbar"
 import SortOptions from "../Products/SortOptions"
 import ProductGrid from "../Products/ProductGrid"
+import { FadeLoader } from "react-spinners"
 
 const CollectionPage = () => {
     const [products, setProducts] = useState([])
@@ -11,6 +12,7 @@ const CollectionPage = () => {
     const [searchParams] = useSearchParams()
     const sidebarRef = useRef(null)
     const [isSidebarOpen, setIsSidebarOpen] = useState(false)
+    const [isFetching, setIsFetching] = useState(true)
 
     const toggleSidebar = () => {
         setIsSidebarOpen(!isSidebarOpen)
@@ -27,6 +29,7 @@ const CollectionPage = () => {
         return () => {
             document.removeEventListener('mousedown', handleClickOutside)
         }
+
     }, [])
 
     useEffect(() => {
@@ -115,7 +118,8 @@ const CollectionPage = () => {
             ]
             setProducts(fetchedProducts)
             setFilteredProducts(fetchedProducts)
-        }, 1000)
+            setIsFetching(false)
+        }, 2000)
     }, [])
 
     // Apply filters whenever products or searchParams change
@@ -155,6 +159,14 @@ const CollectionPage = () => {
 
         setFilteredProducts(filtered)
     }, [products, searchParams])
+
+    if (isFetching) {
+        return (
+            <div className="flex justify-center items-center min-h-screen">
+                <FadeLoader color="#CB2957" />
+            </div>
+        )
+    }
 
     return (
         <div className="flex flex-col lg:flex-row min-h-screen">
