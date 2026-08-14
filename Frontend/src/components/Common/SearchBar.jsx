@@ -4,7 +4,7 @@ import { BiPlus, BiSearch } from "react-icons/bi";
 const SearchBar = () => {
 
     const [searchTerm, setSearchTerm] = useState("");
-    const [isOpen, setIsOpen] = useState("");
+    const [isOpen, setIsOpen] = useState(false);
 
     const handleSearchToggle = () => {
         setIsOpen(!isOpen);
@@ -36,7 +36,7 @@ const SearchBar = () => {
                             <BiSearch className="h-6 w-6" />
                         </button>
 
-                        <button type="button" className="absolute -right-20 top-1/2 transform -translate-y-1/2 text-white  hover:text-[#CB2957] transition-all ease-in-out duration-300 hover:rotate-90" >
+                        <button type="button" onClick={handleSearchToggle} className="absolute -right-20 top-1/2 transform -translate-y-1/2 text-white  hover:text-[#CB2957] hover:rotate-90 transition-all ease-in-out duration-300" >
                             <BiPlus className="h-8 w-8 rotate-135" />
                         </button>
 
