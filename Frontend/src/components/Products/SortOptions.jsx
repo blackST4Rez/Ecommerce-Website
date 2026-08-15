@@ -20,7 +20,7 @@ const SortOptions = () => {
 
     return (
         <div className="flex items-center gap-2">
-            <label htmlFor="sort" className="text-gray-400 text-sm">
+            <label htmlFor="sort" className="text-white text-l font-semibold">
                 Sort by:
             </label>
             <select

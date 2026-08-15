@@ -10,7 +10,7 @@ const FilterSidebar = ({
 
     /* Set all the filters in an arr inside a variable */
     const categories = ["Stratocastor", "Telecastor", "Les Paul"]
-    const colors = ["Red", "Blue", "Green", "Yellow", "White", "Black", "Tweed", "Orange"]
+    const colors = ["Yellow", "Green", "Red", "White", "Blue", "Orange", "Beige"]
     const materials = ["Mahogany", "Maple", "Alder Woods"]
     const brands = ["Fender", "Squier", "Les Paul", "Gibson"]
 
@@ -106,14 +106,14 @@ const FilterSidebar = ({
                     <label className="block text-[#CB2957] font-medium mb-2 text-xl">
                         Colors
                     </label>
-                    <div className="flex flex-wrap gap-2">
+                    <div className="flex flex-wrap gap-2 pl-1">
                         {colors.map((color) => (
                             <button
                                 key={color}
                                 onClick={() => handleColorSelect(color)}
                                 className={`w-6 h-6 rounded-full border-2 cursor-pointer ${currentColor === color
-                                        ? 'border-[#CB2957] ring-2 ring-[#CB2957]'
-                                        : 'border-white'
+                                        ? 'border-black ring-2 ring-[#ffffff]'
+                                        : 'border-none'
                                     }`}
                                 style={{ backgroundColor: color.toLowerCase() }}
                                 aria-label={`Select ${color} color`}
@@ -168,9 +168,9 @@ const FilterSidebar = ({
             <div className="mt-auto pt-4 border-t border-gray-800">
                 <button
                     onClick={handleReset}
-                    className="w-full py-2 bg-[#CB2957] text-black rounded hover:bg-black hover:text-[#CB2957] transition-all"
+                    className="w-full py-2 font-bold bg-[#CB2957] text-black rounded hover:bg-black hover:text-[#CB2957] transition-all ease-in-out duration-300"
                 >
-                    Reset Filters
+                Reset Filters
                 </button>
             </div>
         </div>
