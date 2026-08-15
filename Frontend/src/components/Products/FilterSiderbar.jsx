@@ -1,189 +1,174 @@
-import { useEffect, useState } from "react"
-import { useSearchParams, useLocation } from "react-router"
 import { BiX } from "react-icons/bi"
+import { useSearchParams } from "react-router"
 
-const FilterSiderbar = ({ onClose }) => {
+const FilterSidebar = ({
+    onClose
+}) => {
+
+    /* Set useParams hook  */
     const [searchParams, setSearchParams] = useSearchParams()
-    const location = useLocation()
-    const [filters, setFilters] = useState({
-        category: "",
-        color: "",
-        material: [],
-        brand: [],
-    })
 
-    // Check if we're on the AMP page
-    const isAMPPage = location.pathname.includes('/amp')
-
-    // Different filter options based on page
-    const guitarCategories = ["Stratocastor", "Telecastor", "Les Paul"]
-    const ampCategories = ["Tube Amp", "Solid State", "Digital"]
+    /* Set all the filters in an arr inside a variable */
+    const categories = ["Stratocastor", "Telecastor", "Les Paul"]
     const colors = ["Red", "Blue", "Green", "Yellow", "White", "Black", "Tweed", "Orange"]
-    const guitarMaterials = ["Mahogany", "Maple", "Alder Woods"]
-    const ampMaterials = ["Wood", "Plastic"]
-    const guitarBrands = ["Fender", "Squier", "Les Paul", "Gibson"]
-    const ampBrands = ["Marshall", "Fender", "Vox", "Boss", "Orange", "Peavey", "Line 6"]
+    const materials = ["Mahogany", "Maple", "Alder Woods"]
+    const brands = ["Fender", "Squier", "Les Paul", "Gibson"]
 
-    const categories = isAMPPage ? ampCategories : guitarCategories
-    const materials = isAMPPage ? ampMaterials : guitarMaterials
-    const brands = isAMPPage ? ampBrands : guitarBrands
+    /* Read the current filters from URL */
+    const currentCategory = searchParams.get('category') || ''
+    const currentColor = searchParams.get('color') || ''
+    const currentMaterials = searchParams.get('material')?.split(',') || []
+    const currentBrands = searchParams.get('brand')?.split(',') || []
 
-    useEffect(() => {
-        const params = Object.fromEntries([...searchParams])
-        
-        setFilters(prev => ({
-            ...prev,
-            category: params.category || prev.category,
-            color: params.color || prev.color,
-            material: params.material ? params.material.split(',') : prev.material,
-            brand: params.brand ? params.brand.split(',') : prev.brand,
-        }))
-    }, [searchParams])
-
-    const handleFilterChange = (e) => {
-        const { name, value, checked, type } = e.target
-        
-        let newFilters = { ...filters }
-        
-        if (type === "checkbox") {
-            if (checked) {
-                newFilters[name] = [...(newFilters[name] || []), value]
-            } else {
-                newFilters[name] = newFilters[name].filter((item) => item !== value)
-            }
-        } else if (type === "radio") {
-            newFilters[name] = value
+    /* Category Selection Handler*/
+    const handleCategoryChange = (category) => {
+        if (category === currentCategory) {
+            searchParams.delete('category')
+        } else {
+            searchParams.set('category', category)
         }
-        
-        setFilters(newFilters)
-        
-        // Update URL search params
-        const params = new URLSearchParams()
-        if (newFilters.category) params.set('category', newFilters.category)
-        if (newFilters.color) params.set('color', newFilters.color)
-        if (newFilters.material.length > 0) params.set('material', newFilters.material.join(','))
-        if (newFilters.brand.length > 0) params.set('brand', newFilters.brand.join(','))
-        setSearchParams(params)
+        setSearchParams(searchParams)
     }
 
-    const handleColorClick = (color) => {
-        const newColor = filters.color === color ? "" : color
-        setFilters(prev => ({
-            ...prev,
-            color: newColor
-        }))
-        
-        const params = new URLSearchParams(searchParams)
-        if (newColor) {
-            params.set('color', newColor)
+    /* Color Selection Handler */
+    const handleColorSelect = (color) => {
+        if (color === currentColor) {
+            searchParams.delete('color')
         } else {
-            params.delete('color')
+            searchParams.set('color', color)
         }
-        setSearchParams(params)
+        setSearchParams(searchParams)
+    }
+
+    /* Multi Value Selection Handler */
+    const handleMultiFilterChange = (key, value) => {
+        const current = searchParams.get(key)?.split(',') || []
+        let newValues
+
+        if (current.includes(value)) {
+            newValues = current.filter(v => v !== value)
+        } else {
+            newValues = [...current, value]
+        }
+
+        if (newValues.length > 0) {
+            searchParams.set(key, newValues.join(','))
+        } else {
+            searchParams.delete(key)
+        }
+        setSearchParams(searchParams)
+    }
+
+    /* Reset Filter */
+    const handleReset = () => {
+        setSearchParams({})
     }
 
     return (
-        <div className="p-4 min-h-full bg-[#191b1c] flex flex-col">
-            {/* Header with Filters text and Close Button */}
+
+        <div className="p-4 min-h-full bg-[#191b1c] flex flex-col hide-scrollbar">
             <div className="flex items-center justify-between mb-10">
                 <h3 className="text-3xl font-medium text-[#CB2957]">Filters</h3>
                 {onClose && (
-                    <button 
+                    <button
                         onClick={onClose}
-                        className="text-white hover:text-[#CB2957] transition-colors"
+                        className="lg:hidden text-white hover:text-[#CB2957] hover:rotate-90 transition-all ease-in-out duration-300"
                     >
                         <BiX size={28} />
                     </button>
                 )}
             </div>
-            
-            {/* Filter Options - Scrollable area */}
+            {/* 5b. Filter Options (Scrollable) */}
             <div className="flex-1 overflow-y-auto">
+
                 {/* Category Filter */}
                 <div className="mb-10">
-                    <label className="block text-[#CB2957] font-medium mb-2 text-xl">Category</label>
+                    <label className="block text-[#CB2957] font-medium mb-2 text-xl">
+                        Category
+                    </label>
                     {categories.map((category) => (
-                        <div key={category} className="flex items-center mb-1">
+                        <label key={category} className="flex items-center mb-1 cursor-pointer">
                             <input
-                                onChange={handleFilterChange}
-                                value={category}
                                 type="radio"
                                 name="category"
-                                checked={filters.category === category}
-                                className="mr-2 h-4 w-4 text-[#CB2957] focus:ring-[#CB2957]"
+                                value={category}
+                                checked={currentCategory === category}
+                                onChange={() => handleCategoryChange(category)}
+                                className="mr-2 h-4 w-4 text-[#CB2957]"
                             />
                             <span className="text-white">{category}</span>
-                        </div>
+                        </label>
                     ))}
                 </div>
-                
-                {/* Color Sections */}
+
+                {/* Color Filter */}
                 <div className="mb-10">
-                    <label className="block text-[#CB2957] font-medium mb-2 text-xl">Colors</label>
+                    <label className="block text-[#CB2957] font-medium mb-2 text-xl">
+                        Colors
+                    </label>
                     <div className="flex flex-wrap gap-2">
                         {colors.map((color) => (
                             <button
-                                onClick={() => handleColorClick(color)}
                                 key={color}
-                                className={`w-6 h-6 rounded-full border-2 cursor-pointer transition hover:scale-105 ${
-                                    filters.color === color ? 'border-[#CB2957]' : 'border-white'
-                                }`}
+                                onClick={() => handleColorSelect(color)}
+                                className={`w-6 h-6 rounded-full border-2 cursor-pointer ${currentColor === color
+                                        ? 'border-[#CB2957] ring-2 ring-[#CB2957]'
+                                        : 'border-white'
+                                    }`}
                                 style={{ backgroundColor: color.toLowerCase() }}
-                            ></button>
+                                aria-label={`Select ${color} color`}
+                                title={color}
+                            />
                         ))}
                     </div>
                 </div>
-                
+
                 {/* Material Filter */}
                 <div className="mb-10">
-                    <label className="block text-[#CB2957] font-medium mb-2 text-xl">Materials</label>
+                    <label className="block text-[#CB2957] font-medium mb-2 text-xl">
+                        Materials
+                    </label>
                     {materials.map((material) => (
-                        <div key={material} className="flex items-center mb-1">
+                        <label key={material} className="flex items-center mb-1 cursor-pointer">
                             <input
-                                onChange={handleFilterChange}
-                                value={material}
                                 type="checkbox"
                                 name="material"
-                                checked={filters.material.includes(material)}
-                                className="mr-2 h-4 w-4 text-white focus:ring-[#CB2957]"
+                                value={material}
+                                checked={currentMaterials.includes(material)}
+                                onChange={() => handleMultiFilterChange('material', material)}
+                                className="mr-2 h-4 w-4 text-white"
                             />
                             <span className="text-white">{material}</span>
-                        </div>
+                        </label>
                     ))}
                 </div>
-                
-                {/* Brand Sections */}
+
+                {/* Brand Filter */}
                 <div className="mb-6">
-                    <label className="block text-[#CB2957] font-medium mb-2 text-xl">Brands</label>
+                    <label className="block text-[#CB2957] font-medium mb-2 text-xl">
+                        Brands
+                    </label>
                     {brands.map((brand) => (
-                        <div key={brand} className="flex items-center mb-1">
+                        <label key={brand} className="flex items-center mb-1 cursor-pointer">
                             <input
-                                onChange={handleFilterChange}
-                                value={brand}
                                 type="checkbox"
                                 name="brand"
-                                checked={filters.brand.includes(brand)}
-                                className="mr-2 h-4 w-4 text-white focus:ring-[#CB2957]"
+                                value={brand}
+                                checked={currentBrands.includes(brand)}
+                                onChange={() => handleMultiFilterChange('brand', brand)}
+                                className="mr-2 h-4 w-4 text-white"
                             />
                             <span className="text-white">{brand}</span>
-                        </div>
+                        </label>
                     ))}
                 </div>
             </div>
-            
-            {/* Reset Filters Button - Sticky at bottom */}
+
+            {/* 5c. Reset Button */}
             <div className="mt-auto pt-4 border-t border-gray-800">
                 <button
-                    onClick={() => {
-                        setFilters({
-                            category: "",
-                            color: "",
-                            material: [],
-                            brand: [],
-                        })
-                        setSearchParams({})
-                    }}
-                    className="w-full py-2 bg-[#CB2957] text-black rounded hover:bg-black hover:text-[#CB2957] transition-all ease-in-out duration-300"
+                    onClick={handleReset}
+                    className="w-full py-2 bg-[#CB2957] text-black rounded hover:bg-black hover:text-[#CB2957] transition-all"
                 >
                     Reset Filters
                 </button>
@@ -192,4 +177,4 @@ const FilterSiderbar = ({ onClose }) => {
     )
 }
 
-export default FilterSiderbar
+export default FilterSidebar

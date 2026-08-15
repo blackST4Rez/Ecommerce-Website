@@ -169,24 +169,19 @@ const CollectionPage = () => {
     }
 
     return (
-        <div className="flex flex-col lg:flex-row min-h-screen">
-            {/* Mobile Filter Button - Only visible on tablet and below */}
-            <div className="lg:hidden top-0 z-40 px-4 py-2">
+        <div className="flex flex-col lg:flex-row min-h-screen bg-[#191b1c]">
+            {/* Mobile Filter Button */}
+            <div className="lg:hidden top-0 z-40 px-4 py-2 bg-[#191b1c]">
                 <button
                     onClick={toggleSidebar}
-                    className="w-30 flex items-center justify-center gap-2 bg-[#090a0a] border border-[#CB2957] py-2 rounded-lg hover:bg-[#060707] transition-all ease-in-out duration-300"
+                    className="w-30 flex items-center justify-center gap-2 bg-[#131414] border-2 border-[#CB2957] hover:bg-[#000000] transition-all ease-in-out duration-300 p-2 rounded-full"
                 >
                     <BiFilter size={20} className="text-[#CB2957]" />
                     <span className="text-white font-medium text-sm">Filters</span>
-                    {Object.values(searchParams).some(v => v) && (
-                        <span className="ml-2 bg-[#CB2957] text-white text-[10px] px-2 py-0.5 rounded-full">
-                            Active
-                        </span>
-                    )}
                 </button>
             </div>
 
-            {/* Filter Sidebar - Hidden on mobile, visible on large screens */}
+            {/* Filter Sidebar */}
             <div
                 ref={sidebarRef}
                 className={`
@@ -202,33 +197,23 @@ const CollectionPage = () => {
                     h-full
                 `}
             >
-            {/* Close button for mobile/tablet */}
-                <div className="lg:hidden flex justify-between items-center p-4 border-b border-gray-800">
-                    <button 
-                        onClick={toggleSidebar}
-                        className="text-white hover:text-[#CB2957] transition-colors"
-                    >
-                        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                        </svg>
-                    </button>
-                </div>
-                <FilterSiderbar />
+                <FilterSiderbar onClose={toggleSidebar} />
             </div>
 
-            {/* Overlay for mobile/tablet */}
+            {/* Mobile Overlay */}
             {isSidebarOpen && (
                 <div 
-                    className="lg:hidden fixed inset-0 z-40"
+                    className="lg:hidden fixed inset-0 z-40 bg-black/70"
                     onClick={toggleSidebar}
                 />
             )}
 
             {/* Main Content */}
-            <div className="flex-1 p-4 md:p-6 lg:p-8">
+            <div className="flex-1 p-4 md:p-6 lg:p-4 bg-[#191b1c]">
+                {/* Header with product count */}
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-4 gap-3">
                     <h2 className="text-xl sm:text-2xl lg:text-3xl uppercase text-[#CB2957] font-bold tracking-wider">
-                        All Collection
+                        Guitar Collection
                     </h2>
                     <div className="flex items-center gap-2 text-sm text-gray-400">
                         <span>{filteredProducts.length}</span>
@@ -237,17 +222,18 @@ const CollectionPage = () => {
                 </div>
                 
                 {/* Sort Options */}
-                <div className="mb-6">
+                <div className="mb-6 text-white">
                     <SortOptions />
                 </div>
                 
                 {/* Product Grid */}
                 <div className="mt-4">
-                    <ProductGrid products={filteredProducts.length > 0 ? filteredProducts : products} />
+                    <ProductGrid products={filteredProducts.length > 0 ? filteredProducts : products } />
                 </div>
             </div>
         </div>
     )
 }
+
 
 export default CollectionPage
