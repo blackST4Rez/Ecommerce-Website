@@ -1,10 +1,10 @@
 import { useEffect, useRef, useState } from "react"
 import { BiFilter } from "react-icons/bi"
 import { useSearchParams } from "react-router"
-import FilterSiderbar from "../Products/FilterSiderbar"
 import SortOptions from "../Products/SortOptions"
 import ProductGrid from "../Products/ProductGrid"
 import { FadeLoader } from "react-spinners"
+import AMPFilterSidebar from "../Products/AMPFilterSidebar"
 
 const AMPCollectionPage = () => {
     const [products, setProducts] = useState([])
@@ -38,97 +38,67 @@ const AMPCollectionPage = () => {
                 {
                     _id: 101,
                     name: "Marshall JCM800",
-                    price: 899,
-                    category: "Tube Amp",
-                    color: "Black",
-                    material: "Wood",
-                    brand: "Marshall",
+                    price: 106468,
+                    category: "Marshall",
+                    material: "Solid Woods",
+                    type: "Voltage Amplifiers",
                     images: [{
-                        url: 'https://i.pinimg.com/736x/7b/df/46/7bdf463789ef29da1cd092684045989c.jpg?random=101',
+                        url: 'https://i.pinimg.com/1200x/0a/0a/b1/0a0ab13da4dc3182b4a4a97f047ee863.jpg?random=101',
                     }],
                 },
                 {
                     _id: 102,
-                    name: "Fender Blues Junior",
-                    price: 699,
-                    category: "Tube Amp",
-                    color: "Tweed",
-                    material: "Wood",
-                    brand: "Fender",
+                    name: "Marshall JBD2090",
+                    price: 175504,
+                    category: "Marshall",
+                    material: "Wood Composites",
+                    type: "Operational Amplifiers",
                     images: [{
-                        url: 'https://i.pinimg.com/736x/2d/4f/ef/2d4fef21ecd1cc0843cd4422d48b23d9.jpg?random=102',
+                        url: 'https://i.pinimg.com/1200x/40/ee/d1/40eed17824bea8525b1177821f1ecbe0.jpg?random=102',
                     }],
                 },
                 {
                     _id: 103,
                     name: "Vox AC30",
-                    price: 1099,
-                    category: "Tube Amp",
-                    color: "Black",
-                    material: "Wood",
-                    brand: "Vox",
+                    price: 104063,
+                    category: "Vox",
+                    material: "Plywood",
+                    type: "Power Amplifiers",
                     images: [{
-                        url: 'https://i.pinimg.com/1200x/39/9d/b0/399db03ceaf3abadddd4111f9f674dc9.jpg?random=103',
+                        url: 'https://i.pinimg.com/1200x/35/a6/ce/35a6ce35de954ecd9737a53977792970.jpg?random=103',
                     }],
                 },
                 {
                     _id: 104,
-                    name: "Boss Katana 50",
-                    price: 349,
-                    category: "Solid State",
-                    color: "Black",
-                    material: "Plastic",
-                    brand: "Boss",
+                    name: "Vox Series 990D",
+                    price: 189709,
+                    category: "Vox",
+                    material: "Polymers",
+                    type: "Power Amplifiers",
                     images: [{
-                        url: 'https://i.pinimg.com/1200x/8e/15/55/8e15552cf7a78ca3f8ad644bea46963e.jpg?random=104',
+                        url: 'https://i.pinimg.com/1200x/3e/81/0b/3e810b510dba4ce24bfba90de9933ebe.jpg?random=104',
                     }],
                 },
                 {
                     _id: 105,
-                    name: "Orange Crush 35RT",
-                    price: 399,
-                    category: "Solid State",
-                    color: "Orange",
-                    material: "Plastic",
-                    brand: "Orange",
+                    name: "Fender 64 Bassman",
+                    price: 149883,
+                    category: "Fender",
+                    material: "Polymers",
+                    type: "Power Amplifiers",
                     images: [{
-                        url: 'https://i.pinimg.com/1200x/c7/f4/3f/c7f43fd1ad9f42df15c219ba58bdd386.jpg?random=105',
+                        url: 'https://i.pinimg.com/1200x/ac/32/48/ac3248f95d4685bb56f8ed2177ff6aa0.jpg?random=105',
                     }],
                 },
                 {
                     _id: 106,
-                    name: "Peavey 6505",
-                    price: 1299,
-                    category: "Tube Amp",
-                    color: "Black",
-                    material: "Wood",
-                    brand: "Peavey",
+                    name: "Fender Champion 20",
+                    price: 148440,
+                    category: "Fender",
+                    material: "Wood Composites",
+                    type: "urrent Amplifiers",
                     images: [{
-                        url: 'https://i.pinimg.com/736x/36/dd/4a/36dd4ac40a4a2552f994204ec853aec1.jpg?random=106',
-                    }],
-                },
-                {
-                    _id: 107,
-                    name: "Line 6 Spider V",
-                    price: 299,
-                    category: "Digital",
-                    color: "Black",
-                    material: "Plastic",
-                    brand: "Line 6",
-                    images: [{
-                        url: 'https://i.pinimg.com/1200x/de/d2/f7/ded2f7420cc2436672a9af511bdf37d8.jpg?random=107',
-                    }],
-                },
-                {
-                    _id: 108,
-                    name: "Marshall DSL40CR",
-                    price: 799,
-                    category: "Tube Amp",
-                    color: "Black",
-                    material: "Wood",
-                    brand: "Marshall",
-                    images: [{
-                        url: 'https://cdn11.bigcommerce.com/s-4hc0jwsnnq/products/13217/images/48030/261206-DSL20_C_Front__66137.1715105815.1280.1280.jpg?c=1?random=108',
+                        url: 'https://i.pinimg.com/1200x/66/f2/bb/66f2bbcc4e856bb3239047b0b5c7da18.jpg?random=106',
                     }],
                 },
             ]
@@ -143,9 +113,8 @@ const AMPCollectionPage = () => {
         if (products.length === 0) return
 
         const category = searchParams.get('category') || ''
-        const color = searchParams.get('color') || ''
         const material = searchParams.get('material')?.split(',') || []
-        const brand = searchParams.get('brand')?.split(',') || []
+        const type = searchParams.get('brand')?.split(',') || []
         const sort = searchParams.get('sort') || 'default'
 
         let filtered = [...products]
@@ -156,21 +125,15 @@ const AMPCollectionPage = () => {
             )
         }
 
-        if (color) {
-            filtered = filtered.filter(product =>
-                product.color === color
-            )
-        }
-
         if (material.length > 0) {
             filtered = filtered.filter(product =>
                 material.includes(product.material)
             )
         }
 
-        if (brand.length > 0) {
+        if (type.length > 0) {
             filtered = filtered.filter(product =>
-                brand.includes(product.brand)
+                type.includes(product.brand)
             )
         }
 
@@ -232,7 +195,7 @@ const AMPCollectionPage = () => {
                     h-full
                 `}
             >
-                <FilterSiderbar onClose={toggleSidebar} />
+                <AMPFilterSidebar onClose={toggleSidebar} />
             </div>
 
             {/* Overlay for mobile/tablet */}
@@ -249,7 +212,7 @@ const AMPCollectionPage = () => {
                     <h2 className="text-xl sm:text-2xl lg:text-3xl uppercase text-[#CB2957] font-bold tracking-wider">
                         AMP Collection
                     </h2>
-                    <div className="flex items-center gap-2 text-sm text-gray-400">
+                    <div className="flex items-center gap-2 text-l font-semibold text-white">
                         <span>{filteredProducts.length}</span>
                         <span>products found</span>
                     </div>

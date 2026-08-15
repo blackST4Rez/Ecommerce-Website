@@ -1,5 +1,6 @@
 import { Link } from "react-router"
 import { BiCart } from "react-icons/bi"
+import { formatINR } from "../Utils/CurrencyFormat"
 
 const ProductGrid = ({ products, isAmpCollection = false }) => {
     if (!products || products.length === 0) {
@@ -56,7 +57,7 @@ const ProductGrid = ({ products, isAmpCollection = false }) => {
                         
                         {/* Price */}
                         <p className="text-[#CB2957] font-bold text-base md:text-lg mt-1">
-                            Rs.{product.price}
+                            {formatINR(product.price)}
                         </p>
 
                         {/* AMP Tags - Category and Color */}
