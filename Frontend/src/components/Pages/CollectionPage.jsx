@@ -130,6 +130,7 @@ const CollectionPage = () => {
         const color = searchParams.get('color') || ''
         const material = searchParams.get('material')?.split(',') || []
         const brand = searchParams.get('brand')?.split(',') || []
+        const sort = searchParams.get('sort') || 'default'
 
         let filtered = [...products]
 
@@ -156,6 +157,24 @@ const CollectionPage = () => {
                 brand.includes(product.brand)
             )
         }
+
+        switch (sort) {
+        case 'price-asc':
+            filtered.sort((a, b) => a.price - b.price)
+            break
+        case 'price-desc':
+            filtered.sort((a, b) => b.price - a.price)
+            break
+        case 'name-asc':
+            filtered.sort((a, b) => a.name.localeCompare(b.name))
+            break
+        case 'name-desc':
+            filtered.sort((a, b) => b.name.localeCompare(a.name))
+            break
+        default:
+            filtered.sort((a, b) => a._id - b._id)
+            break
+    }
 
         setFilteredProducts(filtered)
     }, [products, searchParams])
