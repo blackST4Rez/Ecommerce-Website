@@ -114,7 +114,7 @@ const AMPCollectionPage = () => {
 
         const category = searchParams.get('category') || ''
         const material = searchParams.get('material')?.split(',') || []
-        const type = searchParams.get('brand')?.split(',') || []
+        const type = searchParams.get('type')?.split(',') || []
         const sort = searchParams.get('sort') || 'default'
 
         let filtered = [...products]
@@ -133,7 +133,7 @@ const AMPCollectionPage = () => {
 
         if (type.length > 0) {
             filtered = filtered.filter(product =>
-                type.includes(product.brand)
+                type.includes(product.type)
             )
         }
 
