@@ -1,12 +1,10 @@
-// components/Pages/ProductDetailPage.jsx
 import { useEffect, useState } from 'react'
 import { useParams, useNavigate } from 'react-router'
 import { FadeLoader } from 'react-spinners'
 import { toast } from 'sonner'
 import { SyncLoader } from 'react-spinners'
 import { BiArrowBack } from 'react-icons/bi'
-import { getProductById } from '../Data/Products'
-
+import { getProductById } from '../Data/Product'
 const ProductDetailsPage = () => {
     const { productId } = useParams() // Get product ID from URL
     const navigate = useNavigate()
@@ -175,7 +173,7 @@ const ProductDetailsPage = () => {
                             Rs. {product.price.toLocaleString()}
                         </p>
 
-                        <p className="text-white mb-4 text-lg">
+                        <p className="text-white mb-8 text-lg">
                             {product.description || ''}
                         </p>
 
@@ -184,34 +182,15 @@ const ProductDetailsPage = () => {
                         </p>
 
                         {product.brand && (
-                            <p className="text-white mb-2 text-lg">
+                            <p className="text-white mb-4 text-lg">
                                 <span className="font-semibold text-[#CB2957] text-xl">Brand:</span> {product.brand}
                             </p>
                         )}
 
                         {product.material && (
-                            <p className="text-white mb-4 text-lg">
+                            <p className="text-white mb-15 text-lg">
                                 <span className="font-semibold text-[#CB2957] text-xl">Material:</span> {product.material}
                             </p>
-                        )}
-
-                        {/* Colors */}
-                        {product.colors && product.colors.length > 0 && (
-                            <div className="mb-4">
-                                <p className="text-gray-300 text-lg font-semibold mb-2">Colors:</p>
-                                <div className="flex gap-2">
-                                    {product.colors.map((color) => (
-                                        <button
-                                            onClick={() => handleColorButton(color)}
-                                            key={color}
-                                            className={`w-10 h-10 rounded-full border-2 
-                                                ${selectedColor === color ? 'border-[#CB2957]' : 'border-transparent'}
-                                                hover:border-[#CB2957] transition-all`}
-                                            style={{ backgroundColor: color.toLowerCase() }}
-                                        />
-                                    ))}
-                                </div>
-                            </div>
                         )}
 
                         {/* Quantity */}
