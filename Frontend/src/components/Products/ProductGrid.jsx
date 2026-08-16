@@ -22,7 +22,9 @@ const ProductGrid = ({ products, isAmpCollection = false }) => {
         `}>
             {products.map((product) => (
                 <div key={product._id} className="bg-[#252424] rounded-lg overflow-hidden relative">
-                    <Link to={`/product/${product._id}`} className="block">
+                    <Link
+                        to={`/product/${product._id}`}
+                        className="block">
                         <div className={`
                             overflow-hidden bg-[#141313]
                             ${isAmpCollection 
@@ -34,7 +36,6 @@ const ProductGrid = ({ products, isAmpCollection = false }) => {
                                 src={product.images[0]?.url || '/placeholder.jpg'}
                                 alt={product.name}
                                 className="w-full h-full object-contain p-2"
-                                loading="lazy"
                             />
                             {/* Cart Icon on Image - Top Right */}
                             <button 
