@@ -1,8 +1,7 @@
-// ProductDetails.jsx
 import { SyncLoader } from 'react-spinners'
 import { toast } from 'sonner';
 import { useState } from 'react';
-import { useCart } from '../Context/CartContext'; // Import useCart
+import { useCart } from '../Context/CartContext';
 
 const selectedProduct = {
     name: "1984 Fender Stratocaster 57V",
@@ -12,7 +11,7 @@ const selectedProduct = {
     brand: "Fender",
     material: "Alder Woods",
     colors: ["#ffffff", "#FF0000"],
-    _id: 999, // Add an ID
+    _id: 999,
     images: [{
         url: "https://i.pinimg.com/1200x/28/50/ac/2850aca174f068641c1ddf4b5a70c895.jpg?random=1",
         altText: "Fender Stratocastor",
@@ -25,10 +24,10 @@ const selectedProduct = {
 }
 
 const ProductDetails = () => {
-    const { addToCart } = useCart(); // Get addToCart function
+    const { addToCart } = useCart();
     const [currImage, setCurrImage] = useState(selectedProduct.images[0])
     const [selectedColor, setSelectedColor] = useState(selectedProduct.colors[0])
-    const [cartValue, setCartValue] = useState(0)
+    const [cartValue, setCartValue] = useState(1) // Changed from 0 to 1
     const [cartHandle, setCartHandle] = useState(false)
 
     const handleImage = (reqImage) => {
@@ -44,13 +43,13 @@ const ProductDetails = () => {
     }
 
     const handleMinusCart = () => {
-        if (cartValue >= 1) {
+        if (cartValue > 1) { // Changed from >= 1 to > 1
             setCartValue((prev) => prev - 1)
         }
     }
 
     const handleCart = () => {
-        if (cartValue === 0 || selectedColor === null) {
+        if (cartValue <= 0 || !selectedColor) { // Fixed condition
             toast.error('Please select the quantity & color', {
                 duration: 3000
             })
@@ -59,7 +58,6 @@ const ProductDetails = () => {
 
         setCartHandle(true)
 
-        // Add product to cart
         const productToAdd = {
             ...selectedProduct,
             color: selectedColor,
@@ -69,8 +67,8 @@ const ProductDetails = () => {
 
         setTimeout(() => {
             setCartHandle(false)
-            setCartValue(0)
-            toast.success(`${cartValue} item(s) added to cart!`, {
+            setCartValue(1) // Reset to 1
+            toast.success(`${selectedProduct.name} added to cart!`, {
                 duration: 3000
             })
         }, 2000)
@@ -79,7 +77,6 @@ const ProductDetails = () => {
     return (
         <div className="max-w-6xl mx-auto p-8">
             <div className="flex flex-col md:flex-row">
-                {/* Left Thumbnail */}
                 <div className="hidden md:flex flex-col space-y-4 mr-6">
                     {selectedProduct.images.map((image, index) => (
                         <img
@@ -91,7 +88,6 @@ const ProductDetails = () => {
                         />
                     ))}
                 </div>
-                {/* Main Image */}
                 <div className="md:w-1/2">
                     <div className="mb-4">
                         <img
@@ -101,7 +97,6 @@ const ProductDetails = () => {
                         />
                     </div>
                 </div>
-                {/* Mobile Thumbnails */}
                 <div className="md:hidden flex overscroll-x-scroll space-x-4 mb-4">
                     {selectedProduct.images.map((image, index) => (
                         <img
@@ -113,7 +108,6 @@ const ProductDetails = () => {
                         />
                     ))}
                 </div>
-                {/* Right Section */}
                 <div className="md:w-1/2 md:ml-10">
                     <h1 className="text-3xl text-[#CB2957] md:-3xl font-semibold mb-2">
                         {selectedProduct.name}
@@ -140,9 +134,9 @@ const ProductDetails = () => {
                                 <button
                                     onClick={() => handleColorButton(color)}
                                     key={color}
-                                    className={`w-8 h-8 rounded-full border-2 
-                                    ${selectedColor === color ? 'border-[#CB2957]' : 'border-transparent'}
-                                    hover:scale-110 transition-transform`}
+                                    className={`w-8 h-8 rounded-full border
+                                    ${selectedColor === color && 'border-black border-2'}
+                                    `}
                                     style={{
                                         backgroundColor: color.toLowerCase()
                                     }}
@@ -171,7 +165,6 @@ const ProductDetails = () => {
                         </div>
                     </div>
 
-                    {/* Add to Cart Button */}
                     <button
                         onClick={handleCart}
                         className={`bg-[#CB2957] text-black border-2 border-black font-semibold py-3 px-2 w-[75%] mb-8 flex items-center justify-center transition-all duration-300 ${cartHandle && "cursor-not-allowed bg-black"}`}

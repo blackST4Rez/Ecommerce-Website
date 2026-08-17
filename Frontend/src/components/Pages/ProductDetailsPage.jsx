@@ -7,6 +7,7 @@ import { BiArrowBack } from 'react-icons/bi'
 import { getProductById } from '../Data/Product.jsx'
 import { useCart } from '../Context/CartContext'
 import AddToCartButton from '../Common/AddToCartButton.jsx'
+
 const ProductDetailsPage = () => {
     const { productId } = useParams()
     const navigate = useNavigate()
@@ -14,10 +15,9 @@ const ProductDetailsPage = () => {
 
     const [product, setProduct] = useState(null)
     const [isLoading, setIsLoading] = useState(true)
-    const [cartValue, setCartValue] = useState(0)
+    const [cartValue, setCartValue] = useState(1) // Changed from 0 to 1
     const [cartHandle, setCartHandle] = useState(false)
     const [currImage, setCurrImage] = useState(null)
-
 
     useEffect(() => {
         setTimeout(() => {
@@ -35,7 +35,6 @@ const ProductDetailsPage = () => {
         }, 1000)
     }, [productId, navigate])
 
-    // Handlers for product interactions
     const handleImage = (image) => {
         setCurrImage(image)
     }
@@ -45,13 +44,13 @@ const ProductDetailsPage = () => {
     }
 
     const handleMinusCart = () => {
-        if (cartValue >= 1) {
+        if (cartValue > 1) { // Changed from >= 1 to > 1
             setCartValue((prev) => prev - 1)
         }
     }
 
     const handleCart = () => {
-        if (cartValue === 0) {
+        if (cartValue <= 0) { // Added check for less than or equal to 0
             toast.error('Please select the quantity', {
                 duration: 3000
             })
@@ -60,12 +59,11 @@ const ProductDetailsPage = () => {
 
         setCartHandle(true)
 
-
         addToCart(product, cartValue)
 
         setTimeout(() => {
             setCartHandle(false)
-            setCartValue(1)
+            setCartValue(1) // Reset to 1 instead of keeping the same value
             toast.success(`${cartValue} ${product.name}(s) added to cart! 🎸`, {
                 duration: 3000
             })
@@ -100,7 +98,6 @@ const ProductDetailsPage = () => {
 
     return (
         <div className="bg-[#191b1c] min-h-screen py-8">
-            {/* Back Button */}
             <div className="max-w-6xl mx-auto px-4 mb-4">
                 <button
                     onClick={goBack}
@@ -113,7 +110,6 @@ const ProductDetailsPage = () => {
 
             <div className="max-w-6xl mx-auto p-4 md:p-8">
                 <div className="flex flex-col md:flex-row gap-8">
-                    {/* Left Thumbnails */}
                     <div className="hidden md:flex flex-col space-y-4 mr-6">
                         {product.images.map((image, index) => (
                             <img
@@ -128,7 +124,6 @@ const ProductDetailsPage = () => {
                         ))}
                     </div>
 
-                    {/* Main Image */}
                     <div className="md:w-1/2">
                         <div className="mb-4">
                             <img
@@ -139,7 +134,6 @@ const ProductDetailsPage = () => {
                         </div>
                     </div>
 
-                    {/* Mobile Thumbnails */}
                     <div className="md:hidden flex overflow-x-scroll space-x-4 mb-4 hide-scrollbar">
                         {product.images.map((image, index) => (
                             <img
@@ -153,7 +147,6 @@ const ProductDetailsPage = () => {
                         ))}
                     </div>
 
-                    {/* Product Details */}
                     <div className="md:w-1/2">
                         <h1 className="text-3xl text-[#CB2957] font-semibold mb-2">
                             {product.name}
@@ -190,7 +183,6 @@ const ProductDetailsPage = () => {
                             </p>
                         )}
 
-                        {/* Quantity */}
                         <div className="mb-4">
                             <p className="text-white text-2xl">Quantity:</p>
                             <div className="flex items-center space-x-4 mt-2 gap-0.5">
@@ -210,7 +202,6 @@ const ProductDetailsPage = () => {
                             </div>
                         </div>
 
-                        {/* Add to Cart Button */}
                         <button
                             onClick={handleCart}
                             disabled={cartHandle}

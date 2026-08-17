@@ -5,10 +5,13 @@ import CartDrawer from '../Layout/CartDrawer'
 import { useState } from 'react'
 import MenuContent from '../Cart/MenuContent'
 import MenuDrawer from '../Layout/MenuDrawer'
+import { useCart } from '../Context/CartContext'
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false)
     const [menuIsOpen, setMenuIsOpen] = useState(false)
+    const { getTotalItems } = useCart() // Get the total items function
+    const totalItems = getTotalItems() // Calculate total items
 
     const handleCart = () => {
         setIsOpen(!isOpen)
@@ -42,9 +45,11 @@ const Navbar = () => {
                 </Link>
                 <button className="relative">
                     <BiCart onClick={handleCart} className='h-6 w-6 text-white hover:bg-black hover:rounded-full hover:text-[#CB2957] transition-all ease-in-out duration-300' />
-                    <span className="absolute bg-[#CB2957] text-black rounded-full -top-2 text-xs px-1.5 py-px">
-                        3
-                    </span>
+                    {totalItems > 0 && ( // Only show badge if there are items
+                        <span className="absolute bg-[#CB2957] text-black rounded-full -top-2 text-xs px-1.5 py-px">
+                            {totalItems}
+                        </span>
+                    )}
                 </button>
 
                 <SearchBar isOpen={isOpen} setIsOpen={setIsOpen} />

@@ -1,4 +1,4 @@
-// src/components/Products/ProductGrid.jsx (No hover effects at all)
+// src/components/Products/ProductGrid.jsx
 import { Link } from 'react-router';
 import { useCart } from '../Context/CartContext';
 import { toast } from 'sonner';
@@ -20,9 +20,11 @@ const ProductGrid = ({ products, isAmpCollection = false }) => {
         setAddingId(product._id);
         
         try {
+            // Always add with quantity 1 from grid views
             addToCart(product, 1);
             toast.success(`${product.name} added to cart!`);
         } catch (error) {
+            console.log(error);     
             toast.error('Failed to add item');
         }
         

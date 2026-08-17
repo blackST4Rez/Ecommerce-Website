@@ -108,66 +108,66 @@ const CheckoutPage = () => {
                     <h2 className="text-xl font-semibold mb-4">Shipping Information</h2>
                     <form onSubmit={handlePlaceOrder} className="space-y-4">
                         <div>
-                            <label className="block text-sm text-gray-400 mb-1">Full Name *</label>
+                            <label className="block text-sm text-white mb-1">Full Name</label>
                             <input 
                                 type="text" 
                                 name="fullName"
                                 value={formData.fullName}
                                 onChange={handleInputChange}
                                 placeholder="John Doe" 
-                                className="w-full bg-black text-white p-3 rounded border border-gray-700 focus:border-[#CB2957] outline-none transition-colors"
+                                className="w-full bg-black text-white p-3 rounded border-[#191b1c] focus:border-[#CB2957] outline-none transition-colors"
                                 required
                             />
                         </div>
                         
                         <div>
-                            <label className="block text-sm text-gray-400 mb-1">Email Address *</label>
+                            <label className="block text-sm text-white mb-1">Email Address</label>
                             <input 
                                 type="email" 
                                 name="email"
                                 value={formData.email}
                                 onChange={handleInputChange}
                                 placeholder="john@example.com" 
-                                className="w-full bg-black text-white p-3 rounded border border-gray-700 focus:border-[#CB2957] outline-none transition-colors"
+                                className="w-full bg-black text-white p-3 rounded border border-[#191b1c]  focus:border-[#CB2957] outline-none transition-colors"
                                 required
                             />
                         </div>
                         
                         <div>
-                            <label className="block text-sm text-gray-400 mb-1">Address *</label>
+                            <label className="block text-sm text-white mb-1">Address</label>
                             <input 
                                 type="text" 
                                 name="address"
                                 value={formData.address}
                                 onChange={handleInputChange}
                                 placeholder="123 Main Street" 
-                                className="w-full bg-black text-white p-3 rounded border border-gray-700 focus:border-[#CB2957] outline-none transition-colors"
+                                className="w-full bg-black text-white p-3 rounded border border-[#191b1c]  focus:border-[#CB2957] outline-none transition-colors"
                                 required
                             />
                         </div>
                         
                         <div className="grid grid-cols-2 gap-4">
                             <div>
-                                <label className="block text-sm text-gray-400 mb-1">City *</label>
+                                <label className="block text-sm text-white mb-1">City</label>
                                 <input 
                                     type="text" 
                                     name="city"
                                     value={formData.city}
                                     onChange={handleInputChange}
                                     placeholder="Kathmandu" 
-                                    className="w-full bg-black text-white p-3 rounded border border-gray-700 focus:border-[#CB2957] outline-none transition-colors"
+                                    className="w-full bg-black text-white p-3 rounded border border-[#191b1c]  focus:border-[#CB2957] outline-none transition-colors"
                                     required
                                 />
                             </div>
                             <div>
-                                <label className="block text-sm text-gray-400 mb-1">ZIP Code *</label>
+                                <label className="block text-sm text-white mb-1">ZIP Code</label>
                                 <input 
                                     type="text" 
                                     name="zipCode"
                                     value={formData.zipCode}
                                     onChange={handleInputChange}
                                     placeholder="44600" 
-                                    className="w-full bg-black text-white p-3 rounded border border-gray-700 focus:border-[#CB2957] outline-none transition-colors"
+                                    className="w-full bg-black text-white p-3 rounded border-[#191b1c] focus:border-[#CB2957] outline-none transition-colors"
                                     required
                                 />
                             </div>

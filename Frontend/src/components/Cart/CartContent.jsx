@@ -1,4 +1,3 @@
-// CartContent.jsx
 import { BiTrash } from "react-icons/bi"
 import { useCart } from '../Context/CartContext'
 

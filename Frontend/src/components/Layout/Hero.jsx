@@ -14,7 +14,7 @@ const Hero = () => {
                     <h1 className="HeroText text-4xl md:text-9xl font-bold tracking-tighter uppercase mb-4">
                         Rock & Roll <br  />Ready
                     </h1>
-                    <Link to='#' className='bg-black text-[#CB2957] px-8 py-4 text-lg font-bold hover:bg-[#CB2957] hover:text-black transition-all ease-in-out duration-300' >
+                    <Link to='/collections/amp' className='bg-black text-[#CB2957] px-8 py-4 text-lg font-bold hover:bg-[#CB2957] hover:text-black transition-all ease-in-out duration-300' >
                         Shop Now
                     </Link>
                 </div>

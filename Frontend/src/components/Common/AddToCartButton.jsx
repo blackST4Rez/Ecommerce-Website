@@ -1,4 +1,3 @@
-// src/components/Common/AddToCartButton.jsx
 import { useState } from 'react';
 import { useCart } from '../Context/CartContext';
 import { toast } from 'sonner';
