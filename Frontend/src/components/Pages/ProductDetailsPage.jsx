@@ -4,31 +4,29 @@ import { FadeLoader } from 'react-spinners'
 import { toast } from 'sonner'
 import { SyncLoader } from 'react-spinners'
 import { BiArrowBack } from 'react-icons/bi'
-import { getProductById } from '../Data/Product'
+import { getProductById } from '../Data/Products'
+import { useCart } from '../Context/CartContext'
+import AddToCartButton from '../Common/AddToCartButton.jsx'
 const ProductDetailsPage = () => {
-    const { productId } = useParams() // Get product ID from URL
+    const { productId } = useParams()
     const navigate = useNavigate()
+    const { addToCart } = useCart()
 
     const [product, setProduct] = useState(null)
     const [isLoading, setIsLoading] = useState(true)
-    const [selectedColor, setSelectedColor] = useState(null)
     const [cartValue, setCartValue] = useState(0)
     const [cartHandle, setCartHandle] = useState(false)
     const [currImage, setCurrImage] = useState(null)
 
-    /* Fetch product data based on ID */
+
     useEffect(() => {
-        /* Simulate API call */
         setTimeout(() => {
-            /* Your complete product database also ID is already filtered in data/Product */
             const foundProduct = getProductById(productId)
 
             if (foundProduct) {
                 setProduct(foundProduct)
                 setCurrImage(foundProduct.images[0])
-                setSelectedColor(foundProduct.colors?.[0] || "#000000")
             } else {
-                // Product not found
                 toast.error('Product not found!')
                 navigate('/')
             }
@@ -42,10 +40,6 @@ const ProductDetailsPage = () => {
         setCurrImage(image)
     }
 
-    const handleColorButton = (color) => {
-        setSelectedColor(color)
-    }
-
     const handleAddCart = () => {
         setCartValue((prev) => prev + 1)
     }
@@ -57,7 +51,7 @@ const ProductDetailsPage = () => {
     }
 
     const handleCart = () => {
-        if (cartValue === 0 || selectedColor === null) {
+        if (cartValue === 0) {
             toast.error('Please select the quantity', {
                 duration: 3000
             })
@@ -66,16 +60,18 @@ const ProductDetailsPage = () => {
 
         setCartHandle(true)
 
+
+        addToCart(product, cartValue)
+
         setTimeout(() => {
             setCartHandle(false)
-            setCartValue(0)
-            toast.success('Items added to cart', {
+            setCartValue(1)
+            toast.success(`${cartValue} ${product.name}(s) added to cart! 🎸`, {
                 duration: 3000
             })
         }, 2000)
     }
 
-    /* Navigate to  previous page */
     const goBack = () => {
         navigate(-1)
     }
@@ -126,7 +122,7 @@ const ProductDetailsPage = () => {
                                 src={image.url}
                                 alt={image.altText || `Thumbnail ${index}`}
                                 className={`w-20 h-20 object-cover cursor-pointer border-2 
-                                    ${currImage?.url === image.url ? 'border-black' : 'border-transparent'}
+                                    ${currImage?.url === image.url ? 'border-[#CB2957]' : 'border-transparent'}
                                     hover:border-[#CB2957] transition-all`}
                             />
                         ))}
@@ -169,16 +165,17 @@ const ProductDetailsPage = () => {
                             </p>
                         )}
 
-                        <p className="text-2xl text-white mb-4 font-bold">
+                        <p className="text-2xl text-white mb-8 font-bold">
                             Rs. {product.price.toLocaleString()}
                         </p>
 
-                        <p className="text-white mb-8 text-lg">
+                        <p className="text-white mb-4 text-lg">
                             {product.description || ''}
                         </p>
 
                         <p className="text-white mb-4 text-lg">
-                            <span className="font-semibold text-[#CB2957] text-xl">Type: </span>{product.type || 'Premium Quality Guitar'}
+                            <span className="font-semibold text-[#CB2957] text-xl">Type: </span>
+                            {product.type || 'Premium Quality Guitar'}
                         </p>
 
                         {product.brand && (
@@ -188,7 +185,7 @@ const ProductDetailsPage = () => {
                         )}
 
                         {product.material && (
-                            <p className="text-white mb-15 text-lg">
+                            <p className="text-white mb-8 text-lg">
                                 <span className="font-semibold text-[#CB2957] text-xl">Material:</span> {product.material}
                             </p>
                         )}
@@ -199,13 +196,15 @@ const ProductDetailsPage = () => {
                             <div className="flex items-center space-x-4 mt-2 gap-0.5">
                                 <button
                                     onClick={handleMinusCart}
-                                    className="px-2 py-1 bg-black text-[#CB2957] text-lg w-8 h-8 flex items-center justify-center hover:text-white transition-all ease-in-out duraiotn-300">
+                                    className="px-2 py-1 bg-black text-[#CB2957] text-lg w-8 h-8 flex items-center justify-center hover:text-white transition-all ease-in-out duration-300"
+                                >
                                     -
                                 </button>
                                 <span className="text-lg text-[#CB2957] w-8 text-center">{cartValue}</span>
                                 <button
                                     onClick={handleAddCart}
-                                    className="px-2 py-1 bg-black text-[#CB2957] text-lg w-8 h-8 flex items-center justify-center hover:text-white transition-all ease-in-out duraiotn-300">
+                                    className="px-2 py-1 bg-black text-[#CB2957] text-lg w-8 h-8 flex items-center justify-center hover:text-white transition-all ease-in-out duration-300"
+                                >
                                     +
                                 </button>
                             </div>
@@ -214,15 +213,18 @@ const ProductDetailsPage = () => {
                         {/* Add to Cart Button */}
                         <button
                             onClick={handleCart}
-                            className={`bg-[#CB2957] text-black border-2 border-black font-semibold py-3 px-2 w-[75%] mb-8 flex items-center justify-center transition-all duration-300" ${cartHandle && "cursor-not-allowed bg-black"}`}
+                            disabled={cartHandle}
+                            className={`font-semibold mb-8 transition-all duration-300 ${
+                                cartHandle ? "cursor-not-allowed opacity-50" : "hover:bg-[#a02044]"
+                            }`}
                         >
-                            {cartHandle
-                                ?
+                            {cartHandle ? (
                                 <div className="flex justify-center items-center">
                                     <SyncLoader size={20} color='#CB2957' />
                                 </div>
-                                : "Add to Cart"
-                            }
+                            ) : (
+                                <AddToCartButton product={product} quantity={cartValue} />
+                            )}
                         </button>
                     </div>
                 </div>

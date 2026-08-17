@@ -96,7 +96,7 @@ const AMPCollectionPage = () => {
                     price: 148440,
                     category: "Fender",
                     material: "Wood Composites",
-                    type: "urrent Amplifiers",
+                    type: "Current Amplifiers",
                     images: [{
                         url: 'https://i.pinimg.com/1200x/66/f2/bb/66f2bbcc4e856bb3239047b0b5c7da18.jpg?random=106',
                     }],
@@ -138,22 +138,22 @@ const AMPCollectionPage = () => {
         }
 
         switch (sort) {
-        case 'price-asc':
-            filtered.sort((a, b) => a.price - b.price)
-            break
-        case 'price-desc':
-            filtered.sort((a, b) => b.price - a.price)
-            break
-        case 'name-asc':
-            filtered.sort((a, b) => a.name.localeCompare(b.name))
-            break
-        case 'name-desc':
-            filtered.sort((a, b) => b.name.localeCompare(a.name))
-            break
-        default:
-            filtered.sort((a, b) => a._id - b._id)
-            break
-    }
+            case 'price-asc':
+                filtered.sort((a, b) => a.price - b.price)
+                break
+            case 'price-desc':
+                filtered.sort((a, b) => b.price - a.price)
+                break
+            case 'name-asc':
+                filtered.sort((a, b) => a.name.localeCompare(b.name))
+                break
+            case 'name-desc':
+                filtered.sort((a, b) => b.name.localeCompare(a.name))
+                break
+            default:
+                filtered.sort((a, b) => a._id - b._id)
+                break
+        }
 
         setFilteredProducts(filtered)
     }, [products, searchParams])
@@ -168,7 +168,7 @@ const AMPCollectionPage = () => {
 
     return (
         <div className="flex flex-col lg:flex-row min-h-screen bg-[#191b1c]">
-            {/* Mobile Filter Button - Only visible on tablet and below */}
+            {/* Mobile Filter Button */}
             <div className="lg:hidden top-0 z-40 px-4 py-2 bg-[#191b1c]">
                 <button
                     onClick={toggleSidebar}
@@ -179,7 +179,7 @@ const AMPCollectionPage = () => {
                 </button>
             </div>
 
-            {/* Filter Sidebar - Hidden on mobile, visible on large screens */}
+            {/* Filter Sidebar */}
             <div
                 ref={sidebarRef}
                 className={`
@@ -198,7 +198,7 @@ const AMPCollectionPage = () => {
                 <AMPFilterSidebar onClose={toggleSidebar} />
             </div>
 
-            {/* Overlay for mobile/tablet */}
+            {/* Mobile Overlay */}
             {isSidebarOpen && (
                 <div
                     className="lg:hidden fixed inset-0 z-40 bg-black/70"
@@ -208,27 +208,25 @@ const AMPCollectionPage = () => {
 
             {/* Main Content */}
             <div className="flex-1 p-4 md:p-6 lg:p-4 bg-[#191b1c]">
+                {/* Header with product count */}
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-4 gap-3">
                     <h2 className="text-xl sm:text-2xl lg:text-3xl uppercase text-[#CB2957] font-bold tracking-wider">
                         AMP Collection
                     </h2>
-                    <div className="flex items-center gap-2 text-l font-semibold text-white">
+                    <div className="flex items-center gap-2 text-l text-white font-semibold">
                         <span>{filteredProducts.length}</span>
                         <span>products found</span>
                     </div>
                 </div>
                 
                 {/* Sort Options */}
-                <div className="mb-6">
+                <div className="mb-6 text-white">
                     <SortOptions />
                 </div>
                 
-                {/* Product Grid with 3 columns for AMP */}
+                {/* Product Grid */}
                 <div className="mt-4">
-                    <ProductGrid
-                        products={filteredProducts.length > 0 ? filteredProducts : products}
-                        isAmpCollection={true}
-                    />
+                    <ProductGrid products={filteredProducts.length > 0 ? filteredProducts : products} />
                 </div>
             </div>
         </div>
