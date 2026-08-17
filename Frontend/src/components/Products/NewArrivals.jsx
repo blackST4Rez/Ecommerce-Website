@@ -180,6 +180,7 @@ const NewArrivals = () => {
                     {newArrivals.map((product) => (
                         <div key={product._id } className="min-w-full min-h-full sm:min-w-[50%] lg:min-w-[30%] relative" >
                             <img
+                                to={`/product/${product._id}`}
                                 src={product.images[0]?.url}
                                 alt={product.images[0]?.altText || product.name}
                                 className="w-full h-180 object-cover"

@@ -1,93 +1,108 @@
-import { Link } from "react-router"
-import { BiCart } from "react-icons/bi"
-import { formatINR } from "../Utils/CurrencyFormat"
+// src/components/Products/ProductGrid.jsx (No hover effects at all)
+import { Link } from 'react-router';
+import { useCart } from '../Context/CartContext';
+import { toast } from 'sonner';
+import { useState } from 'react';
 
 const ProductGrid = ({ products, isAmpCollection = false }) => {
+    const { addToCart } = useCart();
+    const [addingId, setAddingId] = useState(null);
+
+    const handleAddToCart = (product, e) => {
+        e.stopPropagation();
+        e.preventDefault();
+        
+        if (!product || !product._id) {
+            toast.error('Cannot add this item');
+            return;
+        }
+
+        setAddingId(product._id);
+        
+        try {
+            addToCart(product, 1);
+            toast.success(`${product.name} added to cart!`);
+        } catch (error) {
+            toast.error('Failed to add item');
+        }
+        
+        setTimeout(() => setAddingId(null), 1000);
+    };
+
     if (!products || products.length === 0) {
         return (
-            <div className="flex flex-col items-center justify-center py-16 text-center">
-                <p className="text-white text-xl mb-2">No products found</p>
-                <p className="text-gray-400">Try adjusting your filters</p>
+            <div className="text-center text-gray-400 py-8">
+                No products available
             </div>
-        )
+        );
     }
 
     return (
-        <div className={`
-            grid gap-3 sm:gap-4 md:gap-5 lg:gap-6
-            ${isAmpCollection 
+        <div className={`grid gap-6 ${
+            isAmpCollection 
                 ? 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3' 
-                : 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'
-            }
-        `}>
+                : 'grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'
+        }`}>
             {products.map((product) => (
-                <div key={product._id} className="bg-[#252424] rounded-lg overflow-hidden relative">
-                    <Link
-                        to={`/product/${product._id}`}
-                        className="block">
-                        <div className={`
-                            overflow-hidden bg-[#141313]
-                            ${isAmpCollection 
-                                ? 'aspect-4/3' 
-                                : 'aspect-square'
-                            }
-                        `}>
-                            <img
-                                src={product.images[0]?.url || '/placeholder.jpg'}
-                                alt={product.name}
-                                className="w-full h-full object-contain p-2"
-                            />
-                            {/* Cart Icon on Image - Top Right */}
-                            <button 
-                                className="absolute bottom-7 right-3 bg-white hover:bg-[#CB2957] p-1.5 rounded-full transition-all duration-300 cursor-pointer"
-                                onClick={(e) => {
-                                    e.preventDefault()
-                                    console.log('Added to cart:', product.name)
+                <div 
+                    key={product._id} 
+                    className="bg-[#1a1c1d] rounded-lg overflow-hidden flex flex-col"
+                >
+                    <Link to={`/product/${product._id}`} className="block overflow-hidden">
+                        <div className="relative aspect-square bg-[#0d0e0f]">
+                            <img 
+                                src={product.images?.[0]?.url || product.image} 
+                                alt={product.name} 
+                                className="w-full h-full object-contain p-3"
+                                onError={(e) => {
+                                    e.target.src = 'https://via.placeholder.com/400x400?text=No+Image';
                                 }}
-                            >
-                                <BiCart size={25} />
-                            </button>
+                            />
+                            {product.discount && (
+                                <span className="absolute top-2 right-2 bg-[#CB2957] text-black text-xs font-bold px-2 py-1 rounded z-10">
+                                    {product.discount}% OFF
+                                </span>
+                            )}
                         </div>
                     </Link>
-                    <div className="p-3 md:p-4">
+                    <div className="p-4 flex flex-col flex-1 bg-[#181616]">
                         <Link to={`/product/${product._id}`}>
-                            <h3 className="text-white text-sm md:text-base font-medium line-clamp-1">
+                            <h3 className="text-white font-semibold text-lg line-clamp-1">
                                 {product.name}
                             </h3>
                         </Link>
+                        <p className="text-gray-400 text-sm">{product.brand || product.category || 'Guitar'}</p>
                         
-                        {/* Price */}
-                        <p className="text-[#CB2957] font-bold text-base md:text-lg mt-1">
-                            {formatINR(product.price)}
-                        </p>
-
-                        {/* AMP Tags - Category and Color */}
-                        {isAmpCollection && (
-                            <div className="mt-1 flex flex-wrap gap-1">
-                                {product.category && (
-                                    <span className="text-xs text-gray-300 bg-black/50 px-2 py-0.5 rounded">
-                                        {product.category}
-                                    </span>
-                                )}
-                                {product.color && (
-                                    <span className="text-xs text-gray-300 bg-black/50 px-2 py-0.5 rounded">
-                                        {product.color}
-                                    </span>
-                                )}
-                            </div>
-                        )}
-
-                        {/* Brand Name - Below everything */}
-                        {product.brand && (
-                            <div className="mt-2">
-                                <span className="text-sm text-gray-400">{product.brand}</span>
-                            </div>
-                        )}
+                        <div className="flex items-center gap-2 mt-2">
+                            <p className="text-white font-bold text-xl">
+                                Rs. {product.price.toLocaleString()}
+                            </p>
+                            {product.originalPrice && (
+                                <p className="text-gray-500 text-sm line-through">
+                                    Rs. {product.originalPrice.toLocaleString()}
+                                </p>
+                            )}
+                        </div>
+                        
+                        <button 
+                            onClick={(e) => handleAddToCart(product, e)}
+                            disabled={addingId === product._id}
+                            className="w-full mt-3 bg-[#0d0e0f] text-[#CB2957] hover:bg-[#CB2957] hover:text-black font-semibold py-2.5 px-4 rounded text-lg cursor-pointer transition-all ease-in-out duration-300"
+                        >
+                            {addingId === product._id ? (
+                                <span className="flex items-center justify-center gap-2">
+                                    <span className="animate-spin rounded-full h-4 w-4 border-2 border-black border-t-transparent"></span>
+                                    Adding...
+                                </span>
+                            ) : (
+                                'Add to Cart'
+                            )}
+                        </button>
                     </div>
                 </div>
             ))}
         </div>
-    )
-}
+    );
+};
 
-export default ProductGrid
+export default ProductGrid;
