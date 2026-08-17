@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react'
 import { useParams, useNavigate } from 'react-router'
 import { FadeLoader } from 'react-spinners'
 import { toast } from 'sonner'
-import { SyncLoader } from 'react-spinners'
 import { BiArrowBack } from 'react-icons/bi'
 import { getProductById } from '../Data/Product.jsx'
 import { useCart } from '../Context/CartContext'
@@ -15,7 +14,7 @@ const ProductDetailsPage = () => {
 
     const [product, setProduct] = useState(null)
     const [isLoading, setIsLoading] = useState(true)
-    const [cartValue, setCartValue] = useState(1) // Changed from 0 to 1
+    const [cartValue, setCartValue] = useState(1)
     const [cartHandle, setCartHandle] = useState(false)
     const [currImage, setCurrImage] = useState(null)
 
@@ -44,13 +43,13 @@ const ProductDetailsPage = () => {
     }
 
     const handleMinusCart = () => {
-        if (cartValue > 1) { // Changed from >= 1 to > 1
+        if (cartValue > 1) {
             setCartValue((prev) => prev - 1)
         }
     }
 
     const handleCart = () => {
-        if (cartValue <= 0) { // Added check for less than or equal to 0
+        if (cartValue <= 0) {
             toast.error('Please select the quantity', {
                 duration: 3000
             })
@@ -63,7 +62,7 @@ const ProductDetailsPage = () => {
 
         setTimeout(() => {
             setCartHandle(false)
-            setCartValue(1) // Reset to 1 instead of keeping the same value
+            setCartValue(1)
             toast.success(`${cartValue} ${product.name}(s) added to cart! 🎸`, {
                 duration: 3000
             })
@@ -202,21 +201,22 @@ const ProductDetailsPage = () => {
                             </div>
                         </div>
 
-                        <button
-                            onClick={handleCart}
-                            disabled={cartHandle}
-                            className={`font-semibold mb-8 transition-all duration-300 ${
-                                cartHandle ? "cursor-not-allowed opacity-50" : "hover:bg-[#a02044]"
-                            }`}
-                        >
-                            {cartHandle ? (
-                                <div className="flex justify-center items-center">
-                                    <SyncLoader size={20} color='#CB2957' />
-                                </div>
-                            ) : (
-                                <AddToCartButton product={product} quantity={cartValue} />
-                            )}
-                        </button>
+                        {cartHandle ? (
+                            <button
+                                disabled
+                                className="w-full mt-3 bg-[#0d0e0f] text-[#CB2957] font-semibold py-2.5 px-4 rounded text-lg cursor-not-allowed transition-all ease-in-out duration-300 opacity-50"
+                            >
+                                <span className="flex items-center justify-center gap-2">
+                                    <span className="animate-spin rounded-full h-4 w-4 border-2 border-black border-t-transparent"></span>
+                                    Adding...
+                                </span>
+                            </button>
+                        ) : (
+                            <AddToCartButton 
+                                product={product} 
+                                quantity={cartValue} 
+                            />
+                        )}
                     </div>
                 </div>
             </div>

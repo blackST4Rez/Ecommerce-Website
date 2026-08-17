@@ -1,4 +1,4 @@
-// src/pages/Checkout.jsx
+// src/pages/CheckoutPage.jsx
 import { useNavigate } from 'react-router';
 import { useCart } from '../Context/CartContext';
 import { useState } from 'react';
@@ -57,7 +57,7 @@ const CheckoutPage = () => {
                 {/* Order Summary */}
                 <div className="bg-[#1a1c1d] p-6 rounded-lg">
                     <h2 className="text-xl font-semibold mb-4">Order Summary</h2>
-                    <div className="max-h-80 overflow-y-auto space-y-3">
+                    <div className="max-h-80 overflow-y-auto space-y-3 hide-scrollbar">
                         {cartItems.map((item) => (
                             <div key={`${item._id}-${item.selectedColor}`} className="flex gap-4 py-3">
                                 {/* Product Image */}

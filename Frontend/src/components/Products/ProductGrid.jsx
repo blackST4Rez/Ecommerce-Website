@@ -1,36 +1,8 @@
 // src/components/Products/ProductGrid.jsx
 import { Link } from 'react-router';
-import { useCart } from '../Context/CartContext';
-import { toast } from 'sonner';
-import { useState } from 'react';
+import AddToCartButton from '../Common/AddToCartButton.jsx';
 
 const ProductGrid = ({ products, isAmpCollection = false }) => {
-    const { addToCart } = useCart();
-    const [addingId, setAddingId] = useState(null);
-
-    const handleAddToCart = (product, e) => {
-        e.stopPropagation();
-        e.preventDefault();
-        
-        if (!product || !product._id) {
-            toast.error('Cannot add this item');
-            return;
-        }
-
-        setAddingId(product._id);
-        
-        try {
-            // Always add with quantity 1 from grid views
-            addToCart(product, 1);
-            toast.success(`${product.name} added to cart!`);
-        } catch (error) {
-            console.log(error);     
-            toast.error('Failed to add item');
-        }
-        
-        setTimeout(() => setAddingId(null), 1000);
-    };
-
     if (!products || products.length === 0) {
         return (
             <div className="text-center text-gray-400 py-8">
@@ -86,20 +58,7 @@ const ProductGrid = ({ products, isAmpCollection = false }) => {
                             )}
                         </div>
                         
-                        <button 
-                            onClick={(e) => handleAddToCart(product, e)}
-                            disabled={addingId === product._id}
-                            className="w-full mt-3 bg-[#0d0e0f] text-[#CB2957] hover:bg-[#CB2957] hover:text-black font-semibold py-2.5 px-4 rounded text-lg cursor-pointer transition-all ease-in-out duration-300"
-                        >
-                            {addingId === product._id ? (
-                                <span className="flex items-center justify-center gap-2">
-                                    <span className="animate-spin rounded-full h-4 w-4 border-2 border-black border-t-transparent"></span>
-                                    Adding...
-                                </span>
-                            ) : (
-                                'Add to Cart'
-                            )}
-                        </button>
+                        <AddToCartButton product={product} quantity={1} />
                     </div>
                 </div>
             ))}

@@ -6,12 +6,13 @@ import Login from './components/Pages/Login'
 import Home from './components/Pages/Home'
 import Register from './components/Pages/Register'
 import Profile from './components/Pages/Profile'
+import MyOrders from './components/Pages/MyOrders'
 import CollectionPage from './components/Pages/CollectionPage'
 import AMPCollectionPage from './components/Pages/AMPCollectionPage'
 import ProductDetailPage from './components/Pages/ProductDetailsPage'
 import { CartProvider } from './components/Context/CartContext'
 import CheckoutPage from './components/Pages/CheckoutPage'
-
+import OrderSuccessPage from './components/Pages/OrderSuccessPage'
 
 const App = () => {
   return (
@@ -24,11 +25,13 @@ const App = () => {
             <Route path='login' element={<Login />} />
             <Route path='register' element={<Register />} />
             <Route path='profile' element={<Profile />} />
+            <Route path='my-orders' element={<MyOrders />} />
             <Route path='collections/guitars' element={<CollectionPage />} />
             <Route path='collections/amp' element={<AMPCollectionPage />} />
             <Route path='collections/:collection' element={<CollectionPage />} />
             <Route path='product/:productId' element={<ProductDetailPage />} />
             <Route path="/checkout" element={<CheckoutPage />} />
+            <Route path="/order-success" element={<OrderSuccessPage />} />
           </Route>
         </Routes>
       </CartProvider>

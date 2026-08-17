@@ -8,16 +8,23 @@ const AddToCartButton = ({ product, quantity = 1, className = '' }) => {
 
     const handleAddToCart = (e) => {
         e.stopPropagation();
-        
-        if (isAdding || !product) return;
-        
+        e.preventDefault();
+
+        if (isAdding || !product || !product._id) {
+            toast.error('Cannot add this item');
+            return;
+        }
+
         setIsAdding(true);
-        addToCart(product, quantity);
-        
-        toast.success(`${product.name} added to cart!`, {
-            duration: 2000
-        });
-        
+
+        try {
+            addToCart(product, quantity);
+            toast.success(`${product.name} added to cart!`);
+        } catch (error) {
+            console.log(error);
+            toast.error('Failed to add item');
+        }
+
         setTimeout(() => {
             setIsAdding(false);
         }, 1000);
@@ -27,9 +34,16 @@ const AddToCartButton = ({ product, quantity = 1, className = '' }) => {
         <button
             onClick={handleAddToCart}
             disabled={isAdding}
-            className={`bg-[#CB2957] text-black font-semibold py-2 px-4 rounded hover:bg-[#a02044] transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed ${className}`}
+            className={`w-full mt-3 bg-[#0d0e0f] text-[#CB2957] hover:bg-[#CB2957] hover:text-black font-semibold py-2.5 px-4 rounded text-lg cursor-pointer transition-all ease-in-out duration-300 disabled:opacity-50 disabled:cursor-not-allowed ${className}`}
         >
-            {isAdding ? 'Adding...' : 'Add to Cart'}
+            {isAdding ? (
+                <span className="flex items-center justify-center gap-2">
+                    <span className="animate-spin rounded-full h-4 w-4 border-2 border-black border-t-transparent"></span>
+                    Adding...
+                </span>
+            ) : (
+                'Add to Cart'
+            )}
         </button>
     );
 };
