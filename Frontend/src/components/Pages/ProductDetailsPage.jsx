@@ -4,7 +4,7 @@ import { FadeLoader } from 'react-spinners'
 import { toast } from 'sonner'
 import { SyncLoader } from 'react-spinners'
 import { BiArrowBack } from 'react-icons/bi'
-import { getProductById } from '../Data/Products'
+import { getProductById } from '../Data/Product.jsx'
 import { useCart } from '../Context/CartContext'
 import AddToCartButton from '../Common/AddToCartButton.jsx'
 const ProductDetailsPage = () => {
