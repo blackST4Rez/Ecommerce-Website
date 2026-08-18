@@ -8,28 +8,28 @@ A full-featured ecommerce web application for purchasing guitars and amplifiers.
 ![Home Page](./Frontend/src/assets/SS1.png)
 
 ### Guitar Collection
-![Product Collection](../Frontend/src/assets/SS2.png)
+![Product Collection](./Frontend/src/assets/SS2.png)
 
 ### AMP Collection
-![Product Details](../Frontend/src/assets/SS3.png)
+![Product Details](./Frontend/src/assets/SS3.png)
 
 ### Shopping Cart
-![Shopping Cart](../Frontend/src/assets/SS4.png)
+![Shopping Cart](./Frontend/src/assets/SS4.png)
 
 ### Checkout Page
-![Checkout Page](../Frontend/src/assets/SS5.png)
+![Checkout Page](./Frontend/src/assets/SS5.png)
 
 ### Order Success
-![Order Success](../Frontend/src/assets/SS6.png)
+![Order Success](./Frontend/src/assets/SS6.png)
 
 ### Login Page
-![Login Page](../Frontend/src/assets/SS7.png)
+![Login Page](./Frontend/src/assets/SS7.png)
 
 ### Register Page
-![Register Page](../Frontend/src/assets/SS8.png)
+![Register Page](./Frontend/src/assets/SS8.png)
 
 ### Profile Page
-![Profile Page](../Frontend/src/assets/SS9.png)
+![Profile Page](./Frontend/src/assets/SS9.png)
 
 ## Features
 
