@@ -5,7 +5,7 @@ A full-featured ecommerce web application for purchasing guitars and amplifiers.
 ### Screenshots
 
 ### Home Page
-![Home Page](../Frontend/src/assets/SS1.png)
+![Home Page](./Frontend/src/assets/SS1.png)
 
 ### Guitar Collection
 ![Product Collection](../Frontend/src/assets/SS2.png)
