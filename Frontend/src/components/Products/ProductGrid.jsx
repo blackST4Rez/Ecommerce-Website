@@ -32,11 +32,6 @@ const ProductGrid = ({ products, isAmpCollection = false }) => {
                                     e.target.src = 'https://via.placeholder.com/400x400?text=No+Image';
                                 }}
                             />
-                            {product.discount && (
-                                <span className="absolute top-2 right-2 bg-[#CB2957] text-black text-xs font-bold px-2 py-1 rounded z-10">
-                                    {product.discount}% OFF
-                                </span>
-                            )}
                         </div>
                     </Link>
                     <div className="p-4 flex flex-col flex-1 bg-[#181616]">

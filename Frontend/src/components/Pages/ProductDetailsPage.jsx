@@ -63,7 +63,7 @@ const ProductDetailsPage = () => {
         setTimeout(() => {
             setCartHandle(false)
             setCartValue(1)
-            toast.success(`${cartValue} ${product.name}(s) added to cart! 🎸`, {
+            toast.success(`${cartValue} ${product.name}(s) added to cart!`, {
                 duration: 3000
             })
         }, 2000)
