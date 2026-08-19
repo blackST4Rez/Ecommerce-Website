@@ -25,7 +25,7 @@ const ProductDetailsPage = () => {
                 setProduct(foundProduct)
             } else {
                 toast.error('Product not found!')
-                navigate('/')
+                navigate('-1')
             }
 
             setIsLoading(false)
