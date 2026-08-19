@@ -16,7 +16,6 @@ const ProductDetailsPage = () => {
     const [isLoading, setIsLoading] = useState(true)
     const [cartValue, setCartValue] = useState(1)
     const [cartHandle, setCartHandle] = useState(false)
-    const [currImage, setCurrImage] = useState(null)
 
     useEffect(() => {
         setTimeout(() => {
@@ -24,7 +23,6 @@ const ProductDetailsPage = () => {
 
             if (foundProduct) {
                 setProduct(foundProduct)
-                setCurrImage(foundProduct.images[0])
             } else {
                 toast.error('Product not found!')
                 navigate('/')
@@ -33,10 +31,6 @@ const ProductDetailsPage = () => {
             setIsLoading(false)
         }, 1000)
     }, [productId, navigate])
-
-    const handleImage = (image) => {
-        setCurrImage(image)
-    }
 
     const handleAddCart = () => {
         setCartValue((prev) => prev + 1)
@@ -57,7 +51,6 @@ const ProductDetailsPage = () => {
         }
 
         setCartHandle(true)
-
         addToCart(product, cartValue)
 
         setTimeout(() => {
@@ -109,43 +102,36 @@ const ProductDetailsPage = () => {
 
             <div className="max-w-6xl mx-auto p-4 md:p-8">
                 <div className="flex flex-col md:flex-row gap-8">
+                    {/* Thumbnail Section  */}
                     <div className="hidden md:flex flex-col space-y-4 mr-6">
-                        {product.images.map((image, index) => (
-                            <img
-                                onClick={() => handleImage(image)}
-                                key={index}
-                                src={image.url}
-                                alt={image.altText || `Thumbnail ${index}`}
-                                className={`w-20 h-20 object-cover cursor-pointer border-2 
-                                    ${currImage?.url === image.url ? 'border-[#CB2957]' : 'border-transparent'}
-                                    hover:border-[#CB2957] transition-all`}
-                            />
-                        ))}
+                        <img
+                            src={product.images[0]?.url || ''}
+                            alt={product.name}
+                            className="w-20 h-20 object-cover cursor-pointer border-2 border-[#CB2957]"
+                        />
                     </div>
 
+                    {/* Main Image Section */}
                     <div className="md:w-1/2">
                         <div className="mb-4">
                             <img
-                                src={currImage?.url || product.images[0].url}
+                                src={product.images[0]?.url || ''}
                                 alt={product.name}
                                 className="w-full h-auto object-cover rounded-lg"
                             />
                         </div>
                     </div>
 
+                    {/* Mobile Thumbnail */}
                     <div className="md:hidden flex overflow-x-scroll space-x-4 mb-4 hide-scrollbar">
-                        {product.images.map((image, index) => (
-                            <img
-                                onClick={() => handleImage(image)}
-                                key={index}
-                                src={image.url}
-                                alt={image.altText || `Thumbnail ${index}`}
-                                className={`w-20 h-20 object-cover cursor-pointer border-2 
-                                    ${currImage?.url === image.url ? 'border-[#CB2957]' : 'border-transparent'}`}
-                            />
-                        ))}
+                        <img
+                            src={product.images[0]?.url || ''}
+                            alt={product.name}
+                            className="w-20 h-20 object-cover cursor-pointer border-2 border-[#CB2957]"
+                        />
                     </div>
 
+                    {/* Product Details */}
                     <div className="md:w-1/2">
                         <h1 className="text-3xl text-[#CB2957] font-semibold mb-2">
                             {product.name}
