@@ -2,6 +2,7 @@ import { toast } from 'sonner';
 import { useState } from 'react';
 import { useCart } from '../Context/CartContext';
 import AddToCartButton from '../Common/AddToCartButton.jsx';
+import { formatNPR } from '../Utils/CurrencyFormat.jsx';
 
 const selectedProduct = {
     name: "1984 Fender Stratocaster 57V",
@@ -112,11 +113,11 @@ const ProductDetails = () => {
                     <h1 className="text-3xl text-[#CB2957] md:-3xl font-semibold mb-2">
                         {selectedProduct.name}
                     </h1>
-                    <p className="priceTag text-2xl text-white mb-1 line-through">
-                        {selectedProduct.originalPrice && `Rs. ${selectedProduct.originalPrice}`}
+                    <p className="text-2xl text-white mb-1 line-through">
+                        {selectedProduct.originalPrice && `${formatNPR(selectedProduct.originalPrice)}`}
                     </p>
-                    <p className="priceTag text-2xl text-white mb-2">
-                        Rs. {selectedProduct.price}
+                    <p className="text-2xl text-white mb-2">
+                        {formatNPR(selectedProduct.price)}
                     </p>
                     <p className="text-gray-300 mb-4 text-xl">
                         {selectedProduct.description}

@@ -1,12 +1,12 @@
 import { useEffect, useRef, useState } from "react"
 import { BiFilter } from "react-icons/bi"
 import { useSearchParams } from "react-router"
-import FilterSiderbar from "../Products/FilterSiderbar"
 import SortOptions from "../Products/SortOptions"
 import ProductGrid from "../Products/ProductGrid"
 import { FadeLoader } from "react-spinners"
+import AMPFilterSidebar from "../Products/AMPFilterSidebar"
 
-const CollectionPage = () => {
+const AMPCollectionPage = () => {
     const [products, setProducts] = useState([])
     const [filteredProducts, setFilteredProducts] = useState([])
     const [searchParams] = useSearchParams()
@@ -29,91 +29,77 @@ const CollectionPage = () => {
         return () => {
             document.removeEventListener('mousedown', handleClickOutside)
         }
-
     }, [])
 
+    // Fetch AMP products
     useEffect(() => {
         setTimeout(() => {
             const fetchedProducts = [
                 {
-                    _id: 1,
-                    name: "Epiphone Les Paul",
-                    price: 198988,
-                    category: "Les Paul",
-                    color: "Yellow",
-                    material: "Mahogany",
-                    brand: "Epiphone",
-                    images: [{ url: 'https://i.pinimg.com/1200x/e1/2c/c5/e12cc567423f40c4c6c94e2bc56d7d92.jpg?random=3' }],
+                    _id: 101,
+                    name: "Marshall JCM800",
+                    price: 106468,
+                    category: "Marshall",
+                    material: "Solid Woods",
+                    type: "Voltage Amplifiers",
+                    images: [{
+                        url: 'https://i.pinimg.com/1200x/0a/0a/b1/0a0ab13da4dc3182b4a4a97f047ee863.jpg?random=101',
+                    }],
                 },
                 {
-                    _id: 2,
-                    name: "Gibson Les Paul",
-                    price: 159530,
-                    category: "Les Paul",
-                    color: "Green",
-                    material: "Mahogany",
-                    brand: "Gibson",
-                    images: [{ url: 'https://i.pinimg.com/736x/5c/18/be/5c18bee1891d7af64cf71f41e4292bb5.jpg?random=4' }],
+                    _id: 102,
+                    name: "Marshall JBD2090",
+                    price: 175504,
+                    category: "Marshall",
+                    material: "Wood Composites",
+                    type: "Operational Amplifiers",
+                    images: [{
+                        url: 'https://i.pinimg.com/1200x/40/ee/d1/40eed17824bea8525b1177821f1ecbe0.jpg?random=102',
+                    }],
                 },
                 {
-                    _id: 3,
-                    name: "Fender Stratocastor 1997",
-                    price: 178804,
-                    category: "Stratocastor",
-                    color: "Red",
-                    material: "Alder Woods",
-                    brand: "Fender",
-                    images: [{ url: 'https://i.pinimg.com/736x/84/9e/d4/849ed4467f929ed71c64eb05d30c7d15.jpg?random=5' }],
+                    _id: 103,
+                    name: "Vox AC30",
+                    price: 104063,
+                    category: "Vox",
+                    material: "Plywood",
+                    type: "Power Amplifiers",
+                    images: [{
+                        url: 'https://i.pinimg.com/1200x/35/a6/ce/35a6ce35de954ecd9737a53977792970.jpg?random=103',
+                    }],
                 },
                 {
-                    _id: 4,
-                    name: "Squier Stratocastor 1890",
-                    price: 180736,
-                    category: "Stratocastor",
-                    color: "White",
-                    material: "Alder Woods",
-                    brand: "Squier",
-                    images: [{ url: 'https://i.pinimg.com/736x/39/cb/27/39cb2737ef2ed022dcc0f2acffef23ae.jpg?random=6' }],
+                    _id: 104,
+                    name: "Vox Series 990D",
+                    price: 189709,
+                    category: "Vox",
+                    material: "Polymers",
+                    type: "Power Amplifiers",
+                    images: [{
+                        url: 'https://i.pinimg.com/1200x/3e/81/0b/3e810b510dba4ce24bfba90de9933ebe.jpg?random=104',
+                    }],
                 },
                 {
-                    _id: 5,
-                    name: "Fender Telecastor 1890",
-                    price: 147023,
-                    category: "Telecastor",
-                    color: "Green",
-                    material: "Maple",
-                    brand: "Fender",
-                    images: [{ url: 'https://i.pinimg.com/1200x/64/58/c3/6458c35b7648f8aa21b4696d3ebd36e9.jpg?random=7' }],
+                    _id: 105,
+                    name: "Fender 64 Bassman",
+                    price: 149883,
+                    category: "Fender",
+                    material: "Polymers",
+                    type: "Power Amplifiers",
+                    images: [{
+                        url: 'https://i.pinimg.com/1200x/ac/32/48/ac3248f95d4685bb56f8ed2177ff6aa0.jpg?random=105',
+                    }],
                 },
                 {
-                    _id: 6,
-                    name: "Squier Telecastor 2002",
-                    price: 128223,
-                    category: "Telecastor",
-                    color: "Orange",
-                    material: "Mahogany",
-                    brand: "Squier",
-                    images: [{ url: 'https://i.pinimg.com/736x/95/ce/f3/95cef33180b73ff38d1d6a5e69f31304.jpg?random=8' }],
-                },
-                {
-                    _id: 7,
-                    name: "Gibsun Firebird 2005",
-                    price: 135203,
-                    category: "Gibson",
-                    color: "Blue",
-                    material: "Alder Woods",
-                    brand: "Gibson",
-                    images: [{ url: 'https://i.pinimg.com/736x/16/f0/c7/16f0c7ccba9b0c0f1424e23f690f2904.jpg?random=9' }],
-                },
-                {
-                    _id: 8,
-                    name: "Gibson Firebird 2008",
-                    price: 137864,
-                    category: "Gibson",
-                    color: "Beige",
-                    material: "Maple",
-                    brand: "Gibson",
-                    images: [{ url: 'https://i.pinimg.com/736x/6b/af/64/6baf641532c6d4c9c51442e51e965a57.jpg?random=10' }],
+                    _id: 106,
+                    name: "Fender Champion 20",
+                    price: 148440,
+                    category: "Fender",
+                    material: "Wood Composites",
+                    type: "Current Amplifiers",
+                    images: [{
+                        url: 'https://i.pinimg.com/1200x/66/f2/bb/66f2bbcc4e856bb3239047b0b5c7da18.jpg?random=106',
+                    }],
                 },
             ]
             setProducts(fetchedProducts)
@@ -127,54 +113,47 @@ const CollectionPage = () => {
         if (products.length === 0) return
 
         const category = searchParams.get('category') || ''
-        const color = searchParams.get('color') || ''
         const material = searchParams.get('material')?.split(',') || []
-        const brand = searchParams.get('brand')?.split(',') || []
+        const type = searchParams.get('type')?.split(',') || []
         const sort = searchParams.get('sort') || 'default'
 
         let filtered = [...products]
 
         if (category) {
-            filtered = filtered.filter(product => 
+            filtered = filtered.filter(product =>
                 product.category === category
             )
         }
 
-        if (color) {
-            filtered = filtered.filter(product => 
-                product.color === color
-            )
-        }
-
         if (material.length > 0) {
-            filtered = filtered.filter(product => 
+            filtered = filtered.filter(product =>
                 material.includes(product.material)
             )
         }
 
-        if (brand.length > 0) {
-            filtered = filtered.filter(product => 
-                brand.includes(product.brand)
+        if (type.length > 0) {
+            filtered = filtered.filter(product =>
+                type.includes(product.type)
             )
         }
 
         switch (sort) {
-        case 'price-asc':
-            filtered.sort((a, b) => a.price - b.price)
-            break
-        case 'price-desc':
-            filtered.sort((a, b) => b.price - a.price)
-            break
-        case 'name-asc':
-            filtered.sort((a, b) => a.name.localeCompare(b.name))
-            break
-        case 'name-desc':
-            filtered.sort((a, b) => b.name.localeCompare(a.name))
-            break
-        default:
-            filtered.sort((a, b) => a._id - b._id)
-            break
-    }
+            case 'price-asc':
+                filtered.sort((a, b) => a.price - b.price)
+                break
+            case 'price-desc':
+                filtered.sort((a, b) => b.price - a.price)
+                break
+            case 'name-asc':
+                filtered.sort((a, b) => a.name.localeCompare(b.name))
+                break
+            case 'name-desc':
+                filtered.sort((a, b) => b.name.localeCompare(a.name))
+                break
+            default:
+                filtered.sort((a, b) => a._id - b._id)
+                break
+        }
 
         setFilteredProducts(filtered)
     }, [products, searchParams])
@@ -216,12 +195,12 @@ const CollectionPage = () => {
                     h-full
                 `}
             >
-                <FilterSiderbar onClose={toggleSidebar} />
+                <AMPFilterSidebar onClose={toggleSidebar} />
             </div>
 
             {/* Mobile Overlay */}
             {isSidebarOpen && (
-                <div 
+                <div
                     className="lg:hidden fixed inset-0 z-40 bg-black/70"
                     onClick={toggleSidebar}
                 />
@@ -232,7 +211,7 @@ const CollectionPage = () => {
                 {/* Header with product count */}
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-4 gap-3">
                     <h2 className="text-xl sm:text-2xl lg:text-3xl uppercase text-[#CB2957] font-bold tracking-wider">
-                        Guitar Collection
+                        AMP Collection
                     </h2>
                     <div className="flex items-center gap-2 text-l text-white font-semibold">
                         <span>{filteredProducts.length}</span>
@@ -247,12 +226,11 @@ const CollectionPage = () => {
                 
                 {/* Product Grid */}
                 <div className="mt-4">
-                    <ProductGrid products={filteredProducts.length > 0 ? filteredProducts : products } />
+                    <ProductGrid products={filteredProducts.length > 0 ? filteredProducts : products} />
                 </div>
             </div>
         </div>
     )
 }
 
-
-export default CollectionPage
+export default AMPCollectionPage

@@ -37,10 +37,6 @@ body{
     font-family: "Henny Penny", system-ui;
 }
 
-.priceTag{
-    font-family: "New Rocker", system-ui;
-}
-
 .BottomImage{
     background-image: url('/Frontend/src/assets/BottomImage.jpg');
     background-size: cover;

@@ -1,6 +1,6 @@
-// src/components/Products/ProductGrid.jsx
 import { Link } from 'react-router';
 import AddToCartButton from '../Common/AddToCartButton.jsx';
+import { formatNPR } from '../Utils/CurrencyFormat.jsx';
 
 const ProductGrid = ({ products, isAmpCollection = false }) => {
     if (!products || products.length === 0) {
@@ -32,6 +32,11 @@ const ProductGrid = ({ products, isAmpCollection = false }) => {
                                     e.target.src = 'https://via.placeholder.com/400x400?text=No+Image';
                                 }}
                             />
+                            {product.discount && (
+                                <span className="absolute top-2 right-2 bg-[#CB2957] text-black text-xs font-bold px-2 py-1 rounded z-10">
+                                    {formatNPR(product.discount)}% OFF
+                                </span>
+                            )}
                         </div>
                     </Link>
                     <div className="p-4 flex flex-col flex-1 bg-[#181616]">
@@ -44,11 +49,11 @@ const ProductGrid = ({ products, isAmpCollection = false }) => {
                         
                         <div className="flex items-center gap-2 mt-2">
                             <p className="text-white font-bold text-xl">
-                                Rs. {product.price.toLocaleString()}
+                                {formatNPR(product.price)}
                             </p>
                             {product.originalPrice && (
                                 <p className="text-gray-500 text-sm line-through">
-                                    Rs. {product.originalPrice.toLocaleString()}
+                                    {formatNPR(product.originalPrice)}
                                 </p>
                             )}
                         </div>

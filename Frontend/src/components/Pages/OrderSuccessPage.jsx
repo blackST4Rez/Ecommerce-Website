@@ -1,4 +1,3 @@
-// src/pages/OrderSuccessPage.jsx
 import { useEffect, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router';
 import { BiCheckCircle } from 'react-icons/bi';
@@ -9,24 +8,27 @@ const OrderSuccessPage = () => {
     const location = useLocation();
     const { clearCart } = useCart();
     const [orderNumber, setOrderNumber] = useState('');
+    const [orderData, setOrderData] = useState(null);
 
     useEffect(() => {
-        window.scrollTo(0, 0);
         
-        // Generate order number once
+        // Get order data from navigation state
         const num = location.state?.orderNumber || Math.floor(Math.random() * 4000) + 1000;
+        const data = location.state?.orderData || null;
+        
         setOrderNumber(num);
+        setOrderData(data);
         
         // Clear the cart when order is successful
         clearCart();
-    }, []); // Empty dependency array - runs only once
+    }, [location.state, clearCart]); // Added dependencies
 
     const handleContinueShopping = () => {
         navigate('/');
     };
 
     const handleViewOrders = () => {
-        navigate('/my-orders');
+        navigate('/profile');
     };
 
     return (
@@ -64,6 +66,12 @@ const OrderSuccessPage = () => {
                             <span className="text-gray-500">Status:</span>
                             <span className="text-green-400">Confirmed</span>
                         </div>
+                        {orderData && (
+                            <div className="flex justify-between text-sm mt-1">
+                                <span className="text-gray-500">Items:</span>
+                                <span className="text-white">{orderData.items?.length || 0}</span>
+                            </div>
+                        )}
                     </div>
                 </div>
 

@@ -1,5 +1,5 @@
-export const formatINR = (amount) => {
-    return new Intl.NumberFormat('en-IN', {
+export const formatNPR = (amount) => {
+    return new Intl.NumberFormat('ne-NP', {
         style: 'currency',
         currency: 'NPR',
         minimumFractionDigits: 0,

@@ -1,11 +1,11 @@
-// src/pages/CheckoutPage.jsx
 import { useNavigate } from 'react-router';
 import { useCart } from '../Context/CartContext';
 import { useState } from 'react';
+import { formatNPR } from '../Utils/CurrencyFormat';
 
 const CheckoutPage = () => {
     const navigate = useNavigate();
-    const { cartItems, getTotalPrice } = useCart();
+    const { cartItems, getTotalPrice, clearCart } = useCart();
     const [isProcessing, setIsProcessing] = useState(false);
     const [formData, setFormData] = useState({
         fullName: '',
@@ -30,7 +30,7 @@ const CheckoutPage = () => {
         });
     };
 
-    const handlePlaceOrder = async (e) => {
+    const handlePlaceOrder = (e) => {
         e.preventDefault();
         
         // Validate form
@@ -41,11 +41,32 @@ const CheckoutPage = () => {
 
         setIsProcessing(true);
         
-        // Simulate order processing
+        // Generate order number
+        const orderNumber = Math.floor(Math.random() * 9999) + 1000;
+
+        // Create order object (just for passing to success page)
+        const order = {
+            id: Date.now(),
+            orderNumber: orderNumber,
+            items: cartItems,
+            total: totalPrice,
+            date: new Date().toISOString(),
+            status: 'Confirmed',
+            shippingInfo: formData
+        };
+
+        // Clear the cart
+        clearCart();
+        
+        // Navigate to success page with order data
         setTimeout(() => {
             setIsProcessing(false);
-            // Navigate to success page
-            navigate('/order-success');
+            navigate('/order-success', { 
+                state: { 
+                    orderNumber: order.orderNumber,
+                    orderData: order // Pass full order if needed
+                } 
+            });
         }, 2000);
     };
 
@@ -59,9 +80,8 @@ const CheckoutPage = () => {
                     <h2 className="text-xl font-semibold mb-4">Order Summary</h2>
                     <div className="max-h-80 overflow-y-auto space-y-3 hide-scrollbar">
                         {cartItems.map((item) => (
-                            <div key={`${item._id}-${item.selectedColor}`} className="flex gap-4 py-3">
-                                {/* Product Image */}
-                                <div className="w-20 h-20 shrink bg-[#0d0e0f] rounded-lg overflow-hidden">
+                            <div key={item._id} className="flex gap-4 py-3">
+                                <div className="w-50 h-50 shrink rounded overflow-hidden">
                                     <img 
                                         src={item.image} 
                                         alt={item.name}
@@ -71,39 +91,28 @@ const CheckoutPage = () => {
                                         }}
                                     />
                                 </div>
-                                
-                                {/* Product Details */}
                                 <div className="flex-1 min-w-0">
-                                    <p className="font-medium text-white truncate">{item.name}</p>
-                                    <p className="text-sm text-white">
-                                        Qty: {item.quantity}
-                                        {item.selectedColor && ` | Color: ${item.selectedColor}`}
-                                    </p>
-                                    {item.brand && (
-                                        <p className="text-xs text-white">{item.brand}</p>
-                                    )}
+                                    <p className="text-1xl font-semibold text-white truncate">{item.name}</p>
+                                    <p className="text-md text-white">Quantity: {item.quantity}</p>
+                                    {item.brand && <p className="text-sm text-white font-light">{item.brand}</p>}
                                 </div>
-                                
-                                {/* Price */}
                                 <div className="shrink text-right">
                                     <p className="font-semibold text-[#CB2957]">
-                                        Rs. {(item.price * item.quantity).toLocaleString()}
+                                        {formatNPR(item.price * item.quantity)}
                                     </p>
                                 </div>
                             </div>
                         ))}
                     </div>
-                    
-                    {/* Total */}
                     <div className="mt-4 pt-4 border-t border-white">
                         <div className="flex justify-between text-xl font-bold">
                             <span>Total:</span>
-                            <span className="text-[#CB2957]">Rs. {totalPrice.toLocaleString()}</span>
+                            <span className="text-[#CB2957]">{formatNPR(totalPrice)}</span>
                         </div>
                     </div>
                 </div>
                 
-                {/* Checkout Form */}
+                {/* Shipping Form */}
                 <div className="bg-[#1a1c1d] p-6 rounded-lg">
                     <h2 className="text-xl font-semibold mb-4">Shipping Information</h2>
                     <form onSubmit={handlePlaceOrder} className="space-y-4">
@@ -119,7 +128,6 @@ const CheckoutPage = () => {
                                 required
                             />
                         </div>
-                        
                         <div>
                             <label className="block text-sm text-white mb-1">Email Address</label>
                             <input 
@@ -128,11 +136,10 @@ const CheckoutPage = () => {
                                 value={formData.email}
                                 onChange={handleInputChange}
                                 placeholder="john@example.com" 
-                                className="w-full bg-black text-white p-3 rounded border border-[#191b1c]  focus:border-[#CB2957] outline-none transition-colors"
+                                className="w-full bg-black text-white p-3 rounded border border-[#191b1c] focus:border-[#CB2957] outline-none transition-colors"
                                 required
                             />
                         </div>
-                        
                         <div>
                             <label className="block text-sm text-white mb-1">Address</label>
                             <input 
@@ -141,11 +148,10 @@ const CheckoutPage = () => {
                                 value={formData.address}
                                 onChange={handleInputChange}
                                 placeholder="123 Main Street" 
-                                className="w-full bg-black text-white p-3 rounded border border-[#191b1c]  focus:border-[#CB2957] outline-none transition-colors"
+                                className="w-full bg-black text-white p-3 rounded border border-[#191b1c] focus:border-[#CB2957] outline-none transition-colors"
                                 required
                             />
                         </div>
-                        
                         <div className="grid grid-cols-2 gap-4">
                             <div>
                                 <label className="block text-sm text-white mb-1">City</label>
@@ -155,7 +161,7 @@ const CheckoutPage = () => {
                                     value={formData.city}
                                     onChange={handleInputChange}
                                     placeholder="Kathmandu" 
-                                    className="w-full bg-black text-white p-3 rounded border border-[#191b1c]  focus:border-[#CB2957] outline-none transition-colors"
+                                    className="w-full bg-black text-white p-3 rounded border border-[#191b1c] focus:border-[#CB2957] outline-none transition-colors"
                                     required
                                 />
                             </div>
@@ -172,7 +178,6 @@ const CheckoutPage = () => {
                                 />
                             </div>
                         </div>
-                        
                         <button 
                             type="submit"
                             disabled={isProcessing}

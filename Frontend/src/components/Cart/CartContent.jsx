@@ -1,19 +1,19 @@
-import { BiTrash } from "react-icons/bi"
-import { useCart } from '../Context/CartContext'
+import { BiTrash } from "react-icons/bi";
+import { useCart } from '../Context/CartContext';
 
 const CartContent = () => {
     const { cartItems, removeFromCart, updateQuantity } = useCart();
 
-    const handleDeleteCartItem = (productId, selectedColor) => {
-        removeFromCart(productId, selectedColor);
+    const handleDeleteCartItem = (productId) => {
+        removeFromCart(productId);
     };
 
-    const handleIncrement = (productId, selectedColor, currentQuantity) => {
-        updateQuantity(productId, currentQuantity + 1, selectedColor);
+    const handleIncrement = (productId, currentQuantity) => {
+        updateQuantity(productId, currentQuantity + 1);
     };
 
-    const handleDecrement = (productId, selectedColor, currentQuantity) => {
-        updateQuantity(productId, currentQuantity - 1, selectedColor);
+    const handleDecrement = (productId, currentQuantity) => {
+        updateQuantity(productId, currentQuantity - 1);
     };
 
     if (cartItems.length === 0) {
@@ -27,8 +27,8 @@ const CartContent = () => {
 
     return (
         <div className="text-white">
-            {cartItems.map((product, idx) => (
-                <div key={`${product._id}-${product.selectedColor || idx}`}
+            {cartItems.map((product) => (
+                <div key={product._id}
                     className="flex items-start justify-between py-4 border-b border-gray-700"
                 >
                     <div className="flex gap-3 items-start flex-1 min-w-0">
@@ -44,11 +44,10 @@ const CartContent = () => {
                             <p className="text-xs sm:text-sm text-gray-400 truncate">
                                 {product.brand && `Brand: ${product.brand} | `}
                                 {product.material && `Material: ${product.material}`}
-                                {product.selectedColor && ` | Color: ${product.selectedColor}`}
                             </p>
                             <div className="flex items-center mt-2">
                                 <button 
-                                    onClick={() => handleDecrement(product._id, product.selectedColor, product.quantity)}
+                                    onClick={() => handleDecrement(product._id, product.quantity)}
                                     className="px-1.5 sm:px-2 py-0.5 sm:py-1 bg-black text-[#CB2957] border-l border-t border-b border-[#CB2957] hover:text-white text-sm sm:text-base"
                                 >
                                     -
@@ -57,7 +56,7 @@ const CartContent = () => {
                                     {product.quantity}
                                 </span>
                                 <button 
-                                    onClick={() => handleIncrement(product._id, product.selectedColor, product.quantity)}
+                                    onClick={() => handleIncrement(product._id, product.quantity)}
                                     className="px-1.5 sm:px-2 py-0.5 sm:py-1 bg-black text-[#CB2957] border-r border-t border-b border-[#CB2957] hover:text-white text-sm sm:text-base"
                                 >
                                     +
@@ -70,7 +69,7 @@ const CartContent = () => {
                             Rs. <span className="font-bold">{(product.price * product.quantity).toLocaleString()}</span>
                         </p>
                         <button 
-                            onClick={() => handleDeleteCartItem(product._id, product.selectedColor)}
+                            onClick={() => handleDeleteCartItem(product._id)}
                             className="absolute top-12 right-2 sm:top-17"
                         >
                             <BiTrash size={18} className="sm:w-5 sm:h-5 text-red-600 hover:text-red-400 transition-colors" />
@@ -79,7 +78,7 @@ const CartContent = () => {
                 </div>
             ))}
         </div>
-    )
-}
+    );
+};
 
-export default CartContent
+export default CartContent;

@@ -6,6 +6,7 @@ import NewArrivals from "../Products/NewArrivals"
 import ProductDetails from "../Products/ProductDetails"
 import ProductGrid from "../Products/ProductGrid"
 
+
 const placeholderProducts = [
     {
         _id: 201,
