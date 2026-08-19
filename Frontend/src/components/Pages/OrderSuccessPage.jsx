@@ -33,7 +33,7 @@ const OrderSuccessPage = () => {
 
     return (
         <div className="min-h-screen bg-[#191b1c] flex items-center justify-center px-4">
-            <div className="bg-[#1a1c1d] rounded-lg p-8 md:p-12 max-w-2xl w-full text-center">
+            <div className="bg-[#1b1b1b] rounded-lg p-8 md:p-12 max-w-2xl w-full text-center">
                 <div className="flex justify-center mb-6">
                     <div className="w-24 h-24 bg-[#CB2957] rounded-full flex items-center justify-center">
                         <BiCheckCircle size={48} className="text-black" />

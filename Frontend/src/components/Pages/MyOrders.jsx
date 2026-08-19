@@ -1,15 +1,54 @@
 import { BiShoppingBag } from "react-icons/bi"
 import { useState, useEffect } from "react"
 import { FadeLoader } from 'react-spinners'
+import { formatNPR } from '../Utils/CurrencyFormat'
 
 const MyOrders = () => {
     const [orders, setOrders] = useState([])
     const [isFetching, setIsFetching] = useState(true)
 
     useEffect(() => {
-        // Get orders from localStorage
-        const savedOrders = JSON.parse(localStorage.getItem('orders') || '[]')
-        setOrders(savedOrders.reverse())
+        // Simplified order data - no nesting
+        const guitarOrders = [
+            {
+                id: 201,
+                orderNumber: 3456,
+                name: "SG Gibson",
+                price: 148974,
+                brand: "Gibson",
+                material: "Mahogony",
+                image: 'https://i.pinimg.com/1200x/5a/65/08/5a650813268066d7800ffe780a4af569.jpg?random=3',
+                total: 148974,
+                date: new Date().toISOString(),
+                status: 'Confirmed',
+                shippingInfo: {
+                    fullName: "John Doe",
+                    address: "123 Main Street",
+                    city: "Kathmandu",
+                    zipCode: "44600"
+                }
+            },
+            {
+                id: 202,
+                orderNumber: 7890,
+                name: "Fender 2001",
+                price: 151296,
+                brand: "Fender",
+                material: "Mahogony",
+                image: 'https://i.pinimg.com/1200x/e4/99/9d/e4999ddf471b0c890af9310487b35a40.jpg?random=4',
+                total: 151296,
+                date: new Date(Date.now() - 86400000).toISOString(),
+                status: 'Pending',
+                shippingInfo: {
+                    fullName: "Jane Smith",
+                    address: "456 Park Avenue",
+                    city: "Pokhara",
+                    zipCode: "33700"
+                }
+            }
+        ]
+
+        setOrders(guitarOrders.reverse())
         setIsFetching(false)
     }, [])
 
@@ -37,15 +76,15 @@ const MyOrders = () => {
                         <div className="space-y-3 sm:space-y-4">
                             {orders.map((order) => (
                                 <div
-                                    key={order.id || order._id}
+                                    key={order.id}
                                     className="bg-[#0c0d0e] rounded-lg p-3 sm:p-4 md:p-6 cursor-pointer transition-colors"
                                 >
-                                    {/* Mobile Layout (default) */}
+                                    {/* Mobile Layout */}
                                     <div className="block lg:hidden">
                                         <div className="flex items-start gap-3">
                                             <img
-                                                src={order.items?.[0]?.image || order.orderItems?.[0]?.image || 'https://via.placeholder.com/80x80?text=No+Image'}
-                                                alt={order.items?.[0]?.name || order.orderItems?.[0]?.name || 'Product'}
+                                                src={order.image || 'https://via.placeholder.com/80x80?text=No+Image'}
+                                                alt={order.name || 'Product'}
                                                 className="w-16 h-16 sm:w-20 sm:h-20 object-cover rounded-lg shrink"
                                             />
                                             <div className="flex-1 min-w-0">
@@ -55,33 +94,28 @@ const MyOrders = () => {
                                                         <div className="text-white text-xs sm:text-sm font-medium truncate">#{order.orderNumber}</div>
                                                     </div>
                                                     <span className={`px-2 py-0.5 sm:px-3 sm:py-1 rounded-full text-xs sm:text-sm font-semibold ${
-                                                        order.status === 'Confirmed' || order.isPaid
+                                                        order.status === 'Confirmed'
                                                             ? 'bg-emerald-500/10 text-emerald-500 border border-emerald-500/20' 
                                                             : 'bg-yellow-500/10 text-yellow-300 border border-yellow-500/20'
                                                     }`}>
-                                                        {order.status || (order.isPaid ? 'Paid' : 'Pending')}
+                                                        {order.status || 'Pending'}
                                                     </span>
                                                 </div>
                                                 <div className="grid grid-cols-1 gap-1 mt-2">
                                                     <div>
                                                         <div className="text-[10px] sm:text-xs uppercase text-[#CB2957] font-bold">Date</div>
                                                         <div className="text-white text-xs sm:text-sm">
-                                                            {new Date(order.date || order.createdAt).toLocaleDateString()}
+                                                            {new Date(order.date).toLocaleDateString()}
                                                         </div>
                                                     </div>
                                                     <div>
                                                         <div className="text-[10px] sm:text-xs uppercase text-[#CB2957] font-bold">Items</div>
-                                                        <div className="text-white text-xs sm:text-sm">{order.items?.length || order.orderItems?.length || 0}</div>
+                                                        <div className="text-white text-xs sm:text-sm">1</div>
                                                     </div>
                                                     <div className="col-span-2">
                                                         <div className="text-[10px] sm:text-xs uppercase text-[#CB2957] font-bold">Address</div>
                                                         <div className="text-white text-xs sm:text-sm truncate">
-                                                            {order.shippingInfo
-                                                                ? `${order.shippingInfo.address}, ${order.shippingInfo.city}`
-                                                                : order.shippingAddress
-                                                                ? `${order.shippingAddress.city}, ${order.shippingAddress.country}`
-                                                                : "N/A"
-                                                            }
+                                                            {order.shippingInfo?.address}, {order.shippingInfo?.city}
                                                         </div>
                                                     </div>
                                                 </div>
@@ -89,7 +123,7 @@ const MyOrders = () => {
                                                     <div className="flex justify-between items-center">
                                                         <span className="text-[10px] sm:text-xs uppercase text-[#CB2957] font-bold">Total</span>
                                                         <span className="text-lg sm:text-xl font-bold text-white">
-                                                            Rs. {(order.total || order.totalPrice).toLocaleString()}
+                                                            {formatNPR(order.total)}
                                                         </span>
                                                     </div>
                                                 </div>
@@ -99,16 +133,14 @@ const MyOrders = () => {
 
                                     {/* Tablet and Desktop Layout */}
                                     <div className="hidden lg:flex lg:items-center lg:gap-4">
-                                        {/* Left section - Image */}
                                         <div className="shrink">
                                             <img
-                                                src={order.items?.[0]?.image || order.orderItems?.[0]?.image || 'https://via.placeholder.com/80x80?text=No+Image'}
-                                                alt={order.items?.[0]?.name || order.orderItems?.[0]?.name || 'Product'}
+                                                src={order.image || 'https://via.placeholder.com/80x80?text=No+Image'}
+                                                alt={order.name || 'Product'}
                                                 className="w-20 h-20 object-cover rounded-lg"
                                             />
                                         </div>
 
-                                        {/* Middle section - Details */}
                                         <div className="flex-1 grid grid-cols-4 gap-4">
                                             <div>
                                                 <div className="text-xs uppercase text-[#CB2957] font-bold">Order ID</div>
@@ -118,45 +150,39 @@ const MyOrders = () => {
                                             <div>
                                                 <div className="text-xs uppercase text-[#CB2957] font-bold">Date</div>
                                                 <div className="text-white text-sm">
-                                                    {new Date(order.date || order.createdAt).toLocaleDateString()}
+                                                    {new Date(order.date).toLocaleDateString()}
                                                 </div>
                                                 <div className="text-gray-400 text-xs">
-                                                    {new Date(order.date || order.createdAt).toLocaleTimeString()}
+                                                    {new Date(order.date).toLocaleTimeString()}
                                                 </div>
                                             </div>
 
                                             <div>
                                                 <div className="text-xs uppercase text-[#CB2957] font-bold">Address</div>
                                                 <div className="text-white text-sm">
-                                                    {order.shippingInfo
-                                                        ? `${order.shippingInfo.city}`
-                                                        : order.shippingAddress
-                                                        ? `${order.shippingAddress.city}`
-                                                        : "N/A"
-                                                    }
+                                                    {order.shippingInfo?.city}
                                                 </div>
                                                 <div className="text-gray-400 text-xs">
-                                                    {order.shippingInfo?.city || order.shippingAddress?.country || ''}
+                                                    {order.shippingInfo?.city || ''}
                                                 </div>
                                             </div>
 
                                             <div>
                                                 <div className="text-xs uppercase text-[#CB2957] font-bold">Items</div>
-                                                <div className="text-white text-sm">{order.items?.length || order.orderItems?.length || 0} item(s)</div>
+                                                <div className="text-white text-sm">1 item(s)</div>
                                             </div>
                                         </div>
 
-                                        {/* Right section - Price and Status */}
                                         <div className="flex flex-col items-end gap-2 shrink">
                                             <div className="text-2xl font-bold text-white">
-                                                Rs. {(order.total || order.totalPrice).toLocaleString()}
+                                                {formatNPR(order.total)}
                                             </div>
                                             <span className={`px-3 py-1 rounded-full text-sm font-semibold ${
-                                                order.status === 'Confirmed' || order.isPaid
+                                                order.status === 'Confirmed'
                                                     ? 'bg-emerald-500/10 text-emerald-500 border border-emerald-500/20' 
                                                     : 'bg-yellow-500/10 text-yellow-300 border border-yellow-500/20'
                                             }`}>
-                                                {order.status || (order.isPaid ? 'Paid' : 'Pending')}
+                                                {order.status || 'Pending'}
                                             </span>
                                         </div>
                                     </div>
