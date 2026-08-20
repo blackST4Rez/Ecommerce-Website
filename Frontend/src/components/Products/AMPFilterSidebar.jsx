@@ -66,7 +66,7 @@ const AMPFilterSidebar = ({
                     </button>
                 )}
             </div>
-            {/* 5b. Filter Options (Scrollable) */}
+            {/* Filter Options (Scrollable) */}
             <div className="flex-1 overflow-y-auto">
 
                 {/* Category Filter */}

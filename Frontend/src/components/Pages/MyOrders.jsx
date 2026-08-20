@@ -8,7 +8,7 @@ const MyOrders = () => {
     const [isFetching, setIsFetching] = useState(true)
 
     useEffect(() => {
-        // Simplified order data - no nesting
+        // Simplified order data//
         const guitarOrders = [
             {
                 id: 201,

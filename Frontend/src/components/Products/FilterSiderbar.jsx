@@ -78,7 +78,7 @@ const FilterSidebar = ({
                     </button>
                 )}
             </div>
-            {/* 5b. Filter Options (Scrollable) */}
+            {/* Filter Options (Scrollable) */}
             <div className="flex-1 overflow-y-auto">
 
                 {/* Category Filter */}
@@ -164,7 +164,7 @@ const FilterSidebar = ({
                 </div>
             </div>
 
-            {/* 5c. Reset Button */}
+            {/* Reset Button */}
             <div className="mt-auto pt-4 border-t border-gray-800">
                 <button
                     onClick={handleReset}
