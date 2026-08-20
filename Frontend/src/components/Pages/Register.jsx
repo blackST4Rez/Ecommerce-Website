@@ -2,6 +2,22 @@ import { Link } from 'react-router'
 import RegisterImage from '../../assets/RegisterImage.jpg'
 
 const Register = () => {
+
+    const [getUsername, setGetUsername] = useState("")
+    const [getEmail, setGetEmail] = useState("")
+    const [getPassword, setGetPassword] = useState("")
+
+    const handleUsername = () => {
+        
+    }
+
+    const handleUserEmail = () => {
+        
+    }
+
+    const handleUserPassword = () => {
+        
+    }
     
     return (
         <div 

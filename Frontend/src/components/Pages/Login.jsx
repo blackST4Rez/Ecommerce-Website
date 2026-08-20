@@ -1,7 +1,19 @@
 import { Link } from 'react-router'
 import LoginImage from '../../assets/LoginImage.jpg'
+import { useState } from 'react'
 
 const Login = () => {
+
+    const [getEmail, setGetEmail] = useState("")
+    const [getPassword, setGetPassword] = useState("")
+
+    const handleUserEmail = () => {
+
+    }
+
+    const handleUserPassword = () => {
+        
+    }
     
     return (
         <div 
