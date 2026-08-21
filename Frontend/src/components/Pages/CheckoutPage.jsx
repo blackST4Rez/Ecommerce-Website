@@ -1,11 +1,13 @@
 import { useNavigate } from 'react-router';
 import { useCart } from '../Context/CartContext';
+import { useOrders } from '../Context/OrderContext';
 import { useState } from 'react';
 import { formatNPR } from '../Utils/CurrencyFormat';
 
 const CheckoutPage = () => {
     const navigate = useNavigate();
     const { cartItems, getTotalPrice, clearCart } = useCart();
+    const { addOrder } = useOrders();
     const [isProcessing, setIsProcessing] = useState(false);
     const [formData, setFormData] = useState({
         fullName: '',
@@ -41,20 +43,20 @@ const CheckoutPage = () => {
 
         setIsProcessing(true);
         
-        // Generate order number
-        const orderNumber = Math.floor(Math.random() * 9999) + 1000;
-
-        // Create order object (just for passing to success page)
-        const order = {
-            id: Date.now(),
-            orderNumber: orderNumber,
-            items: cartItems,
+        // Create order object with all items
+        const orderData = {
+            items: cartItems.map(item => ({
+                ...item,
+                image: item.image || item.images?.[0]?.url || ''
+            })),
             total: totalPrice,
-            date: new Date().toISOString(),
-            status: 'Confirmed',
-            shippingInfo: formData
+            shippingInfo: formData,
+            itemCount: cartItems.reduce((sum, item) => sum + item.quantity, 0)
         };
 
+        // Save the order using OrderContext
+        const savedOrder = addOrder(orderData);
+        
         // Clear the cart
         clearCart();
         
@@ -63,8 +65,8 @@ const CheckoutPage = () => {
             setIsProcessing(false);
             navigate('/order-success', { 
                 state: { 
-                    orderNumber: order.orderNumber,
-                    orderData: order // Pass full order if needed
+                    orderNumber: savedOrder.orderNumber,
+                    orderData: savedOrder
                 } 
             });
         }, 2000);
@@ -80,8 +82,8 @@ const CheckoutPage = () => {
                     <h2 className="text-xl font-semibold mb-4">Order Summary</h2>
                     <div className="max-h-80 overflow-y-auto space-y-3 hide-scrollbar">
                         {cartItems.map((item) => (
-                            <div key={item._id} className="flex gap-4 py-3">
-                                <div className="w-50 h-50 shrink rounded overflow-hidden">
+                            <div key={item._id} className="flex gap-1 md:gap-4 py-3">
+                                <div className="w-30 h-30 shrink-0 rounded overflow-hidden">
                                     <img 
                                         src={item.image} 
                                         alt={item.name}
@@ -92,12 +94,12 @@ const CheckoutPage = () => {
                                     />
                                 </div>
                                 <div className="flex-1 min-w-0">
-                                    <p className="text-1xl font-semibold text-white truncate">{item.name}</p>
-                                    <p className="text-md text-white">Quantity: {item.quantity}</p>
-                                    {item.brand && <p className="text-sm text-white font-light">{item.brand}</p>}
+                                    <p className="text-xs md:text-lg font-semibold text-white truncate">{item.name}</p>
+                                    <p className="text-xs md:text-lg text-white">Quantity: {item.quantity}</p>
+                                    {item.brand && <p className="text-xs text-white font-light">{item.brand}</p>}
                                 </div>
-                                <div className="shrink text-right">
-                                    <p className="font-semibold text-[#CB2957]">
+                                <div className="shrink-0 text-right">
+                                    <p className="text-xs md:text-lg font-semibold text-[#CB2957]">
                                         {formatNPR(item.price * item.quantity)}
                                     </p>
                                 </div>
@@ -124,7 +126,7 @@ const CheckoutPage = () => {
                                 value={formData.fullName}
                                 onChange={handleInputChange}
                                 placeholder="John Doe" 
-                                className="w-full bg-black text-white p-3 rounded border-[#191b1c] focus:border-[#CB2957] outline-none transition-colors"
+                                className="w-full bg-black text-white p-3 rounded border border-[#191b1c] focus:border-[#CB2957] outline-none transition-colors"
                                 required
                             />
                         </div>
@@ -173,7 +175,7 @@ const CheckoutPage = () => {
                                     value={formData.zipCode}
                                     onChange={handleInputChange}
                                     placeholder="44600" 
-                                    className="w-full bg-black text-white p-3 rounded border-[#191b1c] focus:border-[#CB2957] outline-none transition-colors"
+                                    className="w-full bg-black text-white p-3 rounded border border-[#191b1c] focus:border-[#CB2957] outline-none transition-colors"
                                     required
                                 />
                             </div>

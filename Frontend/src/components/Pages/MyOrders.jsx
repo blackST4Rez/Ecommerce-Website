@@ -1,57 +1,13 @@
 import { BiShoppingBag } from "react-icons/bi"
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import { FadeLoader } from 'react-spinners'
 import { formatNPR } from '../Utils/CurrencyFormat'
+import { useOrders } from '../Context/OrderContext'
 
 const MyOrders = () => {
-    const [orders, setOrders] = useState([])
-    const [isFetching, setIsFetching] = useState(true)
-
-    useEffect(() => {
-        // Simplified order data//
-        const guitarOrders = [
-            {
-                id: 201,
-                orderNumber: 3456,
-                name: "SG Gibson",
-                price: 148974,
-                brand: "Gibson",
-                material: "Mahogony",
-                image: 'https://i.pinimg.com/1200x/5a/65/08/5a650813268066d7800ffe780a4af569.jpg?random=3',
-                total: 148974,
-                date: new Date().toISOString(),
-                status: 'Confirmed',
-                shippingInfo: {
-                    fullName: "John Doe",
-                    address: "123 Main Street",
-                    city: "Kathmandu",
-                    zipCode: "44600"
-                }
-            },
-            {
-                id: 202,
-                orderNumber: 7890,
-                name: "Fender 2001",
-                price: 151296,
-                brand: "Fender",
-                material: "Mahogony",
-                image: 'https://i.pinimg.com/1200x/e4/99/9d/e4999ddf471b0c890af9310487b35a40.jpg?random=4',
-                total: 151296,
-                date: new Date(Date.now() - 86400000).toISOString(),
-                status: 'Pending',
-                shippingInfo: {
-                    fullName: "Jane Smith",
-                    address: "456 Park Avenue",
-                    city: "Pokhara",
-                    zipCode: "33700"
-                }
-            }
-        ]
-
-        setOrders(guitarOrders.reverse())
-        setIsFetching(false)
-    }, [])
-
+    const { orders } = useOrders();
+    const [isFetching] = useState(false);
+    
     if (isFetching) {
         return (
             <div className="max-w-7xl mx-auto p-3 sm:p-4 md:p-6">
@@ -75,17 +31,17 @@ const MyOrders = () => {
                     {orders.length > 0 ? (
                         <div className="space-y-3 sm:space-y-4">
                             {orders.map((order) => (
-                                <div
-                                    key={order.id}
-                                    className="bg-[#0c0d0e] rounded-lg p-3 sm:p-4 md:p-6 cursor-pointer transition-colors"
-                                >
-                                    {/* Mobile Layout */}
-                                    <div className="block lg:hidden">
+                                // Map through each item to create separate boxes
+                                order.items.map((item, index) => (
+                                    <div
+                                        key={`${order.id}-${index}`}
+                                        className="bg-[#0c0d0e] rounded-lg p-3 sm:p-4 md:p-6 transition-colors hover:bg-[#1a1c1d]"
+                                    >
                                         <div className="flex items-start gap-3">
                                             <img
-                                                src={order.image || 'https://via.placeholder.com/80x80?text=No+Image'}
-                                                alt={order.name || 'Product'}
-                                                className="w-16 h-16 sm:w-20 sm:h-20 object-cover rounded-lg shrink"
+                                                src={item.image || 'https://via.placeholder.com/80x80?text=No+Image'}
+                                                alt={item.name || 'Product'}
+                                                className="w-16 h-16 sm:w-20 sm:h-20 object-cover rounded-lg shrink-0"
                                             />
                                             <div className="flex-1 min-w-0">
                                                 <div className="flex justify-between items-start">
@@ -109,8 +65,10 @@ const MyOrders = () => {
                                                         </div>
                                                     </div>
                                                     <div>
-                                                        <div className="text-[10px] sm:text-xs uppercase text-[#CB2957] font-bold">Items</div>
-                                                        <div className="text-white text-xs sm:text-sm">1</div>
+                                                        <div className="text-right text-[10px] sm:text-xs uppercase text-[#CB2957] font-bold">Items</div>
+                                                        <div className="text-white text-xs sm:text-sm">
+                                                            {item.name} (x{item.quantity})
+                                                        </div>
                                                     </div>
                                                     <div className="col-span-2">
                                                         <div className="text-[10px] sm:text-xs uppercase text-[#CB2957] font-bold">Address</div>
@@ -123,70 +81,14 @@ const MyOrders = () => {
                                                     <div className="flex justify-between items-center">
                                                         <span className="text-[10px] sm:text-xs uppercase text-[#CB2957] font-bold">Total</span>
                                                         <span className="text-lg sm:text-xl font-bold text-white">
-                                                            {formatNPR(order.total)}
+                                                            {formatNPR(item.price * item.quantity)}
                                                         </span>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-
-                                    {/* Tablet and Desktop Layout */}
-                                    <div className="hidden lg:flex lg:items-center lg:gap-4">
-                                        <div className="shrink">
-                                            <img
-                                                src={order.image || 'https://via.placeholder.com/80x80?text=No+Image'}
-                                                alt={order.name || 'Product'}
-                                                className="w-20 h-20 object-cover rounded-lg"
-                                            />
-                                        </div>
-
-                                        <div className="flex-1 grid grid-cols-4 gap-4">
-                                            <div>
-                                                <div className="text-xs uppercase text-[#CB2957] font-bold">Order ID</div>
-                                                <div className="text-white text-sm font-medium">#{order.orderNumber}</div>
-                                            </div>
-                                            
-                                            <div>
-                                                <div className="text-xs uppercase text-[#CB2957] font-bold">Date</div>
-                                                <div className="text-white text-sm">
-                                                    {new Date(order.date).toLocaleDateString()}
-                                                </div>
-                                                <div className="text-gray-400 text-xs">
-                                                    {new Date(order.date).toLocaleTimeString()}
-                                                </div>
-                                            </div>
-
-                                            <div>
-                                                <div className="text-xs uppercase text-[#CB2957] font-bold">Address</div>
-                                                <div className="text-white text-sm">
-                                                    {order.shippingInfo?.city}
-                                                </div>
-                                                <div className="text-gray-400 text-xs">
-                                                    {order.shippingInfo?.city || ''}
-                                                </div>
-                                            </div>
-
-                                            <div>
-                                                <div className="text-xs uppercase text-[#CB2957] font-bold">Items</div>
-                                                <div className="text-white text-sm">1 item(s)</div>
-                                            </div>
-                                        </div>
-
-                                        <div className="flex flex-col items-end gap-2 shrink">
-                                            <div className="text-2xl font-bold text-white">
-                                                {formatNPR(order.total)}
-                                            </div>
-                                            <span className={`px-3 py-1 rounded-full text-sm font-semibold ${
-                                                order.status === 'Confirmed'
-                                                    ? 'bg-emerald-500/10 text-emerald-500 border border-emerald-500/20' 
-                                                    : 'bg-yellow-500/10 text-yellow-300 border border-yellow-500/20'
-                                            }`}>
-                                                {order.status || 'Pending'}
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
+                                ))
                             ))}
                         </div>
                     ) : (
