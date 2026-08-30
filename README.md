@@ -49,7 +49,7 @@ A full-featured ecommerce web application for purchasing guitars and amplifiers.
 - Total price calculation
 - Cart counter in header
 
-### User Authentication (In-Progress)
+### User Authentication
 - Login and registration pages
 - User session management with localStorage
 - Protected routes (checkout requires login)
@@ -102,7 +102,7 @@ A full-featured ecommerce web application for purchasing guitars and amplifiers.
   - Cart items
 
 ### Libraries & Tools
-- **Sonner** - Toast notifications
+- **React Hot Toast** - Toast notifications
 - **React Spinners** - Loading animations (FadeLoader, SyncLoader)
 - **Vite** - Build tool and development server
 
