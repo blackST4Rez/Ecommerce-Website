@@ -1,4 +1,4 @@
-// CartDrawer.jsx
+
 import { BiPlus } from "react-icons/bi";
 import CartContent from "../Cart/CartContent";
 import { useCart } from '../Context/CartContext';
