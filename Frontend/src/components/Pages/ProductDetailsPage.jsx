@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router';
 import { FadeLoader } from 'react-spinners';
-import { toast } from 'sonner';
+import toast from 'react-hot-toast';
 import { BiArrowBack } from 'react-icons/bi';
 import { getProductById } from '../Data/Product.jsx';
 import { useCart } from '../Context/CartContext';
@@ -26,7 +26,8 @@ const ProductDetailsPage = () => {
                 setProduct(foundProduct);
                 setCurrImage(foundProduct.images[0]);
             } else {
-                toast.error('Product not found!');
+                toast.error('Product not found!', {
+                });
                 navigate('/');
             }
 

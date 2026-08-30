@@ -112,7 +112,7 @@ const Footer = () => {
 
             <div className="container mx-auto mt-12 px-4 lg-px-0 border-t border-gray-700 pt-6 ">
                 <p className='text-[#CB2957] text-sm tracking-tight text-center' >
-                    &copy 2026, blackST4Rez. All Rights Reserved.
+                    © 2026, blackST4Rez. All Rights Reserved.
                 </p>
             </div>
 

@@ -1,17 +1,27 @@
 import { useState } from 'react';
 import { useCart } from '../Context/CartContext';
-import { toast } from 'sonner';
+import { useAuth } from '../Context/AuthContext';
+import { toast } from 'react-hot-toast';
 
 const AddToCartButton = ({ product, quantity = 1, className = '' }) => {
     const { addToCart } = useCart();
+    const { isAuthenticated } = useAuth();
     const [isAdding, setIsAdding] = useState(false);
 
     const handleAddToCart = (e) => {
         e.stopPropagation();
         e.preventDefault();
 
+        // Check if user is logged in
+        if (!isAuthenticated) {
+            toast.error('Please login to add items to cart.', {
+            });
+            return;
+        }
+
         if (isAdding || !product || !product._id) {
-            toast.error('Cannot add this item');
+            toast.error('Cannot add this item', {
+            });
             return;
         }
 
@@ -19,10 +29,13 @@ const AddToCartButton = ({ product, quantity = 1, className = '' }) => {
 
         try {
             addToCart(product, quantity);
-            toast.success(`${product.name} added to cart!`);
+            toast.success(`${product.name} added to cart!`, {
+            });
+
         } catch (error) {
             console.log(error);
-            toast.error('Failed to add item');
+            toast.error('Failed to add item', {
+            });
         }
 
         setTimeout(() => {

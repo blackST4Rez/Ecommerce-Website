@@ -49,8 +49,8 @@ const SearchBar = () => {
 
                     </div>
                 </form>) : (
-                <button onClick={handleSearchToggle} className="hover:bg-black h-6 w-6 rounded-full hover:text-[#CB2957] transition-all ease-in-out duration-300" >
-                    <BiSearch className="h-6 w-6" />
+                <button onClick={handleSearchToggle} className="h-6 w-6 rounded-full hover:text-[#CB2957] transition-all ease-in-out duration-300" >
+                    <BiSearch className="h-5 w-5" />
                 </button>
             )}
         </div>
