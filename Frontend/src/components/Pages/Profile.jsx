@@ -19,7 +19,7 @@ const Profile = () => {
                     {/* Left Section */}
                     <div className="w-full md:w-1/3 lg:w-1/4 p-6">
                         <h1 className="text-2xl md:text-2xl font-bold mb-2 text-white">
-                            {user?.firstName || 'User'}
+                            {user?.firstName} {user?.lastName}
                         </h1>
                         <p className="text-lg text-[#CB2957] mb-2">
                             {user?.email}

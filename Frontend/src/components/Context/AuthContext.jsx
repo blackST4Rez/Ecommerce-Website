@@ -1,4 +1,3 @@
-
 import { createContext, useContext, useState, useEffect } from 'react';
 import toast from 'react-hot-toast';
 
@@ -44,14 +43,22 @@ export function AuthProvider({ children }) {
         try {
             await new Promise(resolve => setTimeout(resolve, 1000));
 
-            // Mock user data
+            // Check if user exists in mock database
+            const existingUsers = JSON.parse(localStorage.getItem('users') || '[]');
+            const foundUser = existingUsers.find(user => user.email === email);
+            
+            if (!foundUser) {
+                throw new Error('User not found. Please register first.');
+            }
+
+            // Mock user data 
             const mockUser = {
-                id: 'user_123',
-                firstName: 'Raka',
-                lastName: 'Maharjan',
+                id: foundUser.id,
+                firstName: foundUser.firstName || 'User',
+                lastName: foundUser.lastName || '',
                 email: email,
                 avatar: null,
-                createdAt: new Date().toISOString()
+                createdAt: foundUser.createdAt || new Date().toISOString()
             };
 
             const mockToken = 'mock_jwt_token_xyz_123';
@@ -63,33 +70,36 @@ export function AuthProvider({ children }) {
             setUser(mockUser);
             setIsAuthenticated(true);
             
+            // Welcome message with first name only
             toast.success(`Welcome back, ${mockUser.firstName}!`, {
+                duration: 3000
             });
             
             return { success: true, user: mockUser };
         } catch (error) {
-
             toast.error(error.message || 'Login failed. Please try again.', {
+                duration: 3000
             });
             return { success: false, error: error.message };
         }
     };
 
-    // Register function
-    const register = async (name, email, password) => {
+    //  Register Function 
+    const register = async (firstName, lastName, email, password) => {
         try {
             await new Promise(resolve => setTimeout(resolve, 1000));
 
-            // Check if user already exists (mock check)
+            // Check if user already exists
             const existingUsers = JSON.parse(localStorage.getItem('users') || '[]');
             if (existingUsers.find(user => user.email === email)) {
                 throw new Error('User with this email already exists');
             }
 
-            // Save user to mock database
+            // Save user with firstName and lastName
             const newUser = {
                 id: `user_${Date.now()}`,
-                name: name,
+                firstName: firstName.trim(),
+                lastName: lastName.trim(),
                 email: email,
                 createdAt: new Date().toISOString()
             };
@@ -97,21 +107,14 @@ export function AuthProvider({ children }) {
             existingUsers.push(newUser);
             localStorage.setItem('users', JSON.stringify(existingUsers));
 
-            // Auto-login after registration
-            const mockToken = `mock_jwt_token_${Date.now()}`;
-            localStorage.setItem('token', mockToken);
-            localStorage.setItem('user', JSON.stringify(newUser));
-
-            setUser(newUser);
-            setIsAuthenticated(true);
-
-            toast.success(`Welcome, ${newUser.name}!`, {
+            toast.success('Registration successful! Please login.', {
+                duration: 3000
             });
             
             return { success: true, user: newUser };
         } catch (error) {
-
             toast.error(error.message || 'Registration failed. Please try again.', {
+                duration: 3000
             });
             return { success: false, error: error.message };
         }
@@ -124,26 +127,26 @@ export function AuthProvider({ children }) {
         setUser(null);
         setIsAuthenticated(false);
         
-
         toast.success('Logged out successfully', {
+            duration: 3000
         });
     };
 
     // Update user profile
     const updateUser = async (updatedData) => {
         try {
-            // Update local user just a mock
             const updatedUser = { ...user, ...updatedData };
             localStorage.setItem('user', JSON.stringify(updatedUser));
             setUser(updatedUser);
             
             toast.success('Profile updated successfully!', {
+                duration: 3000
             });
             
             return { success: true, user: updatedUser };
         } catch (error) {
-
             toast.error('Failed to update profile', {
+                duration: 3000
             });
             return { success: false, error: error.message };
         }

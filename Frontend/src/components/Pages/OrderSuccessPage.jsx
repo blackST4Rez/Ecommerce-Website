@@ -9,9 +9,9 @@ const OrderSuccessPage = () => {
     const { clearCart } = useCart();
     const [orderNumber, setOrderNumber] = useState('');
     const [orderData, setOrderData] = useState(null);
+    const [isCleared, setIsCleared] = useState(false);
 
     useEffect(() => {
-        
         // Get order data from navigation state
         const num = location.state?.orderNumber || Math.floor(Math.random() * 4000) + 1000;
         const data = location.state?.orderData || null;
@@ -19,9 +19,11 @@ const OrderSuccessPage = () => {
         setOrderNumber(num);
         setOrderData(data);
         
-        // Clear the cart when order is successful
-        clearCart();
-    }, [location.state, clearCart]); // Added dependencies
+        if (!isCleared) {
+            clearCart();
+            setIsCleared(true);
+        }
+    }, [location.state, clearCart, isCleared]);
 
     const handleContinueShopping = () => {
         navigate('/');

@@ -1,14 +1,21 @@
 import { createContext, useContext, useState, useEffect } from 'react';
+import { useAuth } from './AuthContext';
 
 const OrderContext = createContext();
 
 export function OrderProvider({ children }) {
     const [orders, setOrders] = useState([]);
+    const { user } = useAuth(); 
 
-    // Load orders from localStorage on mount
+    // Load orders for the specific user
     useEffect(() => {
+        if (!user) {
+            setOrders([]);
+            return;
+        }
+
         try {
-            const savedOrders = localStorage.getItem('orders');
+            const savedOrders = localStorage.getItem(`orders_${user.id}`);
             if (savedOrders) {
                 const parsed = JSON.parse(savedOrders);
                 if (Array.isArray(parsed)) {
@@ -18,25 +25,34 @@ export function OrderProvider({ children }) {
         } catch (error) {
             console.error('Error loading orders:', error);
         }
-    }, []);
+    }, [user]);
 
-    // Save orders to localStorage whenever they change
+    // Save orders for the specific user
     useEffect(() => {
+        if (!user) return;
+        
         try {
-            localStorage.setItem('orders', JSON.stringify(orders));
+            localStorage.setItem(`orders_${user.id}`, JSON.stringify(orders));
         } catch (error) {
             console.error('Error saving orders:', error);
         }
-    }, [orders]);
+    }, [orders, user]);
 
     // Add a new order
     const addOrder = (orderData) => {
+        if (!user) {
+            console.error('No user logged in');
+            return null;
+        }
+
         const newOrder = {
             ...orderData,
             id: Date.now(),
             orderNumber: Math.floor(Math.random() * 9000) + 1000,
             date: new Date().toISOString(),
-            status: 'Confirmed'
+            status: 'Confirmed',
+            userId: user.id,
+            userEmail: user.email // 
         };
 
         setOrders(prevOrders => [newOrder, ...prevOrders]); // Newest first
@@ -53,7 +69,7 @@ export function OrderProvider({ children }) {
         return orders.find(order => order.id === orderId);
     };
 
-    // Clear all orders
+    // Clear all orders for the current user
     const clearOrders = () => {
         setOrders([]);
     };

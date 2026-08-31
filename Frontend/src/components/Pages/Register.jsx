@@ -1,11 +1,11 @@
-
 import { Link, useNavigate } from 'react-router';
 import RegisterImage from '../../assets/RegisterImage.jpg';
 import { useState, useEffect } from 'react';
 import { useAuth } from '../Context/AuthContext';
 
 const Register = () => {
-    const [name, setName] = useState('');
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState(''); 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
@@ -18,7 +18,7 @@ const Register = () => {
     // Redirect if already logged in
     useEffect(() => {
         if (isAuthenticated) {
-            navigate('/', { replace: true });
+            navigate('/login', { replace: true });
         }
     }, [isAuthenticated, navigate]);
 
@@ -39,11 +39,12 @@ const Register = () => {
         }
 
         setIsLoading(true);
-        const result = await register(name, email, password);
+
+        const result = await register(firstName, lastName, email, password);
         setIsLoading(false);
 
         if (result.success) {
-            navigate('/');
+            navigate('/login', { replace: true });
         } else {
             setError(result.error || 'Registration failed. Please try again.');
         }
@@ -82,16 +83,33 @@ const Register = () => {
                         </div>
                     )}
 
+                    {/* First Name Field */}
                     <div className="mb-4">
                         <label className="block text-xl font-semibold mb-2 text-white">
-                            Full Name
+                            First Name
                         </label>
                         <input
                             type="text"
-                            value={name}
-                            onChange={(e) => setName(e.target.value)}
+                            value={firstName}
+                            onChange={(e) => setFirstName(e.target.value)}
                             className="w-full p-2 border border-white focus:outline-none focus:ring-2 focus:ring-[#CB2957] text-white text-xl bg-transparent"
-                            placeholder="John Doe"
+                            placeholder="John"
+                            required
+                            disabled={isLoading}
+                        />
+                    </div>
+
+                    {/* Last Name Field */}
+                    <div className="mb-4">
+                        <label className="block text-xl font-semibold mb-2 text-white">
+                            Last Name
+                        </label>
+                        <input
+                            type="text"
+                            value={lastName}
+                            onChange={(e) => setLastName(e.target.value)}
+                            className="w-full p-2 border border-white focus:outline-none focus:ring-2 focus:ring-[#CB2957] text-white text-xl bg-transparent"
+                            placeholder="Doe"
                             required
                             disabled={isLoading}
                         />
