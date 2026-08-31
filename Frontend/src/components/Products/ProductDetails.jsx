@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useCart } from '../Context/CartContext';
 import AddToCartButton from '../Common/AddToCartButton.jsx';
 import { formatNPR } from '../Utils/CurrencyFormat.jsx';
+import { toast } from 'react-hot-toast';
 
 const selectedProduct = {
     name: "1984 Fender Stratocaster 57V",
@@ -178,7 +179,8 @@ const ProductDetails = () => {
                     ) : (
                         <AddToCartButton 
                             product={selectedProduct} 
-                            quantity={cartValue} 
+                                quantity={cartValue} 
+                                onClick={handleCart}
                         />
                     )}
                 </div>
