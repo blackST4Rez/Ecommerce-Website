@@ -16,10 +16,10 @@ const CheckoutPage = () => {
         city: '',
         zipCode: '',
     });
-    
+
     const totalPrice = getTotalPrice();
-    
-    // Redirect if cart is empty
+
+    {/* Redirect if cart is empty */ }
     if (cartItems.length === 0) {
         navigate(-1);
         return null;
@@ -34,16 +34,16 @@ const CheckoutPage = () => {
 
     const handlePlaceOrder = (e) => {
         e.preventDefault();
-        
-        // Validate form
+
+        {/* Validate form */ }
         if (!formData.fullName || !formData.email || !formData.address || !formData.city || !formData.zipCode) {
             alert('Please fill in all fields');
             return;
         }
 
         setIsProcessing(true);
-        
-        // Create order object with all items
+
+        {/* Create order object with all items */ }
         const orderData = {
             items: cartItems.map(item => ({
                 ...item,
@@ -54,20 +54,20 @@ const CheckoutPage = () => {
             itemCount: cartItems.reduce((sum, item) => sum + item.quantity, 0)
         };
 
-        // Save the order using OrderContext
+        {/* Save the order using OrderContext */ }
         const savedOrder = addOrder(orderData);
-        
-        // Clear the cart
+
+        {/* Clear the cart */ }
         clearCart();
-        
-        // Navigate to success page with order data
+
+        {/* Navigate to success page with order data */ }
         setTimeout(() => {
             setIsProcessing(false);
-            navigate('/order-success', { 
-                state: { 
+            navigate('/order-success', {
+                state: {
                     orderNumber: savedOrder.orderNumber,
                     orderData: savedOrder
-                } 
+                }
             });
         }, 2000);
     };
@@ -75,7 +75,7 @@ const CheckoutPage = () => {
     return (
         <div className="container mx-auto px-4 py-8 text-white">
             <h1 className="text-3xl font-bold text-[#CB2957] mb-8 pl-6">Checkout</h1>
-            
+
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                 {/* Order Summary */}
                 <div className="bg-[#1a1c1d] p-6 rounded-lg">
@@ -84,8 +84,8 @@ const CheckoutPage = () => {
                         {cartItems.map((item) => (
                             <div key={item._id} className="flex gap-1 md:gap-4 py-3">
                                 <div className="w-30 h-30 shrink-0 rounded overflow-hidden">
-                                    <img 
-                                        src={item.image} 
+                                    <img
+                                        src={item.image}
                                         alt={item.name}
                                         className="w-full h-full object-contain p-1"
                                         onError={(e) => {
@@ -113,43 +113,43 @@ const CheckoutPage = () => {
                         </div>
                     </div>
                 </div>
-                
+
                 {/* Shipping Form */}
                 <div className="bg-[#1a1c1d] p-6 rounded-lg">
                     <h2 className="text-xl font-semibold mb-4">Shipping Information</h2>
                     <form onSubmit={handlePlaceOrder} className="space-y-4">
                         <div>
                             <label className="block text-sm text-white mb-1">Full Name</label>
-                            <input 
-                                type="text" 
+                            <input
+                                type="text"
                                 name="fullName"
                                 value={formData.fullName}
                                 onChange={handleInputChange}
-                                placeholder="John Doe" 
+                                placeholder="John Doe"
                                 className="w-full bg-black text-white p-3 rounded border border-[#191b1c] focus:border-[#CB2957] outline-none transition-colors"
                                 required
                             />
                         </div>
                         <div>
                             <label className="block text-sm text-white mb-1">Email Address</label>
-                            <input 
-                                type="email" 
+                            <input
+                                type="email"
                                 name="email"
                                 value={formData.email}
                                 onChange={handleInputChange}
-                                placeholder="john@example.com" 
+                                placeholder="john@example.com"
                                 className="w-full bg-black text-white p-3 rounded border border-[#191b1c] focus:border-[#CB2957] outline-none transition-colors"
                                 required
                             />
                         </div>
                         <div>
                             <label className="block text-sm text-white mb-1">Address</label>
-                            <input 
-                                type="text" 
+                            <input
+                                type="text"
                                 name="address"
                                 value={formData.address}
                                 onChange={handleInputChange}
-                                placeholder="123 Main Street" 
+                                placeholder="123 Main Street"
                                 className="w-full bg-black text-white p-3 rounded border border-[#191b1c] focus:border-[#CB2957] outline-none transition-colors"
                                 required
                             />
@@ -157,30 +157,30 @@ const CheckoutPage = () => {
                         <div className="grid grid-cols-2 gap-4">
                             <div>
                                 <label className="block text-sm text-white mb-1">City</label>
-                                <input 
-                                    type="text" 
+                                <input
+                                    type="text"
                                     name="city"
                                     value={formData.city}
                                     onChange={handleInputChange}
-                                    placeholder="Kathmandu" 
+                                    placeholder="Kathmandu"
                                     className="w-full bg-black text-white p-3 rounded border border-[#191b1c] focus:border-[#CB2957] outline-none transition-colors"
                                     required
                                 />
                             </div>
                             <div>
                                 <label className="block text-sm text-white mb-1">ZIP Code</label>
-                                <input 
-                                    type="text" 
+                                <input
+                                    type="text"
                                     name="zipCode"
                                     value={formData.zipCode}
                                     onChange={handleInputChange}
-                                    placeholder="44600" 
+                                    placeholder="44600"
                                     className="w-full bg-black text-white p-3 rounded border border-[#191b1c] focus:border-[#CB2957] outline-none transition-colors"
                                     required
                                 />
                             </div>
                         </div>
-                        <button 
+                        <button
                             type="submit"
                             disabled={isProcessing}
                             className="w-full bg-[#CB2957] text-black font-semibold py-3 rounded-lg hover:bg-[#a02044] transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"

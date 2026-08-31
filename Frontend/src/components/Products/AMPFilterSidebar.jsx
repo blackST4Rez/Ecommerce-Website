@@ -5,20 +5,20 @@ const AMPFilterSidebar = ({
     onClose
 }) => {
 
-    /* Set useParams hook  */
+    {/* Set useParams hook  */ }
     const [searchParams, setSearchParams] = useSearchParams()
 
-    /* Set all the filters in an arr inside a variable */
-    const categories = ["Marshall", "Vox", "Fender","Line 6"]
+    {/* Set all the filters in an arr inside a variable */ }
+    const categories = ["Marshall", "Vox", "Fender", "Line 6"]
     const materials = ["Solid Woods", "Wood Composites", "Plywood", "Polymers"]
     const types = ["Voltage Amplifiers", "Current Amplifiers", "Power Amplifiers", "Operational Amplifiers"]
 
-    /* Read the current filters from URL */
+    {/* Read the current filters from URL */ }
     const currentCategory = searchParams.get('category') || ''
     const currentMaterials = searchParams.get('material')?.split(',') || []
     const currentTypes = searchParams.get('type')?.split(',') || []
 
-    /* Category Selection Handler*/
+    {/* Category Selection Handler*/ }
     const handleCategoryChange = (category) => {
         if (category === currentCategory) {
             searchParams.delete('category')
@@ -28,7 +28,7 @@ const AMPFilterSidebar = ({
         setSearchParams(searchParams)
     }
 
-    /* Multi Value Selection Handler */
+    {/* Multi Value Selection Handler */ }
     const handleMultiFilterChange = (key, value) => {
         const current = searchParams.get(key)?.split(',') || []
         let newValues
@@ -47,7 +47,7 @@ const AMPFilterSidebar = ({
         setSearchParams(searchParams)
     }
 
-    /* Reset Filter */
+    {/* Reset Filter */ }
     const handleReset = () => {
         setSearchParams({})
     }
@@ -136,7 +136,7 @@ const AMPFilterSidebar = ({
                     onClick={handleReset}
                     className="w-full py-2 font-bold bg-[#CB2957] text-black rounded hover:bg-black hover:text-[#CB2957] transition-all ease-in-out duration-300"
                 >
-                Reset Filters
+                    Reset Filters
                 </button>
             </div>
         </div>

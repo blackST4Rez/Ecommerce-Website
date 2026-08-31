@@ -9,15 +9,15 @@ const Login = () => {
     const [password, setPassword] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState('');
-    
+
     const { login, isAuthenticated } = useAuth();
     const navigate = useNavigate();
     const location = useLocation();
 
-    // Get the page user was trying to visit
+    {/* Get the page user was trying to visit */ }
     const from = location.state?.from || '/';
 
-    // Redirect if already logged in
+    {/* Redirect if already logged in */ }
     useEffect(() => {
         if (isAuthenticated) {
             navigate(from, { replace: true });
@@ -33,7 +33,7 @@ const Login = () => {
         setIsLoading(false);
 
         if (result.success) {
-            // Redirect to the page they were trying to visit
+            {/* Redirect to the page they were trying to visit */ }
             navigate(from, { replace: true });
         } else {
             setError(result.error || 'Invalid email or password');
@@ -41,7 +41,7 @@ const Login = () => {
     };
 
     return (
-        <div 
+        <div
             className="relative min-h-screen flex items-center justify-end"
             style={{
                 backgroundImage: `url(${LoginImage})`,
@@ -58,11 +58,11 @@ const Login = () => {
                             roove
                         </h2>
                     </div>
-                    
+
                     <h2 className="text-2xl font-bold text-center mb-6 text-white">
                         Hey There!
                     </h2>
-                    
+
                     <p className="text-center mb-6 text-white">
                         Enter your email and password to Login
                     </p>

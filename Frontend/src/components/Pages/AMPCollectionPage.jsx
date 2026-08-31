@@ -31,7 +31,7 @@ const AMPCollectionPage = () => {
         }
     }, [])
 
-    // Fetch AMP products
+    {/* Fetch AMP products */ }
     useEffect(() => {
         setTimeout(() => {
             const fetchedProducts = [
@@ -108,7 +108,7 @@ const AMPCollectionPage = () => {
         }, 2000)
     }, [])
 
-    // Apply filters whenever products or searchParams change
+    {/* Apply filters whenever products or searchParams change */ }
     useEffect(() => {
         if (products.length === 0) return
 
@@ -218,12 +218,12 @@ const AMPCollectionPage = () => {
                         <span>products found</span>
                     </div>
                 </div>
-                
+
                 {/* Sort Options */}
                 <div className="mb-6 text-white">
                     <SortOptions />
                 </div>
-                
+
                 {/* Product Grid */}
                 <div className="mt-4">
                     <ProductGrid products={filteredProducts.length > 0 ? filteredProducts : products} />

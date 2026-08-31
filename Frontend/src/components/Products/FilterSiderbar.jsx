@@ -5,22 +5,22 @@ const FilterSidebar = ({
     onClose
 }) => {
 
-    /* Set useParams hook  */
+    {/* Set useParams hook  */ }
     const [searchParams, setSearchParams] = useSearchParams()
 
-    /* Set all the filters in an arr inside a variable */
+    {/* Set all the filters in an arr inside a variable */ }
     const categories = ["Stratocastor", "Telecastor", "Les Paul"]
     const colors = ["Yellow", "Green", "Red", "White", "Blue", "Orange", "Beige"]
     const materials = ["Mahogany", "Maple", "Alder Woods"]
     const brands = ["Fender", "Squier", "Les Paul", "Gibson"]
 
-    /* Read the current filters from URL */
+    {/* Read the current filters from URL */ }
     const currentCategory = searchParams.get('category') || ''
     const currentColor = searchParams.get('color') || ''
     const currentMaterials = searchParams.get('material')?.split(',') || []
     const currentBrands = searchParams.get('brand')?.split(',') || []
 
-    /* Category Selection Handler*/
+    {/* Category Selection Handler*/ }
     const handleCategoryChange = (category) => {
         if (category === currentCategory) {
             searchParams.delete('category')
@@ -30,7 +30,7 @@ const FilterSidebar = ({
         setSearchParams(searchParams)
     }
 
-    /* Color Selection Handler */
+    {/* Color Selection Handler */ }
     const handleColorSelect = (color) => {
         if (color === currentColor) {
             searchParams.delete('color')
@@ -40,7 +40,7 @@ const FilterSidebar = ({
         setSearchParams(searchParams)
     }
 
-    /* Multi Value Selection Handler */
+    {/* Multi Value Selection Handler */ }
     const handleMultiFilterChange = (key, value) => {
         const current = searchParams.get(key)?.split(',') || []
         let newValues
@@ -59,7 +59,7 @@ const FilterSidebar = ({
         setSearchParams(searchParams)
     }
 
-    /* Reset Filter */
+    {/* Reset Filter */ }
     const handleReset = () => {
         setSearchParams({})
     }
@@ -112,8 +112,8 @@ const FilterSidebar = ({
                                 key={color}
                                 onClick={() => handleColorSelect(color)}
                                 className={`w-6 h-6 rounded-full border-2 cursor-pointer ${currentColor === color
-                                        ? 'border-black ring-2 ring-[#ffffff]'
-                                        : 'border-none'
+                                    ? 'border-black ring-2 ring-[#ffffff]'
+                                    : 'border-none'
                                     }`}
                                 style={{ backgroundColor: color.toLowerCase() }}
                                 aria-label={`Select ${color} color`}
@@ -170,7 +170,7 @@ const FilterSidebar = ({
                     onClick={handleReset}
                     className="w-full py-2 font-bold bg-[#CB2957] text-black rounded hover:bg-black hover:text-[#CB2957] transition-all ease-in-out duration-300"
                 >
-                Reset Filters
+                    Reset Filters
                 </button>
             </div>
         </div>

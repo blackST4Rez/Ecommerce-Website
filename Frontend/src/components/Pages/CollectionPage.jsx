@@ -122,7 +122,7 @@ const CollectionPage = () => {
         }, 2000)
     }, [])
 
-    // Apply filters whenever products or searchParams change
+    {/* Apply filters whenever products or searchParams change */ }
     useEffect(() => {
         if (products.length === 0) return
 
@@ -135,46 +135,46 @@ const CollectionPage = () => {
         let filtered = [...products]
 
         if (category) {
-            filtered = filtered.filter(product => 
+            filtered = filtered.filter(product =>
                 product.category === category
             )
         }
 
         if (color) {
-            filtered = filtered.filter(product => 
+            filtered = filtered.filter(product =>
                 product.color === color
             )
         }
 
         if (material.length > 0) {
-            filtered = filtered.filter(product => 
+            filtered = filtered.filter(product =>
                 material.includes(product.material)
             )
         }
 
         if (brand.length > 0) {
-            filtered = filtered.filter(product => 
+            filtered = filtered.filter(product =>
                 brand.includes(product.brand)
             )
         }
 
         switch (sort) {
-        case 'price-asc':
-            filtered.sort((a, b) => a.price - b.price)
-            break
-        case 'price-desc':
-            filtered.sort((a, b) => b.price - a.price)
-            break
-        case 'name-asc':
-            filtered.sort((a, b) => a.name.localeCompare(b.name))
-            break
-        case 'name-desc':
-            filtered.sort((a, b) => b.name.localeCompare(a.name))
-            break
-        default:
-            filtered.sort((a, b) => a._id - b._id)
-            break
-    }
+            case 'price-asc':
+                filtered.sort((a, b) => a.price - b.price)
+                break
+            case 'price-desc':
+                filtered.sort((a, b) => b.price - a.price)
+                break
+            case 'name-asc':
+                filtered.sort((a, b) => a.name.localeCompare(b.name))
+                break
+            case 'name-desc':
+                filtered.sort((a, b) => b.name.localeCompare(a.name))
+                break
+            default:
+                filtered.sort((a, b) => a._id - b._id)
+                break
+        }
 
         setFilteredProducts(filtered)
     }, [products, searchParams])
@@ -221,7 +221,7 @@ const CollectionPage = () => {
 
             {/* Mobile Overlay */}
             {isSidebarOpen && (
-                <div 
+                <div
                     className="lg:hidden fixed inset-0 z-40 bg-black/70"
                     onClick={toggleSidebar}
                 />
@@ -239,15 +239,15 @@ const CollectionPage = () => {
                         <span>products found</span>
                     </div>
                 </div>
-                
+
                 {/* Sort Options */}
                 <div className="mb-6 text-white">
                     <SortOptions />
                 </div>
-                
+
                 {/* Product Grid */}
                 <div className="mt-4">
-                    <ProductGrid products={filteredProducts.length > 0 ? filteredProducts : products } />
+                    <ProductGrid products={filteredProducts.length > 0 ? filteredProducts : products} />
                 </div>
             </div>
         </div>

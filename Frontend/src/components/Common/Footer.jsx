@@ -1,5 +1,5 @@
 import { BiLogoInstagram, BiLogoMeta, BiLogoTwitter, BiPhone } from 'react-icons/bi'
-import {Link} from 'react-router'
+import { Link } from 'react-router'
 
 const Footer = () => {
     return (
@@ -26,56 +26,56 @@ const Footer = () => {
                 </div>
 
                 <div>
-                        <h3 className="text-lg text-[#CB2957] mb-4">Shop</h3>
-                        <ul className="space-y-2 text-white">
-                            <li>
-                                <Link to='#' className='hover:text-[#CB2957] transition-all ease-in-out duration-300' >
-                                    Stratocastor
-                                </Link>
-                            </li>
-                            <li>
-                                <Link to='#' className='hover:text-[#CB2957] transition-all ease-in-out duration-300' >
-                                    Telecastor
-                                </Link>
-                            </li>
-                            <li>
-                                <Link to='#' className='hover:text-[#CB2957] transition-all ease-in-out duration-300' >
-                                    Les Paul
-                                </Link>
-                            </li>
-                            <li>
-                                <Link to='#' className='hover:text-[#CB2957] transition-all ease-in-out duration-300' >
-                                    AMP
-                                </Link>
-                            </li>
-                        </ul>
+                    <h3 className="text-lg text-[#CB2957] mb-4">Shop</h3>
+                    <ul className="space-y-2 text-white">
+                        <li>
+                            <Link to='#' className='hover:text-[#CB2957] transition-all ease-in-out duration-300' >
+                                Stratocastor
+                            </Link>
+                        </li>
+                        <li>
+                            <Link to='#' className='hover:text-[#CB2957] transition-all ease-in-out duration-300' >
+                                Telecastor
+                            </Link>
+                        </li>
+                        <li>
+                            <Link to='#' className='hover:text-[#CB2957] transition-all ease-in-out duration-300' >
+                                Les Paul
+                            </Link>
+                        </li>
+                        <li>
+                            <Link to='#' className='hover:text-[#CB2957] transition-all ease-in-out duration-300' >
+                                AMP
+                            </Link>
+                        </li>
+                    </ul>
                 </div>
-                
+
                 <div>
-                        <h3 className="text-lg text-[#CB2957] mb-4">Support</h3>
-                        <ul className="space-y-2 text-white">
-                            <li>
-                                <Link to='#' className='hover:text-[#CB2957] transition-all ease-in-out duration-300' >
-                                    Contact US
-                                </Link>
-                            </li>
-                            <li>
-                                <Link to='#' className='hover:text-[#CB2957] transition-all ease-in-out duration-300' >
-                                    About Us
-                                </Link>
-                            </li>
-                            <li>
-                                <Link to='#' className='hover:text-[#CB2957] transition-all ease-in-out duration-300' >
-                                    FAQ's
-                                </Link>
-                            </li>
-                            <li>
-                                <Link to='#' className='hover:text-[#CB2957] transition-all ease-in-out duration-300' >
-                                    Features
-                                </Link>
-                            </li>
-                        </ul>
-                    </div>
+                    <h3 className="text-lg text-[#CB2957] mb-4">Support</h3>
+                    <ul className="space-y-2 text-white">
+                        <li>
+                            <Link to='#' className='hover:text-[#CB2957] transition-all ease-in-out duration-300' >
+                                Contact US
+                            </Link>
+                        </li>
+                        <li>
+                            <Link to='#' className='hover:text-[#CB2957] transition-all ease-in-out duration-300' >
+                                About Us
+                            </Link>
+                        </li>
+                        <li>
+                            <Link to='#' className='hover:text-[#CB2957] transition-all ease-in-out duration-300' >
+                                FAQ's
+                            </Link>
+                        </li>
+                        <li>
+                            <Link to='#' className='hover:text-[#CB2957] transition-all ease-in-out duration-300' >
+                                Features
+                            </Link>
+                        </li>
+                    </ul>
+                </div>
 
                 <div>
                     <h3 className="text-lg text-[#CB2957] mb-4" >Follow Us</h3>
@@ -84,29 +84,29 @@ const Footer = () => {
                             href=""
                             target='_blank'
                             rel='noopener noreferrer' >
-                            
+
                             <BiLogoMeta className='w-8 h-8 text-white hover:text-[#CB2957] transition-all ease-in-out duration-300' />
                         </a>
                         <a
                             href=""
                             target='_blank'
                             rel='noopener noreferrer' >
-                            
+
                             <BiLogoInstagram className='w-8 h-8 text-white hover:text-[#CB2957] transition-all ease-in-out duration-300' />
                         </a>
                         <a
                             href=""
                             target='_blank'
                             rel='noopener noreferrer' >
-                            
+
                             <BiLogoTwitter className='w-8 h-8 text-white hover:text-[#CB2957] transition-all ease-in-out duration-300' />
                         </a>
                     </div>
-                            <p className='text-white'>Call Us</p>
-                            <p className='text-[#CB2957]'>
-                                <BiPhone className='inline-block mr-2 text-[#CB2957]' />
-                                +977 98 0329 4610
-                            </p>
+                    <p className='text-white'>Call Us</p>
+                    <p className='text-[#CB2957]'>
+                        <BiPhone className='inline-block mr-2 text-[#CB2957]' />
+                        +977 98 0329 4610
+                    </p>
                 </div>
             </div>
 

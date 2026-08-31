@@ -5,7 +5,7 @@ const CartContext = createContext();
 export function CartProvider({ children }) {
     const [cartItems, setCartItems] = useState([]);
 
-    // Load cart from localStorage on mount
+    {/* Load cart from localStorage on mount */ }
     useEffect(() => {
         try {
             const savedCart = localStorage.getItem('cart');
@@ -20,7 +20,7 @@ export function CartProvider({ children }) {
         }
     }, []);
 
-    // Save cart to localStorage whenever it changes
+    {/* Save cart to localStorage whenever it changes */ }
     useEffect(() => {
         try {
             localStorage.setItem('cart', JSON.stringify(cartItems));
@@ -29,7 +29,7 @@ export function CartProvider({ children }) {
         }
     }, [cartItems]);
 
-    // Add item to cart
+    {/* Add item to cart */ }
     const addToCart = (product, quantity = 1) => {
         if (!product || !product._id) {
             console.error('Invalid product');
@@ -60,7 +60,7 @@ export function CartProvider({ children }) {
         });
     };
 
-    // Remove item from cart
+    {/* Remove item from cart */ }
     const removeFromCart = (productId) => {
         if (!productId) return;
         setCartItems(prevItems =>
@@ -68,7 +68,7 @@ export function CartProvider({ children }) {
         );
     };
 
-    //Update the quantity
+    {/* Update the quantity */ }
     const updateQuantity = (productId, newQuantity) => {
         if (!productId) return;
 
@@ -87,17 +87,17 @@ export function CartProvider({ children }) {
     };
 
 
-    // Clear cart
+    {/* Clear cart */ }
     const clearCart = () => {
         setCartItems([]);
     };
 
-    // Get total items
+    {/* Get total items */ }
     const getTotalItems = () => {
         return cartItems.reduce((total, item) => total + item.quantity, 0);
     };
 
-    // Get total price
+    {/* Get total price */ }
     const getTotalPrice = () => {
         return cartItems.reduce((total, item) => total + (item.price * item.quantity), 0);
     };

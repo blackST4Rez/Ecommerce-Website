@@ -177,10 +177,10 @@ const ProductDetails = () => {
                             </span>
                         </button>
                     ) : (
-                        <AddToCartButton 
-                            product={selectedProduct} 
-                                quantity={cartValue} 
-                                onClick={handleCart}
+                        <AddToCartButton
+                            product={selectedProduct}
+                            quantity={cartValue}
+                            onClick={handleCart}
                         />
                     )}
                 </div>

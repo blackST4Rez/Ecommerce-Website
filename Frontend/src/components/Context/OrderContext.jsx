@@ -5,9 +5,9 @@ const OrderContext = createContext();
 
 export function OrderProvider({ children }) {
     const [orders, setOrders] = useState([]);
-    const { user } = useAuth(); 
+    const { user } = useAuth();
 
-    // Load orders for the specific user
+    {/* Load orders for the specific user */ }
     useEffect(() => {
         if (!user) {
             setOrders([]);
@@ -27,10 +27,10 @@ export function OrderProvider({ children }) {
         }
     }, [user]);
 
-    // Save orders for the specific user
+    {/* Save orders for the specific user */ }
     useEffect(() => {
         if (!user) return;
-        
+
         try {
             localStorage.setItem(`orders_${user.id}`, JSON.stringify(orders));
         } catch (error) {
@@ -38,7 +38,7 @@ export function OrderProvider({ children }) {
         }
     }, [orders, user]);
 
-    // Add a new order
+    {/* Add a new order */ }
     const addOrder = (orderData) => {
         if (!user) {
             console.error('No user logged in');
@@ -52,24 +52,25 @@ export function OrderProvider({ children }) {
             date: new Date().toISOString(),
             status: 'Confirmed',
             userId: user.id,
-            userEmail: user.email // 
+            userEmail: user.email
         };
 
-        setOrders(prevOrders => [newOrder, ...prevOrders]); // Newest first
+        {/* Newest First */ }
+        setOrders(prevOrders => [newOrder, ...prevOrders]);
         return newOrder;
     };
 
-    // Get all orders
+    {/* Get all orders */ }
     const getOrders = () => {
         return orders;
     };
 
-    // Get order by ID
+    {/* Get order by ID */ }
     const getOrderById = (orderId) => {
         return orders.find(order => order.id === orderId);
     };
 
-    // Clear all orders for the current user
+    {/* Clear all orders for the current user */ }
     const clearOrders = () => {
         setOrders([]);
     };

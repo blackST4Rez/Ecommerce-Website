@@ -8,11 +8,11 @@ export function AuthProvider({ children }) {
     const [loading, setLoading] = useState(true);
     const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-    // Check if user is logged in on mount
+    {/* Check if user is logged in on mount */ }
     useEffect(() => {
         const checkAuth = async () => {
             const token = localStorage.getItem('token');
-            
+
             if (!token) {
                 setLoading(false);
                 return;
@@ -38,20 +38,20 @@ export function AuthProvider({ children }) {
         checkAuth();
     }, []);
 
-    // Login function
+    {/* Login function */ }
     const login = async (email, password) => {
         try {
             await new Promise(resolve => setTimeout(resolve, 1000));
 
-            // Check if user exists in mock database
+            {/* Check if user exists in mock database */ }
             const existingUsers = JSON.parse(localStorage.getItem('users') || '[]');
             const foundUser = existingUsers.find(user => user.email === email);
-            
+
             if (!foundUser) {
                 throw new Error('User not found. Please register first.');
             }
 
-            // Mock user data 
+            {/* Mock user data  */ }
             const mockUser = {
                 id: foundUser.id,
                 firstName: foundUser.firstName || 'User',
@@ -63,18 +63,18 @@ export function AuthProvider({ children }) {
 
             const mockToken = 'mock_jwt_token_xyz_123';
 
-            // Save to localStorage
+            {/* Save to localStorage */ }
             localStorage.setItem('token', mockToken);
             localStorage.setItem('user', JSON.stringify(mockUser));
 
             setUser(mockUser);
             setIsAuthenticated(true);
-            
-            // Welcome message with first name only
+
+            {/* Welcome message with first name only */ }
             toast.success(`Welcome back, ${mockUser.firstName}!`, {
                 duration: 3000
             });
-            
+
             return { success: true, user: mockUser };
         } catch (error) {
             toast.error(error.message || 'Login failed. Please try again.', {
@@ -84,18 +84,18 @@ export function AuthProvider({ children }) {
         }
     };
 
-    //  Register Function 
+    {/* Register Function  */ }
     const register = async (firstName, lastName, email, password) => {
         try {
             await new Promise(resolve => setTimeout(resolve, 1000));
 
-            // Check if user already exists
+            {/* Check if user already exists */ }
             const existingUsers = JSON.parse(localStorage.getItem('users') || '[]');
             if (existingUsers.find(user => user.email === email)) {
                 throw new Error('User with this email already exists');
             }
 
-            // Save user with firstName and lastName
+            {/* Save user with firstName and lastName */ }
             const newUser = {
                 id: `user_${Date.now()}`,
                 firstName: firstName.trim(),
@@ -110,7 +110,7 @@ export function AuthProvider({ children }) {
             toast.success('Registration successful! Please login.', {
                 duration: 3000
             });
-            
+
             return { success: true, user: newUser };
         } catch (error) {
             toast.error(error.message || 'Registration failed. Please try again.', {
@@ -120,29 +120,29 @@ export function AuthProvider({ children }) {
         }
     };
 
-    // Logout function
+    {/* Logout function */ }
     const logout = () => {
         localStorage.removeItem('token');
         localStorage.removeItem('user');
         setUser(null);
         setIsAuthenticated(false);
-        
+
         toast.success('Logged out successfully', {
             duration: 3000
         });
     };
 
-    // Update user profile
+    {/* Update user profile */ }
     const updateUser = async (updatedData) => {
         try {
             const updatedUser = { ...user, ...updatedData };
             localStorage.setItem('user', JSON.stringify(updatedUser));
             setUser(updatedUser);
-            
+
             toast.success('Profile updated successfully!', {
                 duration: 3000
             });
-            
+
             return { success: true, user: updatedUser };
         } catch (error) {
             toast.error('Failed to update profile', {
@@ -169,7 +169,7 @@ export function AuthProvider({ children }) {
     );
 }
 
-// Custom hook for using auth in other components
+{/* Custom hook for using auth in other components */ }
 export function useAuth() {
     const context = useContext(AuthContext);
     if (!context) {

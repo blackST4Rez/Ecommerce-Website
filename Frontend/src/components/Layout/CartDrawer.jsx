@@ -46,7 +46,7 @@ const CartDrawer = ({ isOpen, setIsOpen }) => {
                     <span>Total:</span>
                     <span>Rs. {totalPrice.toLocaleString()}</span>
                 </div>
-                <button 
+                <button
                     onClick={handleCheckout}
                     className="w-full hover:bg-[#CB2957] hover:text-black border hover:border-black py-3 font-semibold bg-black border-[#CB2957] text-white transition-all ease-in-out duration-300"
                 >

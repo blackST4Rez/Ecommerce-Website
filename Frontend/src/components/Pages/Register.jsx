@@ -5,17 +5,17 @@ import { useAuth } from '../Context/AuthContext';
 
 const Register = () => {
     const [firstName, setFirstName] = useState('');
-    const [lastName, setLastName] = useState(''); 
+    const [lastName, setLastName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState('');
-    
+
     const { register, isAuthenticated } = useAuth();
     const navigate = useNavigate();
 
-    // Redirect if already logged in
+    {/* Redirect if already logged in */ }
     useEffect(() => {
         if (isAuthenticated) {
             navigate('/login', { replace: true });
@@ -26,13 +26,13 @@ const Register = () => {
         e.preventDefault();
         setError('');
 
-        // Validate passwords match
+        {/* Validate passwords match */ }
         if (password !== confirmPassword) {
             setError('Passwords do not match');
             return;
         }
 
-        // Validate password length
+        {/* Validate password length */ }
         if (password.length < 6) {
             setError('Password must be at least 6 characters');
             return;
@@ -51,7 +51,7 @@ const Register = () => {
     };
 
     return (
-        <div 
+        <div
             className="relative min-h-screen flex items-center justify-end"
             style={{
                 backgroundImage: `url(${RegisterImage})`,

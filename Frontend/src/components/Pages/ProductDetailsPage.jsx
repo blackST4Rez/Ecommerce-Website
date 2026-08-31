@@ -132,7 +132,7 @@ const ProductDetailsPage = () => {
                         )}
 
                         <p className="text-2xl text-white mb-8 font-bold">
-                                {formatNPR(product.price)}
+                            {formatNPR(product.price)}
                         </p>
 
                         <p className="text-white mb-4 text-lg">

@@ -32,10 +32,10 @@ const CartContent = () => {
                     className="flex items-start justify-between py-4 border-b border-gray-700"
                 >
                     <div className="flex gap-3 items-start flex-1 min-w-0">
-                        <img 
-                            src={product.image} 
-                            alt={product.name} 
-                            className="w-20 h-20 sm:w-16 sm:h-16 md:w-25 md:h-25 object-cover rounded shrink-0" 
+                        <img
+                            src={product.image}
+                            alt={product.name}
+                            className="w-20 h-20 sm:w-16 sm:h-16 md:w-25 md:h-25 object-cover rounded shrink-0"
                         />
                         <div className="flex-1 min-w-0">
                             <h3 className="text-white text-sm sm:text-base md:text-lg font-medium truncate">
@@ -46,7 +46,7 @@ const CartContent = () => {
                                 {product.material && `Material: ${product.material}`}
                             </p>
                             <div className="flex items-center mt-2">
-                                <button 
+                                <button
                                     onClick={() => handleDecrement(product._id, product.quantity)}
                                     className="px-1.5 sm:px-2 py-0.5 sm:py-1 bg-black text-[#CB2957] border-l border-t border-b border-[#CB2957] hover:text-white text-sm sm:text-base"
                                 >
@@ -55,7 +55,7 @@ const CartContent = () => {
                                 <span className="px-1.5 sm:px-2 py-0.5 sm:py-1 bg-black text-white min-w-6 sm:min-w-7.5 text-center text-sm sm:text-base">
                                     {product.quantity}
                                 </span>
-                                <button 
+                                <button
                                     onClick={() => handleIncrement(product._id, product.quantity)}
                                     className="px-1.5 sm:px-2 py-0.5 sm:py-1 bg-black text-[#CB2957] border-r border-t border-b border-[#CB2957] hover:text-white text-sm sm:text-base"
                                 >
@@ -68,7 +68,7 @@ const CartContent = () => {
                         <p className="text-white text-l sm:text-base md:text-lg">
                             Rs. <span className="font-bold">{(product.price * product.quantity).toLocaleString()}</span>
                         </p>
-                        <button 
+                        <button
                             onClick={() => handleDeleteCartItem(product._id)}
                             className="absolute top-12 right-2 sm:top-17"
                         >

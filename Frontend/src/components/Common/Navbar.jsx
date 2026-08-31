@@ -32,7 +32,7 @@ const Navbar = () => {
         <>
             <nav className="container mx-auto py-4 px-4">
                 <div className="flex items-center justify-between">
-                    
+
                     {/* Logo */}
                     <div className="w-45 shrink-0">
                         <Link to='/' className="navbarText text-5xl font-medium text-white whitespace-nowrap">
@@ -42,14 +42,14 @@ const Navbar = () => {
 
                     {/* Navigation Links  */}
                     <div className="hidden md:flex flex-1 justify-center space-x-8">
-                        <Link 
-                            to='/collections/guitars' 
+                        <Link
+                            to='/collections/guitars'
                             className="text-white hover:text-[#CB2957] text-lg font-medium transition-all ease-in-out duration-300 whitespace-nowrap"
                         >
                             Guitars
                         </Link>
-                        <Link 
-                            to='/collections/amp' 
+                        <Link
+                            to='/collections/amp'
                             className="text-white hover:text-[#CB2957] text-lg font-medium transition-all ease-in-out duration-300 whitespace-nowrap"
                         >
                             AMP
@@ -64,13 +64,13 @@ const Navbar = () => {
                                 <span className="text-sm text-[#CB2957] hidden sm:inline truncate max-w-20">
                                     {user?.firstName || user?.name || 'User'}
                                 </span>
-                                <Link 
-                                    to="/profile" 
+                                <Link
+                                    to="/profile"
                                     className="flex items-center justify-center w-9 h-9 rounded-full hover:bg-[#0a0a0a] hover:text-[#CB2957] transition-all ease-in-out duration-300"
                                 >
                                     <BiUser className='h-5 w-5' />
                                 </Link>
-                                <button 
+                                <button
                                     onClick={handleLogout}
                                     className="flex items-center justify-center w-9 h-9 rounded-full hover:bg-[#0a0a0a] hover:text-[#CB2957] transition-all ease-in-out duration-300"
                                 >
@@ -78,8 +78,8 @@ const Navbar = () => {
                                 </button>
                             </div>
                         ) : (
-                            <Link 
-                                to="/login" 
+                            <Link
+                                to="/login"
                                 className="flex items-center justify-center w-9 h-9 rounded-full hover:bg-[#0a0a0a] hover:text-[#CB2957] transition-all ease-in-out duration-300"
                             >
                                 <BiUser className='h-5 w-5' />
@@ -105,7 +105,7 @@ const Navbar = () => {
                         </div>
 
                         {/* Mobile Menu Button */}
-                        <button 
+                        <button
                             onClick={handleMenu}
                             className="flex items-center justify-center w-9 h-9 rounded-full hover:bg-[#0a0a0a] hover:text-[#CB2957] transition-all ease-in-out duration-300 md:hidden"
                         >

@@ -15,7 +15,7 @@ const MenuDrawer = ({
             ${menuIsOpen
                 ? "translate-x-0"
                 : "-translate-x-full"
-                }`}
+            }`}
         >
             <div className="absolute right-0 top-4 flex justify-end p-4 ">
                 <BiPlus

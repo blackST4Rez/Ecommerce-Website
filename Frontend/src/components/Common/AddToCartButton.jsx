@@ -12,7 +12,7 @@ const AddToCartButton = ({ product, quantity = 1, className = '' }) => {
         e.stopPropagation();
         e.preventDefault();
 
-        // Check if user is logged in
+        {/* Check if user is logged in */ }
         if (!isAuthenticated) {
             toast.error('Please login to add items to cart.', {
             });

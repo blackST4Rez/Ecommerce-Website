@@ -27,7 +27,7 @@ const Profile = () => {
                         <p className="text-sm text-white mb-4">
                             Member since: {user?.createdAt ? new Date(user.createdAt).toLocaleDateString() : 'N/A'}
                         </p>
-                        <button 
+                        <button
                             onClick={handleLogout}
                             className="w-full hover:bg-black border-2 hover:border-[#CB2957] hover:text-white py-2 px-4 bg-[#CB2957] text-black transition-all ease-in-out duration-300 rounded"
                         >

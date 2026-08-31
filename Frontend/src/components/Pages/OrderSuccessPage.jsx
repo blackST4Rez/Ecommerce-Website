@@ -11,14 +11,15 @@ const OrderSuccessPage = () => {
     const [orderData, setOrderData] = useState(null);
     const [isCleared, setIsCleared] = useState(false);
 
+    {/* Get order data from navigation state */ }
     useEffect(() => {
-        // Get order data from navigation state
+
         const num = location.state?.orderNumber || Math.floor(Math.random() * 4000) + 1000;
         const data = location.state?.orderData || null;
-        
+
         setOrderNumber(num);
         setOrderData(data);
-        
+
         if (!isCleared) {
             clearCart();
             setIsCleared(true);

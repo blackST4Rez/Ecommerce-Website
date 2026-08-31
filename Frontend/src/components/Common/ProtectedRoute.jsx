@@ -7,7 +7,7 @@ export function ProtectedRoute({ children, redirectTo = '/login' }) {
     const { isAuthenticated, loading } = useAuth();
     const location = useLocation();
 
-    // Show loading spinner while checking auth
+    {/* Show loading spinner while checking auth */ }
     if (loading) {
         return (
             <div className="flex justify-center items-center min-h-screen bg-[#191b1c]">
@@ -16,17 +16,17 @@ export function ProtectedRoute({ children, redirectTo = '/login' }) {
         );
     }
 
-    // Redirect to login if not authenticated
+    {/* Redirect to login if not authenticated */ }
     if (!isAuthenticated) {
         return (
-            <Navigate 
-                to={redirectTo} 
-                state={{ from: location.pathname }} 
-                replace 
+            <Navigate
+                to={redirectTo}
+                state={{ from: location.pathname }}
+                replace
             />
         );
     }
 
-    // Render children if authenticated
+    {/* Render children if authenticated */ }
     return children;
 }

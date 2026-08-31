@@ -2,19 +2,19 @@ import { useSearchParams } from "react-router"
 
 const SortOptions = () => {
     const [searchParams, setSearchParams] = useSearchParams()
-    
-    // Get current sort value from URL
+
+    {/* Get current sort value from URL */ }
     const currentSort = searchParams.get('sort') || 'default'
 
     const handleSortChange = (e) => {
         const value = e.target.value
-        
+
         if (value === 'default') {
             searchParams.delete('sort')
         } else {
             searchParams.set('sort', value)
         }
-        
+
         setSearchParams(searchParams)
     }
 
