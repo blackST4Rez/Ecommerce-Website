@@ -59,7 +59,7 @@ const Login = () => {
                         </h2>
                     </div>
                     
-                    <h2 className="navbarText text-2xl font-bold text-center mb-6 text-white">
+                    <h2 className="text-2xl font-bold text-center mb-6 text-white">
                         Hey There!
                     </h2>
                     
