@@ -14,7 +14,7 @@ const Footer = () => {
                     <p className="text-[#CB2957] font-medium mb-6">Sign Up and Get 10% off your first order.</p>
 
                     <form className="flex">
-                        <input type="email" placeholder="Your e-mail" className="p-3 w-65 text-sm border-t border-l border-b border-gray-700 focus:outline-none transition-all ease-in-out duration-300 placeholder-white " required />
+                        <input type="email" placeholder="Your e-mail" className="p-3 w-65 text-sm border-t border-l border-b border-gray-700 focus:outline-none transition-all ease-in-out duration-300 placeholder-white text-[#CB2957] " required />
                         <button
                             type="submit"
                             className="bg-black text-white px-6 py-3 text-sm hover:text-[#CB2957] transition-all ease-in-out duration-300"
